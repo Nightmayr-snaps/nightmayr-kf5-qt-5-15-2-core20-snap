@@ -2,7 +2,7 @@
 name: nightmayr-kf5-5-84-0-qt-5-15-2-core20
 version: 5.84.0
 base: core20
-summary: Shared Qt 5.15
+summary: Shared Qt 5.15.2
 description: |
  This snap contains the necessary libraries required by
  Qt Applications.
@@ -55,7 +55,7 @@ parts:
         - "-usr/share/pkgconfig"
     kf5:
         after:
-        - qt5
+        - qtwayland
         plugin: nil
         build-attributes:
         - enable-patchelf
@@ -673,42 +673,281 @@ parts:
         - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
         - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Window.2/libwindowplugin.so"
 
-    qt5:
-        # plugin: autotools
+    # qt5:
+    #     # plugin: autotools
+    #     plugin: nil
+    #     override-pull: |
+    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+    #         # perl init-repository --module-subset=default,qtwebengine
+    #         # git submodule update --init --recursive
+    #         perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qt3d,qtcharts,qtdatavis3d,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtmultimedia,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qttools,qttranslations,qtwayland,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
+    #         git submodule update qtbase qtdeclarative qtconnectivity qt3d qtcharts qtdatavis3d qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtmultimedia qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qttools qttranslations qtwayland qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
+    #         # perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
+    #         # git submodule update qtbase qtdeclarative qtconnectivity qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
+
+    #         cd qtbase
+    #         git apply $SNAPCRAFT_STAGE/qtbase-ordonly4.patch
+    #         # cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
+    #     # autotools-configure-parameters:
+    #     # - --prefix=/usr
+    #     # - -bindir /usr/lib/qt5/bin
+    #     # - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+    #     # - -docdir /usr/share/qt5/doc
+    #     # - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
+    #     # - -datadir /usr/share/qt5
+    #     # - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
+    #     # - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+    #     # - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
+    #     # - -translationdir /usr/share/qt5/translations
+    #     # - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
+    #     # - -sysconfdir /etc/xdg
+    #     # - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+    #     # - -release
+    #     # - -opensource
+    #     # - -confirm-license
+    #     # - -nomake examples
+    #     # - -nomake tests
+    #     # - -I $SNAPCRAFT_STAGE/usr/include
+    #     # - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+    #     override-build: |
+    #         ./configure \
+    #             -prefix /usr \
+    #             -bindir /usr/lib/qt5/bin \
+    #             -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+    #             -docdir /usr/share/qt5/doc \
+    #             -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+    #             -datadir /usr/share/qt5 \
+    #             -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+    #             -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+    #             -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+    #             -translationdir /usr/share/qt5/translations \
+    #             -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+    #             -sysconfdir /etc/xdg \
+    #             -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+    #             -release \
+    #             -opensource \
+    #             -confirm-license \
+    #             -nomake examples \
+    #             -nomake tests \
+    #             -I $SNAPCRAFT_STAGE/usr/include \
+    #             -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+    #         make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+    #         make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+    #     override-stage: |
+    #         snapcraftctl stage
+    #         # Cleanup space on build VM to prevent running out of disk space for later parts
+    #         rm -rf $SNAPCRAFT_PART_INSTALL/*
+    #         rm -rf $SNAPCRAFT_PART_BUILD/*
+    #         rm -rf $SNAPCRAFT_PART_SRC/*
+    #     build-packages:
+    #     - build-essential
+    #     - autotools-dev
+    #     - binutils-gold
+    #     - bison
+    #     - cdbs
+    #     - cmake
+    #     - flex
+    #     - flite1-dev
+    #     - freetds-dev
+    #     - git
+    #     - gnome-keyring
+    #     - gperf
+    #     - libasound2-dev
+    #     - libatspi2.0-dev
+    #     - libaudio-dev
+    #     - libavcodec-dev
+    #     - libavformat-dev
+    #     - libavutil-dev
+    #     - libbluetooth-dev
+    #     - libc6
+    #     - libcap-dev
+    #     - libclang-6.0-dev
+    #     - libcups2-dev
+    #     - libdbus-1-3
+    #     - libdbus-1-dev
+    #     - libedit-dev
+    #     - libegl1-mesa-dev
+    #     - libevent-dev
+    #     - libflac++-dev
+    #     - libfontconfig1-dev
+    #     - libfreetype6-dev
+    #     - libgcc1
+    #     - libgconf2-dev
+    #     - libgcrypt20-dev
+    #     - libgeoclue-2-dev
+    #     - libgl1-mesa-dev
+    #     # - libgl1-mesa-dev|libgl-dev
+    #     - libglib2.0-0
+    #     - libglib2.0-dev
+    #     # - libglu1-mesa-dev|libglu-dev
+    #     - libglu1-mesa-dev
+    #     - libgstreamer1.0-dev
+    #     - libgstreamer-plugins-base1.0-dev
+    #     - libgtk2.0-dev
+    #     - libgtk-3-dev
+    #     - libharfbuzz-dev
+    #     - libhunspell-dev
+    #     - libice-dev
+    #     - libicu-dev
+    #     - libjpeg-dev
+    #     - libjsoncpp-dev
+    #     - libmng-dev
+    #     - libmtdev-dev
+    #     - libmysqlclient-dev
+    #     - libnss3-dev
+    #     - libopenal-dev
+    #     - libopus-dev
+    #     - libpci-dev
+    #     - libpng-dev
+    #     - libpq-dev
+    #     - libproxy-dev
+    #     - libpulse-dev
+    #     - libsdl2-dev
+    #     - libsm-dev
+    #     - libsnappy-dev
+    #     - libsocketcan-dev
+    #     - libspeex-dev
+    #     - libsqlite3-0
+    #     - libsqlite3-dev
+    #     - libsrtp2-dev
+    #     - libssl-dev
+    #     - libstdc++6
+    #     - libtiff5-dev
+    #     - libudev-dev
+    #     - libvpx-dev
+    #     - libvulkan-dev
+    #     - libwayland-dev
+    #     # - libwayland-egl1-mesa|libwayland-egl1
+    #     - libwayland-egl1-mesa
+    #     - libwebp-dev
+    #     - libx11-dev
+    #     - libx11-xcb1
+    #     - libx11-xcb-dev
+    #     - libxcb1
+    #     - libxcb1-dev
+    #     - libxcb-dri3-dev
+    #     - libxcb-glx0-dev
+    #     - libxcb-icccm4
+    #     - libxcb-icccm4-dev
+    #     - libxcb-image0
+    #     - libxcb-image0-dev
+    #     - libxcb-keysyms1
+    #     - libxcb-keysyms1-dev
+    #     - libxcb-randr0-dev
+    #     - libxcb-render0-dev
+    #     - libxcb-render-util0-dev
+    #     - libxcb-shape0-dev
+    #     - libxcb-shm0-dev
+    #     - libxcb-sync0-dev
+    #     - libxcb-sync-dev
+    #     - libxcb-util-dev
+    #     - libxcb-xfixes0-dev
+    #     - libxcb-xinerama0-dev
+    #     - libxcb-xinput-dev
+    #     - libxcomposite-dev
+    #     - libxcursor-dev
+    #     - libxext-dev
+    #     - libxft-dev
+    #     - libxi-dev
+    #     - libxinerama-dev
+    #     - libxkbcommon-dev
+    #     - libxkbcommon-x11-dev
+    #     - libxkbfile-dev
+    #     - libxml2
+    #     - libxml2-dev
+    #     - libxmu-dev
+    #     - libxrandr-dev
+    #     - libxrender-dev
+    #     - libxslt1-dev
+    #     - libxss-dev
+    #     - libxt-dev
+    #     - libxtst-dev
+    #     - libxv-dev
+    #     - llvm-6.0
+    #     - mesa-common-dev
+    #     - ninja-build
+    #     - pkg-config
+    #     - python2
+    #     - python3
+    #     - quilt
+    #     - re2c
+    #     - ruby
+    #     - unixodbc-dev
+    #     - zlib1g-dev
+    #     stage-packages:
+    #     - libdbus-1-3
+    #     - libegl1
+    #     - libfontconfig1
+    #     - libfreetype6
+    #     - libgl1
+    #     - libglib2.0-0
+    #     - libgtk-3-0
+    #     - libharfbuzz0b
+    #     - libicu66
+    #     - libpcre2-16-0
+    #     - libpng16-16
+    #     - libssl1.1
+    #     - libwayland-client0
+    #     - libwayland-cursor0
+    #     - libwayland-egl1
+    #     - libx11-6
+    #     - libx11-xcb1
+    #     - libxcb1
+    #     - libxcb-glx0
+    #     - libxcb-icccm4
+    #     - libxcb-image0
+    #     - libxcb-keysyms1
+    #     - libxcb-randr0
+    #     - libxcb-render0
+    #     - libxcb-render-util0
+    #     - libxcb-shape0
+    #     - libxcb-shm0
+    #     - libxcb-sync1
+    #     - libxcb-util1
+    #     - libxcb-xfixes0
+    #     - libxcb-xinerama0
+    #     - libxcb-xinput0
+    #     - libxcb-xkb1
+    #     - libxcursor1
+    #     - libxkbcommon0
+    #     - libxkbcommon-x11-0
+    #     - zlib1g
+    #     - libasound2
+    #     - libevent-2.1-7
+    #     - libice6
+    #     - libjpeg-turbo8
+    #     - libminizip1
+    #     - libnspr4
+    #     - libnss3
+    #     - libopus0
+    #     - libre2-5
+    #     - libsm6
+    #     - libsnappy1v5
+    #     - libvpx6
+    #     - libxss1
+    #     prime:
+    #     - -./usr/include
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+    #     - -./usr/lib/qt5
+    #     after:
+    #     - patches
+    qtbase:
         plugin: nil
         override-pull: |
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            # perl init-repository --module-subset=default,qtwebengine
-            # git submodule update --init --recursive
-            perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qt3d,qtcharts,qtdatavis3d,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtmultimedia,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qttools,qttranslations,qtwayland,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
-            git submodule update qtbase qtdeclarative qtconnectivity qt3d qtcharts qtdatavis3d qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtmultimedia qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qttools qttranslations qtwayland qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
-            # perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
-            # git submodule update qtbase qtdeclarative qtconnectivity qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
+            perl init-repository --module-subset=qtbase
+            git submodule update qtbase
 
             cd qtbase
             git apply $SNAPCRAFT_STAGE/qtbase-ordonly4.patch
             # cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
-        # autotools-configure-parameters:
-        # - --prefix=/usr
-        # - -bindir /usr/lib/qt5/bin
-        # - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-        # - -docdir /usr/share/qt5/doc
-        # - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-        # - -datadir /usr/share/qt5
-        # - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-        # - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-        # - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-        # - -translationdir /usr/share/qt5/translations
-        # - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-        # - -sysconfdir /etc/xdg
-        # - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-        # - -release
-        # - -opensource
-        # - -confirm-license
-        # - -nomake examples
-        # - -nomake tests
-        # - -I $SNAPCRAFT_STAGE/usr/include
-        # - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
         override-build: |
             ./configure \
                 -prefix /usr \
@@ -737,9 +976,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf $SNAPCRAFT_PART_INSTALL/*
-            rm -rf $SNAPCRAFT_PART_BUILD/*
-            rm -rf $SNAPCRAFT_PART_SRC/*
+            pwd
+            rm -rf /root/parts/qtbase/install/*
+            rm -rf /root/parts/qtbase/build/*
+            rm -rf /root/parts/qtbase/src/*
         build-packages:
         - build-essential
         - autotools-dev
@@ -937,549 +1177,3515 @@ parts:
         - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
         - -./usr/lib/qt5
         after:
-        - patches
-    # qtwayland:
-    #     plugin: autotools
-    #     build-environment:
-    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-    #     override-pull: |
-    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-    #         perl init-repository --module-subset=qtwayland
-    #         git submodule update qtwayland
-    #     autotools-configure-parameters:
-    #     - --prefix=/usr
-    #     - -bindir /usr/lib/qt5/bin
-    #     - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     - -docdir /usr/share/qt5/doc
-    #     - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -datadir /usr/share/qt5
-    #     - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-    #     - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-    #     - -translationdir /usr/share/qt5/translations
-    #     - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -sysconfdir /etc/xdg
-    #     - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -release
-    #     - -opensource
-    #     - -confirm-license
-    #     - -nomake examples
-    #     - -nomake tests
-    #     - -I $SNAPCRAFT_STAGE/usr/include
-    #     - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     build-packages:
-    #     - flex
-    #     - libxcb-render0-dev
-    #     - libxcb-image0-dev
-    #     - libxcb-shape0-dev
-    #     - libxcb-sync-dev
-    #     - libxcb-render-util0-dev
-    #     - libxcb1-dev
-    #     - libxcb-xfixes0-dev
-    #     - libxcb-icccm4-dev
-    #     - libxcb-keysyms1-dev
-    #     - libxcb-shm0-dev
-    #     - libxrender-dev
-    #     - libpulse-dev
-    #     - libasound2-dev
-    #     - libaudio-dev
-    #     - libcups2-dev
-    #     - libdbus-1-dev
-    #     - libfreetype6-dev
-    #     - libgl1-mesa-dev
-    #     - libglib2.0-dev
-    #     - libegl1-mesa-dev
-    #     - libglu1-mesa-dev
-    #     - libice-dev
-    #     - libjpeg-dev
-    #     - libmng-dev
-    #     - libpng-dev
-    #     - libsm-dev
-    #     - libsqlite3-dev
-    #     - libssl-dev
-    #     - libtiff5-dev
-    #     - libx11-dev
-    #     - libxcursor-dev
-    #     - libxext-dev
-    #     - libxft-dev
-    #     - libxi-dev
-    #     - libxinerama-dev
-    #     - libxmu-dev
-    #     - libxrandr-dev
-    #     - libxt-dev
-    #     - libxv-dev
-    #     - zlib1g-dev
-    #     - libedit-dev
-    #     - libwayland-dev
-    #     - libwayland-egl1-mesa
-    #     - libmtdev-dev
-    #     - libudev-dev
-    #     - libxkbcommon-dev
-    #     - libxcomposite-dev
-    #     - libvulkan-dev
-    #     stage-packages: []
-    #     prime:
-    #     - -./usr/include
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
-    #     - -./usr/lib/qt5
-    #     after:
-    #     - qt5
-    # qt3d:
-    #     plugin: autotools
-    #     build-environment:
-    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-    #     override-pull: |
-    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-    #         perl init-repository --module-subset=qt3d
-    #         git submodule update qt3d
-    #     autotools-configure-parameters:
-    #     - --prefix=/usr
-    #     - -bindir /usr/lib/qt5/bin
-    #     - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     - -docdir /usr/share/qt5/doc
-    #     - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -datadir /usr/share/qt5
-    #     - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-    #     - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-    #     - -translationdir /usr/share/qt5/translations
-    #     - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -sysconfdir /etc/xdg
-    #     - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -release
-    #     - -opensource
-    #     - -confirm-license
-    #     - -nomake examples
-    #     - -nomake tests
-    #     - -I $SNAPCRAFT_STAGE/usr/include
-    #     - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     build-packages:
-    #     - flex
-    #     - libxcb-render0-dev
-    #     - libxcb-image0-dev
-    #     - libxcb-shape0-dev
-    #     - libxcb-sync-dev
-    #     - libxcb-render-util0-dev
-    #     - libxcb1-dev
-    #     - libxcb-xfixes0-dev
-    #     - libxcb-icccm4-dev
-    #     - libxcb-keysyms1-dev
-    #     - libxcb-shm0-dev
-    #     - libxrender-dev
-    #     - libpulse-dev
-    #     - libasound2-dev
-    #     - libaudio-dev
-    #     - libcups2-dev
-    #     - libdbus-1-dev
-    #     - libfreetype6-dev
-    #     - libgl1-mesa-dev
-    #     - libglib2.0-dev
-    #     - libegl1-mesa-dev
-    #     - libglu1-mesa-dev
-    #     - libice-dev
-    #     - libjpeg-dev
-    #     - libmng-dev
-    #     - libpng-dev
-    #     - libsm-dev
-    #     - libsqlite3-dev
-    #     - libssl-dev
-    #     - libtiff5-dev
-    #     - libx11-dev
-    #     - libxcursor-dev
-    #     - libxext-dev
-    #     - libxft-dev
-    #     - libxi-dev
-    #     - libxinerama-dev
-    #     - libxmu-dev
-    #     - libxrandr-dev
-    #     - libxt-dev
-    #     - libxv-dev
-    #     - zlib1g-dev
-    #     - libedit-dev
-    #     - libwayland-dev
-    #     - libwayland-egl1-mesa
-    #     - libmtdev-dev
-    #     - libudev-dev
-    #     - libxkbcommon-dev
-    #     - libxcomposite-dev
-    #     - libvulkan-dev
-    #     stage-packages: []
-    #     prime:
-    #     - -./usr/include
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
-    #     - -./usr/lib/qt5
-    #     after:
-    #     - qtwayland
-    # qtcharts-qtdatavis3d:
-    #     plugin: autotools
-    #     build-environment:
-    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-    #     override-pull: |
-    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-    #         perl init-repository --module-subset=qtcharts,qtdatavis3d,qtmultimedia
-    #         git submodule update qtcharts qtdatavis3d qtmultimedia
-    #     autotools-configure-parameters:
-    #     - --prefix=/usr
-    #     - -bindir /usr/lib/qt5/bin
-    #     - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     - -docdir /usr/share/qt5/doc
-    #     - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -datadir /usr/share/qt5
-    #     - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-    #     - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-    #     - -translationdir /usr/share/qt5/translations
-    #     - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -sysconfdir /etc/xdg
-    #     - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -release
-    #     - -opensource
-    #     - -confirm-license
-    #     - -nomake examples
-    #     - -nomake tests
-    #     - -I $SNAPCRAFT_STAGE/usr/include
-    #     - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     build-packages:
-    #     - build-essential
-    #     - autotools-dev
-    #     - binutils-gold
-    #     - bison
-    #     - cdbs
-    #     - cmake
-    #     - flex
-    #     - flite1-dev
-    #     - freetds-dev
-    #     - git
-    #     - gnome-keyring
-    #     - gperf
-    #     - libasound2-dev
-    #     - libatspi2.0-dev
-    #     - libaudio-dev
-    #     - libavcodec-dev
-    #     - libavformat-dev
-    #     - libavutil-dev
-    #     - libbluetooth-dev
-    #     - libc6
-    #     - libcap-dev
-    #     - libclang-6.0-dev
-    #     - libcups2-dev
-    #     - libdbus-1-3
-    #     - libdbus-1-dev
-    #     - libedit-dev
-    #     - libegl1-mesa-dev
-    #     - libevent-dev
-    #     - libflac++-dev
-    #     - libfontconfig1-dev
-    #     - libfreetype6-dev
-    #     - libgcc1
-    #     - libgconf2-dev
-    #     - libgcrypt20-dev
-    #     - libgeoclue-2-dev
-    #     - libgl1-mesa-dev
-    #     # - libgl1-mesa-dev|libgl-dev
-    #     - libglib2.0-0
-    #     - libglib2.0-dev
-    #     # - libglu1-mesa-dev|libglu-dev
-    #     - libglu1-mesa-dev
-    #     - libgstreamer1.0-dev
-    #     - libgstreamer-plugins-base1.0-dev
-    #     - libgtk2.0-dev
-    #     - libgtk-3-dev
-    #     - libharfbuzz-dev
-    #     - libhunspell-dev
-    #     - libice-dev
-    #     - libicu-dev
-    #     - libjpeg-dev
-    #     - libjsoncpp-dev
-    #     - libmng-dev
-    #     - libmtdev-dev
-    #     - libmysqlclient-dev
-    #     - libnss3-dev
-    #     - libopenal-dev
-    #     - libopus-dev
-    #     - libpci-dev
-    #     - libpng-dev
-    #     - libpq-dev
-    #     - libproxy-dev
-    #     - libpulse-dev
-    #     - libsdl2-dev
-    #     - libsm-dev
-    #     - libsnappy-dev
-    #     - libsocketcan-dev
-    #     - libspeex-dev
-    #     - libsqlite3-0
-    #     - libsqlite3-dev
-    #     - libsrtp2-dev
-    #     - libssl-dev
-    #     - libstdc++6
-    #     - libtiff5-dev
-    #     - libudev-dev
-    #     - libvpx-dev
-    #     - libvulkan-dev
-    #     - libwayland-dev
-    #     # - libwayland-egl1-mesa|libwayland-egl1
-    #     - libwayland-egl1-mesa
-    #     - libwebp-dev
-    #     - libx11-dev
-    #     - libx11-xcb1
-    #     - libx11-xcb-dev
-    #     - libxcb1
-    #     - libxcb1-dev
-    #     - libxcb-dri3-dev
-    #     - libxcb-glx0-dev
-    #     - libxcb-icccm4
-    #     - libxcb-icccm4-dev
-    #     - libxcb-image0
-    #     - libxcb-image0-dev
-    #     - libxcb-keysyms1
-    #     - libxcb-keysyms1-dev
-    #     - libxcb-randr0-dev
-    #     - libxcb-render0-dev
-    #     - libxcb-render-util0-dev
-    #     - libxcb-shape0-dev
-    #     - libxcb-shm0-dev
-    #     - libxcb-sync0-dev
-    #     - libxcb-sync-dev
-    #     - libxcb-util-dev
-    #     - libxcb-xfixes0-dev
-    #     - libxcb-xinerama0-dev
-    #     - libxcb-xinput-dev
-    #     - libxcomposite-dev
-    #     - libxcursor-dev
-    #     - libxext-dev
-    #     - libxft-dev
-    #     - libxi-dev
-    #     - libxinerama-dev
-    #     - libxkbcommon-dev
-    #     - libxkbcommon-x11-dev
-    #     - libxkbfile-dev
-    #     - libxml2
-    #     - libxml2-dev
-    #     - libxmu-dev
-    #     - libxrandr-dev
-    #     - libxrender-dev
-    #     - libxslt1-dev
-    #     - libxss-dev
-    #     - libxt-dev
-    #     - libxtst-dev
-    #     - libxv-dev
-    #     - llvm-6.0
-    #     - mesa-common-dev
-    #     - ninja-build
-    #     - pkg-config
-    #     - python2
-    #     - python3
-    #     - quilt
-    #     - re2c
-    #     - ruby
-    #     - unixodbc-dev
-    #     - zlib1g-dev
-    #     stage-packages: []
-    #     prime:
-    #     - -./usr/include
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
-    #     - -./usr/lib/qt5
-    #     after:
-    #     - qt3d
-    # qttools:
-    #     plugin: autotools
-    #     build-environment:
-    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-    #     override-pull: |
-    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-    #         perl init-repository --module-subset=qttools,qttranslations
-    #         git submodule update qttools,qttranslations
-    #     autotools-configure-parameters:
-    #     - --prefix=/usr
-    #     - -bindir /usr/lib/qt5/bin
-    #     - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     - -docdir /usr/share/qt5/doc
-    #     - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -datadir /usr/share/qt5
-    #     - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-    #     - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-    #     - -translationdir /usr/share/qt5/translations
-    #     - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     - -sysconfdir /etc/xdg
-    #     - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -release
-    #     - -opensource
-    #     - -confirm-license
-    #     - -nomake examples
-    #     - -nomake tests
-    #     - -I $SNAPCRAFT_STAGE/usr/include
-    #     - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     build-packages:
-    #     - build-essential
-    #     - autotools-dev
-    #     - binutils-gold
-    #     - bison
-    #     - cdbs
-    #     - cmake
-    #     - flex
-    #     - flite1-dev
-    #     - freetds-dev
-    #     - git
-    #     - gnome-keyring
-    #     - gperf
-    #     - libasound2-dev
-    #     - libatspi2.0-dev
-    #     - libaudio-dev
-    #     - libavcodec-dev
-    #     - libavformat-dev
-    #     - libavutil-dev
-    #     - libbluetooth-dev
-    #     - libc6
-    #     - libcap-dev
-    #     - libclang-6.0-dev
-    #     - libcups2-dev
-    #     - libdbus-1-3
-    #     - libdbus-1-dev
-    #     - libedit-dev
-    #     - libegl1-mesa-dev
-    #     - libevent-dev
-    #     - libflac++-dev
-    #     - libfontconfig1-dev
-    #     - libfreetype6-dev
-    #     - libgcc1
-    #     - libgconf2-dev
-    #     - libgcrypt20-dev
-    #     - libgeoclue-2-dev
-    #     - libgl1-mesa-dev
-    #     # - libgl1-mesa-dev|libgl-dev
-    #     - libglib2.0-0
-    #     - libglib2.0-dev
-    #     # - libglu1-mesa-dev|libglu-dev
-    #     - libglu1-mesa-dev
-    #     - libgstreamer1.0-dev
-    #     - libgstreamer-plugins-base1.0-dev
-    #     - libgtk2.0-dev
-    #     - libgtk-3-dev
-    #     - libharfbuzz-dev
-    #     - libhunspell-dev
-    #     - libice-dev
-    #     - libicu-dev
-    #     - libjpeg-dev
-    #     - libjsoncpp-dev
-    #     - libmng-dev
-    #     - libmtdev-dev
-    #     - libmysqlclient-dev
-    #     - libnss3-dev
-    #     - libopenal-dev
-    #     - libopus-dev
-    #     - libpci-dev
-    #     - libpng-dev
-    #     - libpq-dev
-    #     - libproxy-dev
-    #     - libpulse-dev
-    #     - libsdl2-dev
-    #     - libsm-dev
-    #     - libsnappy-dev
-    #     - libsocketcan-dev
-    #     - libspeex-dev
-    #     - libsqlite3-0
-    #     - libsqlite3-dev
-    #     - libsrtp2-dev
-    #     - libssl-dev
-    #     - libstdc++6
-    #     - libtiff5-dev
-    #     - libudev-dev
-    #     - libvpx-dev
-    #     - libvulkan-dev
-    #     - libwayland-dev
-    #     # - libwayland-egl1-mesa|libwayland-egl1
-    #     - libwayland-egl1-mesa
-    #     - libwebp-dev
-    #     - libx11-dev
-    #     - libx11-xcb1
-    #     - libx11-xcb-dev
-    #     - libxcb1
-    #     - libxcb1-dev
-    #     - libxcb-dri3-dev
-    #     - libxcb-glx0-dev
-    #     - libxcb-icccm4
-    #     - libxcb-icccm4-dev
-    #     - libxcb-image0
-    #     - libxcb-image0-dev
-    #     - libxcb-keysyms1
-    #     - libxcb-keysyms1-dev
-    #     - libxcb-randr0-dev
-    #     - libxcb-render0-dev
-    #     - libxcb-render-util0-dev
-    #     - libxcb-shape0-dev
-    #     - libxcb-shm0-dev
-    #     - libxcb-sync0-dev
-    #     - libxcb-sync-dev
-    #     - libxcb-util-dev
-    #     - libxcb-xfixes0-dev
-    #     - libxcb-xinerama0-dev
-    #     - libxcb-xinput-dev
-    #     - libxcomposite-dev
-    #     - libxcursor-dev
-    #     - libxext-dev
-    #     - libxft-dev
-    #     - libxi-dev
-    #     - libxinerama-dev
-    #     - libxkbcommon-dev
-    #     - libxkbcommon-x11-dev
-    #     - libxkbfile-dev
-    #     - libxml2
-    #     - libxml2-dev
-    #     - libxmu-dev
-    #     - libxrandr-dev
-    #     - libxrender-dev
-    #     - libxslt1-dev
-    #     - libxss-dev
-    #     - libxt-dev
-    #     - libxtst-dev
-    #     - libxv-dev
-    #     - llvm-6.0
-    #     - mesa-common-dev
-    #     - ninja-build
-    #     - pkg-config
-    #     - python2
-    #     - python3
-    #     - quilt
-    #     - re2c
-    #     - ruby
-    #     - unixodbc-dev
-    #     - zlib1g-dev
-    #     stage-packages: []
-    #     prime:
-    #     - -./usr/include
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
-    #     - -./usr/lib/qt5
-    #     after:
-    #     - qt5
+        - patches    
+    qtxmlpatterns:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtbase,qtxmlpatterns
+            git submodule update qtbase qtxmlpatterns
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtxmlpatterns/install/*
+            rm -rf /root/parts/qtxmlpatterns/build/*
+            rm -rf /root/parts/qtxmlpatterns/src/*
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase   
+    qtx11extras:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtx11extras
+            git submodule update qtx11extras
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtx11extras/install/*
+            rm -rf /root/parts/qtx11extras/build/*
+            rm -rf /root/parts/qtx11extras/src/*
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase       
+    qtgamepad:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtgamepad
+            git submodule update qtgamepad
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtgamepad/install/*
+            rm -rf /root/parts/qtgamepad/build/*
+            rm -rf /root/parts/qtgamepad/src/*
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtimageformats:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtimageformats,qtbase
+            git submodule update qtimageformats qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtimageformats/install/*
+            rm -rf /root/parts/qtimageformats/build/*
+            rm -rf /root/parts/qtimageformats/src/*    
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtnetworkauth:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtnetworkauth,qtbase
+            git submodule update qtnetworkauth qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtnetworkauth/install/*
+            rm -rf /root/parts/qtnetworkauth/build/*
+            rm -rf /root/parts/qtnetworkauth/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtserialport:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtserialport,qtbase
+            git submodule update qtserialport qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtserialport/install/*
+            rm -rf /root/parts/qtserialport/build/*
+            rm -rf /root/parts/qtserialport/src/*   
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtremoteobjects:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtremoteobjects,qtbase
+            git submodule update qtremoteobjects qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtremoteobjects/install/*
+            rm -rf /root/parts/qtremoteobjects/build/*
+            rm -rf /root/parts/qtremoteobjects/src/*    
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtsvg:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtsvg,qtbase
+            git submodule update qtsvg qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtsvg/install/*
+            rm -rf /root/parts/qtsvg/build/*
+            rm -rf /root/parts/qtsvg/src/*
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtscript:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtscript,qtbase
+            git submodule update qtscript qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtscript/install/*
+            rm -rf /root/parts/qtscript/build/*
+            rm -rf /root/parts/qtscript/src/*    
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtbase
+    qtdeclarative:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtdeclarative,qtbase
+            git submodule update qtdeclarative qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtdeclarative/install/*
+            rm -rf /root/parts/qtdeclarative/build/*
+            rm -rf /root/parts/qtdeclarative/src/*  
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtxmlpatterns
+    qtwayland:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtwayland,qtbase
+            git submodule update qtwayland qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtwayland/install/*
+            rm -rf /root/parts/qtwayland/build/*
+            rm -rf /root/parts/qtwayland/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qttools:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qttools,qtbase
+            git submodule update qttools qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qttools/install/*
+            rm -rf /root/parts/qttools/build/*
+            rm -rf /root/parts/qttools/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtconnectivity:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtconnectivity,qtbase
+            git submodule update qtconnectivity qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtconnectivity/install/*
+            rm -rf /root/parts/qtconnectivity/build/*
+            rm -rf /root/parts/qtconnectivity/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtcharts:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtcharts,qtbase
+            git submodule update qtcharts qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtcharts/install/*
+            rm -rf /root/parts/qtcharts/build/*
+            rm -rf /root/parts/qtcharts/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtdocs:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtdocs,qtbase
+            git submodule update qtdocs qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtdocs/install/*
+            rm -rf /root/parts/qtdocs/build/*
+            rm -rf /root/parts/qtdocs/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtlottie:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtlottie,qtbase
+            git submodule update qtlottie qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtlottie/install/*
+            rm -rf /root/parts/qtlottie/build/*
+            rm -rf /root/parts/qtlottie/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtgraphicaleffects:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtgraphicaleffects,qtbase
+            git submodule update qtgraphicaleffects qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtgraphicaleffects/install/*
+            rm -rf /root/parts/qtgraphicaleffects/build/*
+            rm -rf /root/parts/qtgraphicaleffects/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtmultimedia:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtmultimedia,qtbase
+            git submodule update qtmultimedia qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtmultimedia/install/*
+            rm -rf /root/parts/qtmultimedia/build/*
+            rm -rf /root/parts/qtmultimedia/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtquick3d:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtquick3d,qtbase
+            git submodule update qtquick3d qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtquick3d/install/*
+            rm -rf /root/parts/qtquick3d/build/*
+            rm -rf /root/parts/qtquick3d/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtquickcontrols:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtquickcontrols,qtbase
+            git submodule update qtquickcontrols qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtquickcontrols/install/*
+            rm -rf /root/parts/qtquickcontrols/build/*
+            rm -rf /root/parts/qtquickcontrols/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtscxml:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtscxml,qtbase
+            git submodule update qtscxml qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtscxml/install/*
+            rm -rf /root/parts/qtscxml/build/*
+            rm -rf /root/parts/qtscxml/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtquicktimeline:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtquicktimeline,qtbase
+            git submodule update qtquicktimeline qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtquicktimeline/install/*
+            rm -rf /root/parts/qtquicktimeline/build/*
+            rm -rf /root/parts/qtquicktimeline/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtsensors:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtsensors,qtbase
+            git submodule update qtsensors qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtsensors/install/*
+            rm -rf /root/parts/qtsensors/build/*
+            rm -rf /root/parts/qtsensors/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtwebchannel:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtwebchannel
+            git submodule update qtwebchannel
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtwebchannel/install/*
+            rm -rf /root/parts/qtwebchannel/build/*
+            rm -rf /root/parts/qtwebchannel/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qtwebsockets:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtwebsockets,qtbase
+            git submodule update qtwebsockets qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtwebsockets/install/*
+            rm -rf /root/parts/qtwebsockets/build/*
+            rm -rf /root/parts/qtwebsockets/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+    qt3d:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qt3d,qtbase
+            git submodule update qt3d qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qt3d/install/*
+            rm -rf /root/parts/qt3d/build/*
+            rm -rf /root/parts/qt3d/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+        - qtimageformats
+    qtquickcontrols2:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtquickcontrols2,qtbase
+            git submodule update qtquickcontrols2 qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtquickcontrols2/install/*
+            rm -rf /root/parts/qt/build/*
+            rm -rf /root/parts/qt/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtdeclarative
+        - qtquickcontrols
+    qtlocation:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtlocation,qtbase
+            git submodule update qtlocation qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtlocation/install/*
+            rm -rf /root/parts/qtlocation/build/*
+            rm -rf /root/parts/qtlocation/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtquickcontrols
+        - qtserialport
+    qtdatavis3d:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtdatavis3d,qtbase
+            git submodule update qtdatavis3d qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtdatavis3d/install/*
+            rm -rf /root/parts/qtdatavis3d/build/*
+            rm -rf /root/parts/qtdatavis3d/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtmultimedia
+    qtspeech:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtspeech,qtbase
+            git submodule update qtspeech qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtspeech/install/*
+            rm -rf /root/parts/qtspeech/build/*
+            rm -rf /root/parts/qtspeech/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtmultimedia
+    qtserialbus:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtserialbus,qtbase
+            git submodule update qtserialbus qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtserialbus/install/*
+            rm -rf /root/parts/qtserialbus/build/*
+            rm -rf /root/parts/qtserialbus/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtserialport
+    qttranslations:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qttranslations,qtbase
+            git submodule update qttranslations qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qttranslations/install/*
+            rm -rf /root/parts/qttranslations/build/*
+            rm -rf /root/parts/qttranslations/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qttools
+    qtwebglplugin:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtwebglplugin,qtbase
+            git submodule update qtwebglplugin qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtwebglplugin/install/*
+            rm -rf /root/parts/qtwebglplugin/build/*
+            rm -rf /root/parts/qtwebglplugin/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtwebsockets
+    qtwebengine:
+        plugin: nil
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
+            perl init-repository --module-subset=qtwebengine,qtbase
+            git submodule update qtwebengine,qtbase
+        override-build: |
+            ./configure \
+                -prefix /usr \
+                -bindir /usr/lib/qt5/bin \
+                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
+                -docdir /usr/share/qt5/doc \
+                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -datadir /usr/share/qt5 \
+                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
+                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
+                -translationdir /usr/share/qt5/translations \
+                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
+                -sysconfdir /etc/xdg \
+                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
+                -release \
+                -opensource \
+                -confirm-license \
+                -nomake examples \
+                -nomake tests \
+                -I $SNAPCRAFT_STAGE/usr/include \
+                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+        override-stage: |
+            snapcraftctl stage
+            # Cleanup space on build VM to prevent running out of disk space for later parts
+            rm -rf /root/parts/qtwebengine/install/*
+            rm -rf /root/parts/qtwebengine/build/*
+            rm -rf /root/parts/qtwebengine/src/*     
+        build-packages:
+        - flex
+        - libxcb-render0-dev
+        - libxcb-image0-dev
+        - libxcb-shape0-dev
+        - libxcb-sync-dev
+        - libxcb-render-util0-dev
+        - libxcb1-dev
+        - libxcb-xfixes0-dev
+        - libxcb-icccm4-dev
+        - libxcb-keysyms1-dev
+        - libxcb-shm0-dev
+        - libxrender-dev
+        - libpulse-dev
+        - libasound2-dev
+        - libaudio-dev
+        - libcups2-dev
+        - libdbus-1-dev
+        - libfreetype6-dev
+        - libgl1-mesa-dev
+        - libglib2.0-dev
+        - libegl1-mesa-dev
+        - libglu1-mesa-dev
+        - libice-dev
+        - libjpeg-dev
+        - libmng-dev
+        - libpng-dev
+        - libsm-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtiff5-dev
+        - libx11-dev
+        - libxcursor-dev
+        - libxext-dev
+        - libxft-dev
+        - libxi-dev
+        - libxinerama-dev
+        - libxmu-dev
+        - libxrandr-dev
+        - libxt-dev
+        - libxv-dev
+        - zlib1g-dev
+        - libedit-dev
+        - libwayland-dev
+        - libwayland-egl1-mesa
+        - libmtdev-dev
+        - libudev-dev
+        - libxkbcommon-dev
+        - libxcomposite-dev
+        - libvulkan-dev
+        stage-packages: []
+        prime:
+        - -./usr/include
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
+        - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
+        - -./usr/lib/qt5
+        after:
+        - qtlocation
+        - qtwebchannel
+        - qtquickcontrols2
+        - qtsvg
     patches:
         plugin: dump
         source: snap/local/patches
@@ -1489,7 +4695,7 @@ parts:
     plasma-integration:
         after:
         - kf5-dev
-        - qt5
+        - qtwayland
         plugin: cmake
         build-attributes:
         - enable-patchelf
