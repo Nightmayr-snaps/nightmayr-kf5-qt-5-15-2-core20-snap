@@ -1,0 +1,5 @@
+*.snap
+.vscode
+.DS_Store
+*.log*
+*.bak*
