@@ -53,891 +53,626 @@ parts:
         - "-usr/share/lintian"
         - "-usr/share/man"
         - "-usr/share/pkgconfig"
-    kf5:
-        after:
-        - qtwayland
-        plugin: nil
-        build-attributes:
-        - enable-patchelf
-        build-packages: []
-        stage-packages:
-        - mesa-utils-extra
-        - freeglut3-dev
-        - gstreamer1.0-x
-        - gstreamer1.0-plugins-base
-        - gstreamer1.0-pulseaudio
-        - gstreamer1.0-plugins-good
-        - locales
-        - libc-bin
-        - gettext
-        - libdrm-dev
-        - extra-cmake-modules
-        - libkf5coreaddons-data
-        - libkf5coreaddons5
-        - libkf5auth-data
-        - libkf5auth5
-        - libkf5authcore5
-        - libkf5config-bin
-        - libkf5config-data
-        - libkf5configcore5
-        - libkf5configgui5
-        - libkf5widgetsaddons-data
-        - libkf5widgetsaddons5
-        - libkf5completion-data
-        - libkf5completion5
-        - libkf5windowsystem-data
-        - libkf5windowsystem5
-        - libkf5crash5
-        - libkf5archive5
-        - libkf5i18n-data
-        - libkf5i18n5
-        - libkf5filemetadata-bin
-        - libkf5filemetadata-data
-        - libkf5filemetadata3
-        - libkf5jobwidgets-data
-        - libkf5jobwidgets5
-        - libkf5pty-data
-        - libkf5pty5
-        - libkf5unitconversion-data
-        - libkf5unitconversion5
-        - libkf5codecs-data
-        - libkf5codecs5
-        - libkf5notifications-data
-        - libkf5notifications5
-        - kpackagetool5
-        - libkf5package-data
-        - libkf5package5
-        - libkf5guiaddons5
-        - libkf5configwidgets-data
-        - libkf5configwidgets5
-        - libkf5itemviews-data
-        - libkf5itemviews5
-        - libkf5iconthemes-bin
-        - libkf5iconthemes-data
-        - libkf5iconthemes5
-        - libkf5attica5
-        - libkf5dbusaddons-bin
-        - libkf5dbusaddons-data
-        - libkf5dbusaddons5
-        - libkf5service-bin
-        - libkf5service-data
-        - libkf5service5
-        - libkf5globalaccel-bin
-        - libkf5globalaccel-data
-        - libkf5globalaccel5
-        - libkf5globalaccelprivate5
-        - libkf5sonnet5-data
-        - libkf5sonnetcore5
-        - libkf5sonnetui5
-        - sonnet-plugins
-        - libkf5textwidgets-data
-        - libkf5textwidgets5
-        - breeze-icon-theme
-        - breeze-icon-theme-rcc
-        - libkf5xmlgui-bin
-        - libkf5xmlgui-data
-        - libkf5xmlgui5
-        - libkf5bookmarks-data
-        - libkf5bookmarks5
-        - libkf5solid-bin
-        - libkf5solid5
-        - libkf5solid5-data
-        - qml-module-org-kde-solid
-        # - qtdeclarative5-kf5solid
-        - libkf5wallet-bin
-        - libkf5wallet-data
-        - libkf5wallet5
-        - libkwalletbackend5-5
-        - kio
-        - libkf5kiocore5
-        - libkf5kiofilewidgets5
-        - libkf5kiogui5
-        - libkf5kiontlm5
-        - libkf5kiowidgets5
-        - kpackagelauncherqml
-        - libkf5calendarevents5
-        - libkf5declarative-data
-        - libkf5declarative5
-        - libkf5quickaddons5
-        # - qml-module-org-kde-draganddrop
-        # - qml-module-org-kde-kcm
-        # - qml-module-org-kde-kconfig
-        # - qml-module-org-kde-kcoreaddons
-        # - qml-module-org-kde-kio
-        # - qml-module-org-kde-kquickcontrols
-        # - qml-module-org-kde-kquickcontrolsaddons
-        # - qml-module-org-kde-kwindowsystem
-        # - qtdeclarative5-kf5declarative
-        - libkf5kcmutils-data
-        - libkf5kcmutils5
-        - libkf5plotting5
-        - libkf5parts-data
-        - libkf5parts-plugins
-        - libkf5parts5
-        - libkf5webkit5
-        - libkf5emoticons-bin
-        - libkf5emoticons-data
-        - libkf5emoticons5
-        - libkf5newstuff-data
-        - libkf5newstuff5
-        - libkf5newstuffcore5
-        - qml-module-org-kde-newstuff
-        - knewstuff-dialog
-        - kinit
-        - libkf5notifyconfig-data
-        - libkf5notifyconfig5
-        - kded5
-        - libkf5su-bin
-        - libkf5su-data
-        - libkf5su5
-        - ktexteditor-data
-        - ktexteditor-katepart
-        - libkf5texteditor-bin
-        - libkf5texteditor5
-        - kactivities-bin
-        - libkf5activities5
-        - qml-module-org-kde-activities
-        - libkf5activitiesstats1
-        - libkf5dnssd-data
-        - libkf5dnssd5
-        - libkf5idletime5
-        - libkf5itemmodels5
-        - qml-module-org-kde-kitemmodels
-        - libkf5threadweaver5
-        - libkf5plasma5
-        - libkf5plasmaquick5
-        - plasma-framework
-        - libkf5xmlrpcclient-data
-        - libkf5xmlrpcclient5
-        - libkf5people-data
-        - libkf5people5
-        - libkf5peoplebackend5
-        - libkf5peoplewidgets5
-        - qml-module-org-kde-people
-        - frameworkintegration
-        - libkf5style5
-        - kdoctools5
-        - libkf5doctools5
-        - kdesignerplugin
-        - kdesignerplugin-data
-        - kgendesignerplugin
-        - kgendesignerplugin-bin
-        - libkf5syntaxhighlighting-data
-        - libkf5syntaxhighlighting-tools
-        - libkf5syntaxhighlighting5
-        - libkf5runner5
-        - qml-module-org-kde-runnermodel
-        - kwayland-data
-        - libkf5waylandclient5
-        - libkf5waylandserver5
-        - baloo-kf5
-        - libkf5baloo5
-        - libkf5balooengine5
-        - breeze
-        - breeze-cursor-theme
-        - kde-style-breeze
-        - kwin-style-breeze
-        - kde-style-breeze-qt4
-        - kdegames-card-data-kf5
-        - libkf5kdegames7
-        - libkf5kdegamesprivate7
-        - qml-module-org-kde-games-core
-        - libkf5kdegamesprivate1
-        - kross
-        - libkf5krosscore5
-        - libkf5krossui5
-        - libkf5kdelibs4support-data
-        - libkf5kdelibs4support5
-        - libkf5kdelibs4support5-bin
-        # - libqt5webkit5
-        # - qml-module-qtwebkit
-        # - libqt5core5a
-        # - libqt5gui5
-        - qt5-flatpak-platformtheme
-        - qt5-xdgdesktopportal-platformtheme
-        # - libqt5network5
-        # - libqt5opengl5
-        # - libqt5sql5
-        # - libqt5sql5-mysql
-        # - libqt5sql5-odbc
-        # - libqt5sql5-psql
-        # - libqt5sql5-sqlite
-        # - libqt5sql5-tds
-        # - libqt5sql5-ibase
-        # - libqt5xml5
-        # - libqt5dbus5
-        # - libqt5test5
-        # - libqt5concurrent5
-        # - libqt5widgets5
-        # - libqt5printsupport5
-        # - qt5-qmake-bin
-        # - qt5-qmake
-        # - qt5-default
-        # - libqt5qml5
-        # - libqt5qmlmodels5
-        # - libqt5qmlworkerscript5
-        # - libqt5quick5
-        # - libqt5quickparticles5
-        # - libqt5quickshapes5
-        # - libqt5quicktest5
-        # - libqt5quickwidgets5
-        # - qml-module-qtquick-layouts
-        # - qt5-qmltooling-plugins
-        # - qml-module-qt-labs-animation
-        # - qml-module-qt-labs-folderlistmodel
-        # - qml-module-qtquick-localstorage
-        # - qml-module-qt-labs-sharedimage
-        # - qml-module-qt-labs-qmlmodels
-        # - qml-module-qt-labs-wavefrontmesh
-        # - qml-module-qtqml
-        # - qml-module-qtqml-models2
-        # - qml-module-qtqml-statemachine
-        # - qml-module-qtqml-workerscript2
-        # - qml-module-qtquick-particles2
-        # - qml-module-qtquick2
-        # - qml-module-qtquick-shapes
-        # - qml-module-qt-labs-settings
-        # - qml-module-qttest
-        # - qml-module-qtquick-window2
-        # - qmlscene
-        # - qml
-        # - qml-module-qtgraphicaleffects
-        # - libqt5location5
-        # - libqt5positioningquick5
-        # - libqt5positioning5
-        # - libqt5location5-plugins
-        # - libqt5location5-plugin-mapboxgl
-        # - libqt5positioning5-plugins
-        # - qml-module-qtlocation
-        # - qml-module-qtpositioning
-        # - qml-module-qt-labs-location
-        # - libqt5multimedia5
-        # - libqt5multimedia5-plugins
-        # - libqt5multimediaquick5
-        # - libqt5multimediawidgets5
-        # - qml-module-qtmultimedia
-        # - qml-module-qtaudioengine
-        # - libqt5multimediagsttools5
-        # - qml-module-qtquick-controls
-        # - qml-module-qtquick-extras
-        # - qml-module-qtquick-dialogs
-        # - qml-module-qtquick-privatewidgets
-        # - libqt5quickcontrols2-5
-        # - libqt5quicktemplates2-5
-        # - qml-module-qt-labs-calendar
-        # - qml-module-qt-labs-platform
-        # - qml-module-qtquick-controls2
-        # - qml-module-qtquick-templates2
-        # - libqt5script5
-        # - libqt5scripttools5
-        # - libqt5sensors5
-        # - qml-module-qtsensors
-        # - libqt5serialport5
-        # - libqt5svg5
-        # - libqt5designer5
-        # - libqt5designercomponents5
-        # - qdbus-qt5
-        # - qdbus
-        # - qdoc-qt5
-        # - qhelpgenerator-qt5
-        # - qtattributionsscanner-qt5
-        # - libqt5help5
-        # - qt5-assistant
-        # - qttranslations5-l10n
-        # - libqt5hunspellinputmethod5
-        # - libqt5virtualkeyboard5
-        # - qml-module-qtquick-virtualkeyboard
-        # - qtvirtualkeyboard-plugin
-        # - libqt5waylandclient5
-        # - libqt5waylandcompositor5
-        # - qml-module-qtwayland-compositor
-        # - qml-module-qtwayland-client-texturesharing
-        # - qtwayland5
-        # - libqt5webchannel5
-        # - qml-module-qtwebchannel
-        # - libqt5webengine5
-        # - libqt5webenginecore5
-        # - libqt5webenginewidgets5
-        # - libqt5pdf5
-        # - libqt5pdfwidgets5
-        # - libqt5webengine-data
-        # - qt5-image-formats-plugin-pdf
-        # - qml-module-qtwebengine
-        # - qml-module-qtquick-pdf
-        # - libqt5websockets5
-        # - qml-module-qtwebsockets
-        # - qml-module-qt-websockets
-        # - libqt5webview5
-        # - qml-module-qtwebview
-        # - libqt5x11extras5
-        # - libqt5xmlpatterns5
-        # - qml-module-qtquick-xmllistmodel
-        # - libqt5bluetooth5
-        # - libqt5bluetooth5-bin
-        # - qml-module-qtbluetooth
-        # - libqt5nfc5
-        # - qml-module-qtnfc
-        filesets:
-            exclusion:
-            - "-usr/lib/*/cmake/*"
-            - "-usr/lib/*/qt5/bin/moc"
-            - "-usr/lib/*/qt5/bin/qmake"
-            - "-usr/lib/*/qt5/bin/rcc"
-            - "-usr/lib/*/qt5/bin/*cpp*"
-            - "-usr/lib/qt5/bin/assistant"
-            - "-usr/lib/qt5/bin/designer"
-            - "-usr/lib/qt5/bin/lconvert"
-            - "-usr/lib/qt5/bin/linguist"
-            - "-usr/lib/qt5/bin/lupdate"
-            - "-usr/lib/qt5/bin/lrelease"
-            - "-usr/lib/qt5/bin/moc"
-            - "-usr/lib/qt5/bin/pixeltool"
-            - "-usr/lib/qt5/bin/qcollectiongenerator"
-            - "-usr/lib/qt5/bin/qdbuscpp2xml"
-            - "-usr/lib/qt5/bin/qdbusxml2cpp"
-            - "-usr/lib/qt5/bin/qdoc"
-            - "-usr/lib/qt5/bin/qhelpconverter"
-            - "-usr/lib/qt5/bin/qlalr"
-            - "-usr/lib/qt5/bin/qmake"
-            - "-usr/lib/qt5/bin/rcc"
-            - "-usr/lib/qt5/bin/syncqt.pl"
-            - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
-            - "-usr/include/*"
-            - "-usr/share/ECM/*"
-            - "-usr/share/xml/docbook/*"
-            - "-usr/share/doc/*"
-            - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
-            - "-usr/share/man/*"
-            - "-usr/share/icons/breeze/*.rcc"
-            - "-usr/share/icons/breeze-dark/*.rcc"
-            - "-usr/share/wallpapers/*"
-            - "-usr/share/fonts/*"
-            - "-usr/share/pkgconfig"
-            - "-usr/lib/*/pkgconfig"
-            - "-usr/share/QtCurve"
-            - "-usr/share/kde4"
-            - "-usr/share/bug"
-            - "-usr/share/debhelper"
-            - "-usr/share/lintian"
-            - "-usr/share/menu"
-            - "-usr/bin/*vlc"
-            - "-usr/bin/dh_*"
-            - "-usr/lib/*/*.a"
-            - "-usr/lib/*/*.pri"
-            - "-usr/share/kf5/kdoctools/*"
-            - "-usr/bin/make"
-            - "-usr/lib/*/*.so.5.15.3"
-            - "-usr/lib/*/libQt5*"
-        prime:
-        - "$exclusion"
-        stage:
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze/*.rcc"
-        - "-usr/share/wallpapers/*"
-        - "-usr/share/fonts/*"
-        - "-usr/bin/checkXML5"
-        - "-usr/bin/kpackagetool5"
-        - "-usr/bin/meinproc5"
-        - "-usr/lib/qt5/bin/qdoc"
-        - "-usr/lib/qt5/bin/qhelpgenerator"
-        - "-usr/lib/qt5/bin/qtattributionsscanner"
-        - "-usr/lib/*/qt5/bin/qmake"
-        - "-usr/lib/*/libQt5*"
-        # Maybe remove all plugins and qml and allow to come from qt5 part
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/bearer"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-emu-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/generic"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/iconengines/libqsvgicon.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/imageformats"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforminputcontexts"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforms"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platformthemes"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/xcbglintegrations"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/settings/libqmlsettingsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/Models.2/libmodelsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/libqmlplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick.2/libqtquick2plugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Window.2/libwindowplugin.so"
-    kf5-dev:
-        after:
-        - kf5
-        plugin: nil
-        build-attributes:
-        - enable-patchelf
-        build-packages: []
-        stage-packages:
-        - libxml2-dev
-        - libxslt-dev
-        - liblcms2-dev
-        - libpng-dev
-        - libexiv2-dev
-        - libjpeg-dev
-        - gettext
-        - libkf5coreaddons-dev
-        - libkf5coreaddons-dev-bin
-        - libkf5auth-dev
-        - libkf5auth-dev-bin
-        - libkf5auth-bin-dev
-        - libkf5config-dev
-        - libkf5config-dev-bin
-        - libkf5config-bin-dev
-        - libkf5widgetsaddons-dev
-        - libkf5completion-dev
-        - libkf5windowsystem-dev
-        - libkf5crash-dev
-        - libkf5archive-dev
-        - libkf5i18n-dev
-        - libkf5filemetadata-dev
-        - libkf5jobwidgets-dev
-        - libkf5pty-dev
-        - libkf5unitconversion-dev
-        - libkf5codecs-dev
-        - libkf5notifications-dev
-        - libkf5package-dev
-        - libkf5guiaddons-dev
-        - libkf5configwidgets-dev
-        - libkf5itemviews-dev
-        - libkf5iconthemes-dev
-        - libkf5attica-dev
-        - libkf5dbusaddons-dev
-        - libkf5service-dev
-        - libkf5globalaccel-dev
-        - libkf5sonnet-dev
-        - libkf5sonnet-dev-bin
-        - libkf5textwidgets-dev
-        - libkf5xmlgui-dev
-        - libkf5bookmarks-dev
-        - libkf5solid-dev
-        - libkf5wallet-dev
-        - kio-dev
-        - libkf5kio-dev
-        - libkf5declarative-dev
-        - libkf5kcmutils-dev
-        - libkf5plotting-dev
-        - libkf5parts-dev
-        - libkf5webkit-dev
-        - libkf5emoticons-dev
-        - libkf5newstuff-dev
-        - kinit-dev
-        - libkf5notifyconfig-dev
-        - kded5-dev
-        - libkf5su-dev
-        - libkf5texteditor-dev
-        - libkf5activities-dev
-        - libkf5activitiesstats-dev
-        - libkf5dnssd-dev
-        - libkf5idletime-dev
-        - libkf5itemmodels-dev
-        - libkf5threadweaver-dev
-        - libkf5plasma-dev
-        - libkf5xmlrpcclient-dev
-        - libkf5people-dev
-        - libkf5style-dev
-        - kdoctools-dev
-        - libkf5doctools-dev
-        - libkf5syntaxhighlighting-dev
-        - libkf5runner-dev
-        - kwayland-dev
-        - libkf5wayland-dev
-        - baloo-kf5-dev
-        - breeze-dev
-        - libkf5kdegames-dev
-        - kross-dev
-        - libkf5kdelibs4support-dev
-        # - libqt5webkit5-dev
-        # - qtbase5-dev
-        # - qtbase5-private-dev
-        # - libqt5opengl5-dev
-        # - qtbase5-dev-tools
-        # - qtbase5-doc-dev
-        # - qtdeclarative5-dev
-        # - qtdeclarative5-private-dev
-        # - qtdeclarative5-dev-tools
-        # - qtdeclarative5-doc-dev
-        # - qtlocation5-dev
-        # - qtpositioning5-dev
-        # - qtlocation5-doc-dev
-        # - qtmultimedia5-dev
-        # - qtmultimedia5-private-dev
-        # - qtquickcontrols2-5-dev
-        # - qtscript5-dev
-        # - libqt5sensors5-dev
-        # - libqt5serialport5-dev
-        # - libqt5svg5-dev
-        # - qttools5-dev
-        # - qttools5-private-dev
-        # - qttools5-dev-tools
-        # - libqt5virtualkeyboard5-dev
-        # - libqt5waylandcompositor5-dev
-        # - libqt5waylandclient5-dev
-        # - qtwayland5-private-dev
-        # - qtwayland5-dev-tools
-        # - libqt5webchannel5-dev
-        # - qtwebengine5-dev
-        # - qtwebengine5-private-dev
-        # - qtpdf5-dev
-        # - qtwebengine5-dev-tools
-        # - libqt5websockets5-dev
-        # - libqt5webview5-dev
-        # - libqt5x11extras5-dev
-        # - libqt5xmlpatterns5-dev
-        # - qtxmlpatterns5-dev-tools
-        # - qtconnectivity5-dev
-        filesets:
-            exclusion:
-            - "-usr/lib/*/cmake/*"
-            - "-usr/lib/*/qt5/bin/moc"
-            - "-usr/lib/*/qt5/bin/qmake"
-            - "-usr/lib/*/qt5/bin/rcc"
-            - "-usr/lib/*/qt5/bin/*cpp*"
-            - "-usr/lib/qt5/bin/assistant"
-            - "-usr/lib/qt5/bin/designer"
-            - "-usr/lib/qt5/bin/lconvert"
-            - "-usr/lib/qt5/bin/linguist"
-            - "-usr/lib/qt5/bin/lupdate"
-            - "-usr/lib/qt5/bin/lrelease"
-            - "-usr/lib/qt5/bin/moc"
-            - "-usr/lib/qt5/bin/pixeltool"
-            - "-usr/lib/qt5/bin/qcollectiongenerator"
-            - "-usr/lib/qt5/bin/qdbuscpp2xml"
-            - "-usr/lib/qt5/bin/qdbusxml2cpp"
-            - "-usr/lib/qt5/bin/qdoc"
-            - "-usr/lib/qt5/bin/qhelpconverter"
-            - "-usr/lib/qt5/bin/qlalr"
-            - "-usr/lib/qt5/bin/qmake"
-            - "-usr/lib/qt5/bin/rcc"
-            - "-usr/lib/qt5/bin/syncqt.pl"
-            - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
-            - "-usr/include/*"
-            - "-usr/share/ECM/*"
-            - "-usr/share/xml/docbook/*"
-            - "-usr/share/doc/*"
-            - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
-            - "-usr/share/man/*"
-            - "-usr/share/icons/breeze/*.rcc"
-            - "-usr/share/icons/breeze-dark/*.rcc"
-            - "-usr/share/wallpapers/*"
-            - "-usr/share/fonts/*"
-            - "-usr/share/pkgconfig"
-            - "-usr/lib/*/pkgconfig"
-            - "-usr/share/QtCurve"
-            - "-usr/share/kde4"
-            - "-usr/share/bug"
-            - "-usr/share/debhelper"
-            - "-usr/share/lintian"
-            - "-usr/share/menu"
-            - "-usr/bin/*vlc"
-            - "-usr/bin/dh_*"
-            - "-usr/lib/*/*.a"
-            - "-usr/lib/*/*.pri"
-            - "-usr/share/kf5/kdoctools/*"
-            - "-usr/bin/make"
-        prime:
-        - "-*"
-        stage:
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze/*.rcc"
-        - "-usr/share/wallpapers/*"
-        - "-usr/share/fonts/*"
-        - "-usr/share/emoticons"
-        - "-usr/share/icons/*"
-        - "-usr/share/locale/*/LC_*/*"
-        - "-usr/share/qt5/translations/*"
-        - "-usr/lib/*/dri/*"
-        - "-usr/share/qtchooser/qt5-*.conf"
-        - "-usr/lib/*/libexec/kf5/kconf_update"
-        - "-usr/lib/*/libQt5*"
-        # Maybe remove all plugins and qml and allow to come from qt5 part
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/bearer"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-emu-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/generic"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/iconengines/libqsvgicon.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/imageformats"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforminputcontexts"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforms"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platformthemes"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/xcbglintegrations"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/settings/libqmlsettingsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/Models.2/libmodelsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/libqmlplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick.2/libqtquick2plugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
-        - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Window.2/libwindowplugin.so"
-
-    # qt5:
-    #     # plugin: autotools
-    #     plugin: nil
-    #     override-pull: |
-    #         git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-    #         # perl init-repository --module-subset=default,qtwebengine
-    #         # git submodule update --init --recursive
-    #         perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qt3d,qtcharts,qtdatavis3d,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtmultimedia,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qttools,qttranslations,qtwayland,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
-    #         git submodule update qtbase qtdeclarative qtconnectivity qt3d qtcharts qtdatavis3d qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtmultimedia qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qttools qttranslations qtwayland qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
-    #         # perl init-repository --module-subset=qtbase,qtdeclarative,qtconnectivity,qtdoc,qtgamepad,qtgraphicaleffects,qtimageformats,qtlocation,qtlottie,qtnetworkauth,qtquick3d,qtquickcontrols,qtquickcontrols2,qtquicktimeline,qtremoteobjects,qtscript,qtscxml,qtsensors,qtserialbus,qtserialport,qtspeech,qtsvg,qtwebchannel,qtwebengine,qtwebglplugin,qtwebsockets,qtx11extras,qtxmlpatterns
-    #         # git submodule update qtbase qtdeclarative qtconnectivity qtdoc qtgamepad qtgraphicaleffects qtimageformats qtlocation qtlottie qtnetworkauth qtquick3d qtquickcontrols qtquickcontrols2 qtquicktimeline qtremoteobjects qtscript qtscxml qtsensors qtserialbus qtserialport qtspeech qtsvg qtwebchannel qtwebengine qtwebglplugin qtwebsockets qtx11extras qtxmlpatterns
-
-    #         cd qtbase
-    #         git apply $SNAPCRAFT_STAGE/qtbase-ordonly4.patch
-    #         # cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
-    #     # autotools-configure-parameters:
-    #     # - --prefix=/usr
-    #     # - -bindir /usr/lib/qt5/bin
-    #     # - -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     # - -docdir /usr/share/qt5/doc
-    #     # - -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     # - -datadir /usr/share/qt5
-    #     # - -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     # - -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
-    #     # - -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports
-    #     # - -translationdir /usr/share/qt5/translations
-    #     # - -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
-    #     # - -sysconfdir /etc/xdg
-    #     # - -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     # - -release
-    #     # - -opensource
-    #     # - -confirm-license
-    #     # - -nomake examples
-    #     # - -nomake tests
-    #     # - -I $SNAPCRAFT_STAGE/usr/include
-    #     # - -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-    #     override-build: |
-    #         ./configure \
-    #             -prefix /usr \
-    #             -bindir /usr/lib/qt5/bin \
-    #             -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-    #             -docdir /usr/share/qt5/doc \
-    #             -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-    #             -datadir /usr/share/qt5 \
-    #             -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-    #             -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-    #             -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-    #             -translationdir /usr/share/qt5/translations \
-    #             -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-    #             -sysconfdir /etc/xdg \
-    #             -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-    #             -release \
-    #             -opensource \
-    #             -confirm-license \
-    #             -nomake examples \
-    #             -nomake tests \
-    #             -I $SNAPCRAFT_STAGE/usr/include \
-    #             -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
-    #         make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-    #         make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
-    #     override-stage: |
-    #         snapcraftctl stage
-    #         # Cleanup space on build VM to prevent running out of disk space for later parts
-    #         rm -rf $SNAPCRAFT_PART_INSTALL/*
-    #         rm -rf $SNAPCRAFT_PART_BUILD/*
-    #         rm -rf $SNAPCRAFT_PART_SRC/*
-    #     build-packages:
-    #     - build-essential
-    #     - autotools-dev
-    #     - binutils-gold
-    #     - bison
-    #     - cdbs
-    #     - cmake
-    #     - flex
-    #     - flite1-dev
-    #     - freetds-dev
-    #     - git
-    #     - gnome-keyring
-    #     - gperf
-    #     - libasound2-dev
-    #     - libatspi2.0-dev
-    #     - libaudio-dev
-    #     - libavcodec-dev
-    #     - libavformat-dev
-    #     - libavutil-dev
-    #     - libbluetooth-dev
-    #     - libc6
-    #     - libcap-dev
-    #     - libclang-6.0-dev
-    #     - libcups2-dev
-    #     - libdbus-1-3
-    #     - libdbus-1-dev
-    #     - libedit-dev
-    #     - libegl1-mesa-dev
-    #     - libevent-dev
-    #     - libflac++-dev
-    #     - libfontconfig1-dev
-    #     - libfreetype6-dev
-    #     - libgcc1
-    #     - libgconf2-dev
-    #     - libgcrypt20-dev
-    #     - libgeoclue-2-dev
-    #     - libgl1-mesa-dev
-    #     # - libgl1-mesa-dev|libgl-dev
-    #     - libglib2.0-0
-    #     - libglib2.0-dev
-    #     # - libglu1-mesa-dev|libglu-dev
-    #     - libglu1-mesa-dev
-    #     - libgstreamer1.0-dev
-    #     - libgstreamer-plugins-base1.0-dev
-    #     - libgtk2.0-dev
-    #     - libgtk-3-dev
-    #     - libharfbuzz-dev
-    #     - libhunspell-dev
-    #     - libice-dev
-    #     - libicu-dev
-    #     - libjpeg-dev
-    #     - libjsoncpp-dev
-    #     - libmng-dev
-    #     - libmtdev-dev
-    #     - libmysqlclient-dev
-    #     - libnss3-dev
-    #     - libopenal-dev
-    #     - libopus-dev
-    #     - libpci-dev
-    #     - libpng-dev
-    #     - libpq-dev
-    #     - libproxy-dev
-    #     - libpulse-dev
-    #     - libsdl2-dev
-    #     - libsm-dev
-    #     - libsnappy-dev
-    #     - libsocketcan-dev
-    #     - libspeex-dev
-    #     - libsqlite3-0
-    #     - libsqlite3-dev
-    #     - libsrtp2-dev
-    #     - libssl-dev
-    #     - libstdc++6
-    #     - libtiff5-dev
-    #     - libudev-dev
-    #     - libvpx-dev
-    #     - libvulkan-dev
-    #     - libwayland-dev
-    #     # - libwayland-egl1-mesa|libwayland-egl1
-    #     - libwayland-egl1-mesa
-    #     - libwebp-dev
-    #     - libx11-dev
-    #     - libx11-xcb1
-    #     - libx11-xcb-dev
-    #     - libxcb1
-    #     - libxcb1-dev
-    #     - libxcb-dri3-dev
-    #     - libxcb-glx0-dev
-    #     - libxcb-icccm4
-    #     - libxcb-icccm4-dev
-    #     - libxcb-image0
-    #     - libxcb-image0-dev
-    #     - libxcb-keysyms1
-    #     - libxcb-keysyms1-dev
-    #     - libxcb-randr0-dev
-    #     - libxcb-render0-dev
-    #     - libxcb-render-util0-dev
-    #     - libxcb-shape0-dev
-    #     - libxcb-shm0-dev
-    #     - libxcb-sync0-dev
-    #     - libxcb-sync-dev
-    #     - libxcb-util-dev
-    #     - libxcb-xfixes0-dev
-    #     - libxcb-xinerama0-dev
-    #     - libxcb-xinput-dev
-    #     - libxcomposite-dev
-    #     - libxcursor-dev
-    #     - libxext-dev
-    #     - libxft-dev
-    #     - libxi-dev
-    #     - libxinerama-dev
-    #     - libxkbcommon-dev
-    #     - libxkbcommon-x11-dev
-    #     - libxkbfile-dev
-    #     - libxml2
-    #     - libxml2-dev
-    #     - libxmu-dev
-    #     - libxrandr-dev
-    #     - libxrender-dev
-    #     - libxslt1-dev
-    #     - libxss-dev
-    #     - libxt-dev
-    #     - libxtst-dev
-    #     - libxv-dev
-    #     - llvm-6.0
-    #     - mesa-common-dev
-    #     - ninja-build
-    #     - pkg-config
-    #     - python2
-    #     - python3
-    #     - quilt
-    #     - re2c
-    #     - ruby
-    #     - unixodbc-dev
-    #     - zlib1g-dev
-    #     stage-packages:
-    #     - libdbus-1-3
-    #     - libegl1
-    #     - libfontconfig1
-    #     - libfreetype6
-    #     - libgl1
-    #     - libglib2.0-0
-    #     - libgtk-3-0
-    #     - libharfbuzz0b
-    #     - libicu66
-    #     - libpcre2-16-0
-    #     - libpng16-16
-    #     - libssl1.1
-    #     - libwayland-client0
-    #     - libwayland-cursor0
-    #     - libwayland-egl1
-    #     - libx11-6
-    #     - libx11-xcb1
-    #     - libxcb1
-    #     - libxcb-glx0
-    #     - libxcb-icccm4
-    #     - libxcb-image0
-    #     - libxcb-keysyms1
-    #     - libxcb-randr0
-    #     - libxcb-render0
-    #     - libxcb-render-util0
-    #     - libxcb-shape0
-    #     - libxcb-shm0
-    #     - libxcb-sync1
-    #     - libxcb-util1
-    #     - libxcb-xfixes0
-    #     - libxcb-xinerama0
-    #     - libxcb-xinput0
-    #     - libxcb-xkb1
-    #     - libxcursor1
-    #     - libxkbcommon0
-    #     - libxkbcommon-x11-0
-    #     - zlib1g
-    #     - libasound2
-    #     - libevent-2.1-7
-    #     - libice6
-    #     - libjpeg-turbo8
-    #     - libminizip1
-    #     - libnspr4
-    #     - libnss3
-    #     - libopus0
-    #     - libre2-5
-    #     - libsm6
-    #     - libsnappy1v5
-    #     - libvpx6
-    #     - libxss1
-    #     prime:
-    #     - -./usr/include
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/pkgconfig
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/bin
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/mkspecs
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.la
-    #     - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
-    #     - -./usr/lib/qt5
+    # kf5:
     #     after:
-    #     - patches
+    #     - qtwayland
+    #     plugin: nil
+    #     build-attributes:
+    #     - enable-patchelf
+    #     build-packages: []
+    #     stage-packages:
+    #     - mesa-utils-extra
+    #     - freeglut3-dev
+    #     - gstreamer1.0-x
+    #     - gstreamer1.0-plugins-base
+    #     - gstreamer1.0-pulseaudio
+    #     - gstreamer1.0-plugins-good
+    #     - locales
+    #     - libc-bin
+    #     - gettext
+    #     - libdrm-dev
+    #     - extra-cmake-modules
+    #     - libkf5coreaddons-data
+    #     - libkf5coreaddons5
+    #     - libkf5auth-data
+    #     - libkf5auth5
+    #     - libkf5authcore5
+    #     - libkf5config-bin
+    #     - libkf5config-data
+    #     - libkf5configcore5
+    #     - libkf5configgui5
+    #     - libkf5widgetsaddons-data
+    #     - libkf5widgetsaddons5
+    #     - libkf5completion-data
+    #     - libkf5completion5
+    #     - libkf5windowsystem-data
+    #     - libkf5windowsystem5
+    #     - libkf5crash5
+    #     - libkf5archive5
+    #     - libkf5i18n-data
+    #     - libkf5i18n5
+    #     - libkf5filemetadata-bin
+    #     - libkf5filemetadata-data
+    #     - libkf5filemetadata3
+    #     - libkf5jobwidgets-data
+    #     - libkf5jobwidgets5
+    #     - libkf5pty-data
+    #     - libkf5pty5
+    #     - libkf5unitconversion-data
+    #     - libkf5unitconversion5
+    #     - libkf5codecs-data
+    #     - libkf5codecs5
+    #     - libkf5notifications-data
+    #     - libkf5notifications5
+    #     - kpackagetool5
+    #     - libkf5package-data
+    #     - libkf5package5
+    #     - libkf5guiaddons5
+    #     - libkf5configwidgets-data
+    #     - libkf5configwidgets5
+    #     - libkf5itemviews-data
+    #     - libkf5itemviews5
+    #     - libkf5iconthemes-bin
+    #     - libkf5iconthemes-data
+    #     - libkf5iconthemes5
+    #     - libkf5attica5
+    #     - libkf5dbusaddons-bin
+    #     - libkf5dbusaddons-data
+    #     - libkf5dbusaddons5
+    #     - libkf5service-bin
+    #     - libkf5service-data
+    #     - libkf5service5
+    #     - libkf5globalaccel-bin
+    #     - libkf5globalaccel-data
+    #     - libkf5globalaccel5
+    #     - libkf5globalaccelprivate5
+    #     - libkf5sonnet5-data
+    #     - libkf5sonnetcore5
+    #     - libkf5sonnetui5
+    #     - sonnet-plugins
+    #     - libkf5textwidgets-data
+    #     - libkf5textwidgets5
+    #     - breeze-icon-theme
+    #     - breeze-icon-theme-rcc
+    #     - libkf5xmlgui-bin
+    #     - libkf5xmlgui-data
+    #     - libkf5xmlgui5
+    #     - libkf5bookmarks-data
+    #     - libkf5bookmarks5
+    #     - libkf5solid-bin
+    #     - libkf5solid5
+    #     - libkf5solid5-data
+    #     - qml-module-org-kde-solid
+    #     # - qtdeclarative5-kf5solid
+    #     - libkf5wallet-bin
+    #     - libkf5wallet-data
+    #     - libkf5wallet5
+    #     - libkwalletbackend5-5
+    #     - kio
+    #     - libkf5kiocore5
+    #     - libkf5kiofilewidgets5
+    #     - libkf5kiogui5
+    #     - libkf5kiontlm5
+    #     - libkf5kiowidgets5
+    #     - kpackagelauncherqml
+    #     - libkf5calendarevents5
+    #     - libkf5declarative-data
+    #     - libkf5declarative5
+    #     - libkf5quickaddons5
+    #     # - qml-module-org-kde-draganddrop
+    #     # - qml-module-org-kde-kcm
+    #     # - qml-module-org-kde-kconfig
+    #     # - qml-module-org-kde-kcoreaddons
+    #     # - qml-module-org-kde-kio
+    #     # - qml-module-org-kde-kquickcontrols
+    #     # - qml-module-org-kde-kquickcontrolsaddons
+    #     # - qml-module-org-kde-kwindowsystem
+    #     # - qtdeclarative5-kf5declarative
+    #     - libkf5kcmutils-data
+    #     - libkf5kcmutils5
+    #     - libkf5plotting5
+    #     - libkf5parts-data
+    #     - libkf5parts-plugins
+    #     - libkf5parts5
+    #     - libkf5webkit5
+    #     - libkf5emoticons-bin
+    #     - libkf5emoticons-data
+    #     - libkf5emoticons5
+    #     - libkf5newstuff-data
+    #     - libkf5newstuff5
+    #     - libkf5newstuffcore5
+    #     - qml-module-org-kde-newstuff
+    #     - knewstuff-dialog
+    #     - kinit
+    #     - libkf5notifyconfig-data
+    #     - libkf5notifyconfig5
+    #     - kded5
+    #     - libkf5su-bin
+    #     - libkf5su-data
+    #     - libkf5su5
+    #     - ktexteditor-data
+    #     - ktexteditor-katepart
+    #     - libkf5texteditor-bin
+    #     - libkf5texteditor5
+    #     - kactivities-bin
+    #     - libkf5activities5
+    #     - qml-module-org-kde-activities
+    #     - libkf5activitiesstats1
+    #     - libkf5dnssd-data
+    #     - libkf5dnssd5
+    #     - libkf5idletime5
+    #     - libkf5itemmodels5
+    #     - qml-module-org-kde-kitemmodels
+    #     - libkf5threadweaver5
+    #     - libkf5plasma5
+    #     - libkf5plasmaquick5
+    #     - plasma-framework
+    #     - libkf5xmlrpcclient-data
+    #     - libkf5xmlrpcclient5
+    #     - libkf5people-data
+    #     - libkf5people5
+    #     - libkf5peoplebackend5
+    #     - libkf5peoplewidgets5
+    #     - qml-module-org-kde-people
+    #     - frameworkintegration
+    #     - libkf5style5
+    #     - kdoctools5
+    #     - libkf5doctools5
+    #     - kdesignerplugin
+    #     - kdesignerplugin-data
+    #     - kgendesignerplugin
+    #     - kgendesignerplugin-bin
+    #     - libkf5syntaxhighlighting-data
+    #     - libkf5syntaxhighlighting-tools
+    #     - libkf5syntaxhighlighting5
+    #     - libkf5runner5
+    #     - qml-module-org-kde-runnermodel
+    #     - kwayland-data
+    #     - libkf5waylandclient5
+    #     - libkf5waylandserver5
+    #     - baloo-kf5
+    #     - libkf5baloo5
+    #     - libkf5balooengine5
+    #     - breeze
+    #     - breeze-cursor-theme
+    #     - kde-style-breeze
+    #     - kwin-style-breeze
+    #     - kde-style-breeze-qt4
+    #     - kdegames-card-data-kf5
+    #     - libkf5kdegames7
+    #     - libkf5kdegamesprivate7
+    #     - qml-module-org-kde-games-core
+    #     - libkf5kdegamesprivate1
+    #     - kross
+    #     - libkf5krosscore5
+    #     - libkf5krossui5
+    #     - libkf5kdelibs4support-data
+    #     - libkf5kdelibs4support5
+    #     - libkf5kdelibs4support5-bin
+    #     # - libqt5webkit5
+    #     # - qml-module-qtwebkit
+    #     # - libqt5core5a
+    #     # - libqt5gui5
+    #     - qt5-flatpak-platformtheme
+    #     - qt5-xdgdesktopportal-platformtheme
+    #     # - libqt5network5
+    #     # - libqt5opengl5
+    #     # - libqt5sql5
+    #     # - libqt5sql5-mysql
+    #     # - libqt5sql5-odbc
+    #     # - libqt5sql5-psql
+    #     # - libqt5sql5-sqlite
+    #     # - libqt5sql5-tds
+    #     # - libqt5sql5-ibase
+    #     # - libqt5xml5
+    #     # - libqt5dbus5
+    #     # - libqt5test5
+    #     # - libqt5concurrent5
+    #     # - libqt5widgets5
+    #     # - libqt5printsupport5
+    #     # - qt5-qmake-bin
+    #     # - qt5-qmake
+    #     # - qt5-default
+    #     # - libqt5qml5
+    #     # - libqt5qmlmodels5
+    #     # - libqt5qmlworkerscript5
+    #     # - libqt5quick5
+    #     # - libqt5quickparticles5
+    #     # - libqt5quickshapes5
+    #     # - libqt5quicktest5
+    #     # - libqt5quickwidgets5
+    #     # - qml-module-qtquick-layouts
+    #     # - qt5-qmltooling-plugins
+    #     # - qml-module-qt-labs-animation
+    #     # - qml-module-qt-labs-folderlistmodel
+    #     # - qml-module-qtquick-localstorage
+    #     # - qml-module-qt-labs-sharedimage
+    #     # - qml-module-qt-labs-qmlmodels
+    #     # - qml-module-qt-labs-wavefrontmesh
+    #     # - qml-module-qtqml
+    #     # - qml-module-qtqml-models2
+    #     # - qml-module-qtqml-statemachine
+    #     # - qml-module-qtqml-workerscript2
+    #     # - qml-module-qtquick-particles2
+    #     # - qml-module-qtquick2
+    #     # - qml-module-qtquick-shapes
+    #     # - qml-module-qt-labs-settings
+    #     # - qml-module-qttest
+    #     # - qml-module-qtquick-window2
+    #     # - qmlscene
+    #     # - qml
+    #     # - qml-module-qtgraphicaleffects
+    #     # - libqt5location5
+    #     # - libqt5positioningquick5
+    #     # - libqt5positioning5
+    #     # - libqt5location5-plugins
+    #     # - libqt5location5-plugin-mapboxgl
+    #     # - libqt5positioning5-plugins
+    #     # - qml-module-qtlocation
+    #     # - qml-module-qtpositioning
+    #     # - qml-module-qt-labs-location
+    #     # - libqt5multimedia5
+    #     # - libqt5multimedia5-plugins
+    #     # - libqt5multimediaquick5
+    #     # - libqt5multimediawidgets5
+    #     # - qml-module-qtmultimedia
+    #     # - qml-module-qtaudioengine
+    #     # - libqt5multimediagsttools5
+    #     # - qml-module-qtquick-controls
+    #     # - qml-module-qtquick-extras
+    #     # - qml-module-qtquick-dialogs
+    #     # - qml-module-qtquick-privatewidgets
+    #     # - libqt5quickcontrols2-5
+    #     # - libqt5quicktemplates2-5
+    #     # - qml-module-qt-labs-calendar
+    #     # - qml-module-qt-labs-platform
+    #     # - qml-module-qtquick-controls2
+    #     # - qml-module-qtquick-templates2
+    #     # - libqt5script5
+    #     # - libqt5scripttools5
+    #     # - libqt5sensors5
+    #     # - qml-module-qtsensors
+    #     # - libqt5serialport5
+    #     # - libqt5svg5
+    #     # - libqt5designer5
+    #     # - libqt5designercomponents5
+    #     # - qdbus-qt5
+    #     # - qdbus
+    #     # - qdoc-qt5
+    #     # - qhelpgenerator-qt5
+    #     # - qtattributionsscanner-qt5
+    #     # - libqt5help5
+    #     # - qt5-assistant
+    #     # - qttranslations5-l10n
+    #     # - libqt5hunspellinputmethod5
+    #     # - libqt5virtualkeyboard5
+    #     # - qml-module-qtquick-virtualkeyboard
+    #     # - qtvirtualkeyboard-plugin
+    #     # - libqt5waylandclient5
+    #     # - libqt5waylandcompositor5
+    #     # - qml-module-qtwayland-compositor
+    #     # - qml-module-qtwayland-client-texturesharing
+    #     # - qtwayland5
+    #     # - libqt5webchannel5
+    #     # - qml-module-qtwebchannel
+    #     # - libqt5webengine5
+    #     # - libqt5webenginecore5
+    #     # - libqt5webenginewidgets5
+    #     # - libqt5pdf5
+    #     # - libqt5pdfwidgets5
+    #     # - libqt5webengine-data
+    #     # - qt5-image-formats-plugin-pdf
+    #     # - qml-module-qtwebengine
+    #     # - qml-module-qtquick-pdf
+    #     # - libqt5websockets5
+    #     # - qml-module-qtwebsockets
+    #     # - qml-module-qt-websockets
+    #     # - libqt5webview5
+    #     # - qml-module-qtwebview
+    #     # - libqt5x11extras5
+    #     # - libqt5xmlpatterns5
+    #     # - qml-module-qtquick-xmllistmodel
+    #     # - libqt5bluetooth5
+    #     # - libqt5bluetooth5-bin
+    #     # - qml-module-qtbluetooth
+    #     # - libqt5nfc5
+    #     # - qml-module-qtnfc
+    #     filesets:
+    #         exclusion:
+    #         - "-usr/lib/*/cmake/*"
+    #         - "-usr/lib/*/qt5/bin/moc"
+    #         - "-usr/lib/*/qt5/bin/qmake"
+    #         - "-usr/lib/*/qt5/bin/rcc"
+    #         - "-usr/lib/*/qt5/bin/*cpp*"
+    #         - "-usr/lib/qt5/bin/assistant"
+    #         - "-usr/lib/qt5/bin/designer"
+    #         - "-usr/lib/qt5/bin/lconvert"
+    #         - "-usr/lib/qt5/bin/linguist"
+    #         - "-usr/lib/qt5/bin/lupdate"
+    #         - "-usr/lib/qt5/bin/lrelease"
+    #         - "-usr/lib/qt5/bin/moc"
+    #         - "-usr/lib/qt5/bin/pixeltool"
+    #         - "-usr/lib/qt5/bin/qcollectiongenerator"
+    #         - "-usr/lib/qt5/bin/qdbuscpp2xml"
+    #         - "-usr/lib/qt5/bin/qdbusxml2cpp"
+    #         - "-usr/lib/qt5/bin/qdoc"
+    #         - "-usr/lib/qt5/bin/qhelpconverter"
+    #         - "-usr/lib/qt5/bin/qlalr"
+    #         - "-usr/lib/qt5/bin/qmake"
+    #         - "-usr/lib/qt5/bin/rcc"
+    #         - "-usr/lib/qt5/bin/syncqt.pl"
+    #         - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
+    #         - "-usr/include/*"
+    #         - "-usr/share/ECM/*"
+    #         - "-usr/share/xml/docbook/*"
+    #         - "-usr/share/doc/*"
+    #         - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
+    #         - "-usr/share/man/*"
+    #         - "-usr/share/icons/breeze/*.rcc"
+    #         - "-usr/share/icons/breeze-dark/*.rcc"
+    #         - "-usr/share/wallpapers/*"
+    #         - "-usr/share/fonts/*"
+    #         - "-usr/share/pkgconfig"
+    #         - "-usr/lib/*/pkgconfig"
+    #         - "-usr/share/QtCurve"
+    #         - "-usr/share/kde4"
+    #         - "-usr/share/bug"
+    #         - "-usr/share/debhelper"
+    #         - "-usr/share/lintian"
+    #         - "-usr/share/menu"
+    #         - "-usr/bin/*vlc"
+    #         - "-usr/bin/dh_*"
+    #         - "-usr/lib/*/*.a"
+    #         - "-usr/lib/*/*.pri"
+    #         - "-usr/share/kf5/kdoctools/*"
+    #         - "-usr/bin/make"
+    #         - "-usr/lib/*/*.so.5.15.3"
+    #         - "-usr/lib/*/libQt5*"
+    #     prime:
+    #     - "$exclusion"
+    #     stage:
+    #     - "-usr/share/doc/*"
+    #     - "-usr/share/man/*"
+    #     - "-usr/share/icons/breeze/*.rcc"
+    #     - "-usr/share/wallpapers/*"
+    #     - "-usr/share/fonts/*"
+    #     - "-usr/bin/checkXML5"
+    #     - "-usr/bin/kpackagetool5"
+    #     - "-usr/bin/meinproc5"
+    #     - "-usr/lib/qt5/bin/qdoc"
+    #     - "-usr/lib/qt5/bin/qhelpgenerator"
+    #     - "-usr/lib/qt5/bin/qtattributionsscanner"
+    #     - "-usr/lib/*/qt5/bin/qmake"
+    #     - "-usr/lib/*/libQt5*"
+    #     # Maybe remove all plugins and qml and allow to come from qt5 part
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/bearer"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-emu-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/generic"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/iconengines/libqsvgicon.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/imageformats"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforminputcontexts"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforms"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platformthemes"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/xcbglintegrations"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/settings/libqmlsettingsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/Models.2/libmodelsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/libqmlplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick.2/libqtquick2plugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Window.2/libwindowplugin.so"
+    #     - "-usr/lib/x86_64-linux-gnu/qt5/plugins/printsupport/libcupsprintersupport.so"
+    # kf5-dev:
+    #     after:
+    #     - kf5
+    #     plugin: nil
+    #     build-attributes:
+    #     - enable-patchelf
+    #     build-packages: []
+    #     stage-packages:
+    #     - libxml2-dev
+    #     - libxslt-dev
+    #     - liblcms2-dev
+    #     - libpng-dev
+    #     - libexiv2-dev
+    #     - libjpeg-dev
+    #     - gettext
+    #     - libkf5coreaddons-dev
+    #     - libkf5coreaddons-dev-bin
+    #     - libkf5auth-dev
+    #     - libkf5auth-dev-bin
+    #     - libkf5auth-bin-dev
+    #     - libkf5config-dev
+    #     - libkf5config-dev-bin
+    #     - libkf5config-bin-dev
+    #     - libkf5widgetsaddons-dev
+    #     - libkf5completion-dev
+    #     - libkf5windowsystem-dev
+    #     - libkf5crash-dev
+    #     - libkf5archive-dev
+    #     - libkf5i18n-dev
+    #     - libkf5filemetadata-dev
+    #     - libkf5jobwidgets-dev
+    #     - libkf5pty-dev
+    #     - libkf5unitconversion-dev
+    #     - libkf5codecs-dev
+    #     - libkf5notifications-dev
+    #     - libkf5package-dev
+    #     - libkf5guiaddons-dev
+    #     - libkf5configwidgets-dev
+    #     - libkf5itemviews-dev
+    #     - libkf5iconthemes-dev
+    #     - libkf5attica-dev
+    #     - libkf5dbusaddons-dev
+    #     - libkf5service-dev
+    #     - libkf5globalaccel-dev
+    #     - libkf5sonnet-dev
+    #     - libkf5sonnet-dev-bin
+    #     - libkf5textwidgets-dev
+    #     - libkf5xmlgui-dev
+    #     - libkf5bookmarks-dev
+    #     - libkf5solid-dev
+    #     - libkf5wallet-dev
+    #     - kio-dev
+    #     - libkf5kio-dev
+    #     - libkf5declarative-dev
+    #     - libkf5kcmutils-dev
+    #     - libkf5plotting-dev
+    #     - libkf5parts-dev
+    #     - libkf5webkit-dev
+    #     - libkf5emoticons-dev
+    #     - libkf5newstuff-dev
+    #     - kinit-dev
+    #     - libkf5notifyconfig-dev
+    #     - kded5-dev
+    #     - libkf5su-dev
+    #     - libkf5texteditor-dev
+    #     - libkf5activities-dev
+    #     - libkf5activitiesstats-dev
+    #     - libkf5dnssd-dev
+    #     - libkf5idletime-dev
+    #     - libkf5itemmodels-dev
+    #     - libkf5threadweaver-dev
+    #     - libkf5plasma-dev
+    #     - libkf5xmlrpcclient-dev
+    #     - libkf5people-dev
+    #     - libkf5style-dev
+    #     - kdoctools-dev
+    #     - libkf5doctools-dev
+    #     - libkf5syntaxhighlighting-dev
+    #     - libkf5runner-dev
+    #     - kwayland-dev
+    #     - libkf5wayland-dev
+    #     - baloo-kf5-dev
+    #     - breeze-dev
+    #     - libkf5kdegames-dev
+    #     - kross-dev
+    #     - libkf5kdelibs4support-dev
+    #     # - libqt5webkit5-dev
+    #     # - qtbase5-dev
+    #     # - qtbase5-private-dev
+    #     # - libqt5opengl5-dev
+    #     # - qtbase5-dev-tools
+    #     # - qtbase5-doc-dev
+    #     # - qtdeclarative5-dev
+    #     # - qtdeclarative5-private-dev
+    #     # - qtdeclarative5-dev-tools
+    #     # - qtdeclarative5-doc-dev
+    #     # - qtlocation5-dev
+    #     # - qtpositioning5-dev
+    #     # - qtlocation5-doc-dev
+    #     # - qtmultimedia5-dev
+    #     # - qtmultimedia5-private-dev
+    #     # - qtquickcontrols2-5-dev
+    #     # - qtscript5-dev
+    #     # - libqt5sensors5-dev
+    #     # - libqt5serialport5-dev
+    #     # - libqt5svg5-dev
+    #     # - qttools5-dev
+    #     # - qttools5-private-dev
+    #     # - qttools5-dev-tools
+    #     # - libqt5virtualkeyboard5-dev
+    #     # - libqt5waylandcompositor5-dev
+    #     # - libqt5waylandclient5-dev
+    #     # - qtwayland5-private-dev
+    #     # - qtwayland5-dev-tools
+    #     # - libqt5webchannel5-dev
+    #     # - qtwebengine5-dev
+    #     # - qtwebengine5-private-dev
+    #     # - qtpdf5-dev
+    #     # - qtwebengine5-dev-tools
+    #     # - libqt5websockets5-dev
+    #     # - libqt5webview5-dev
+    #     # - libqt5x11extras5-dev
+    #     # - libqt5xmlpatterns5-dev
+    #     # - qtxmlpatterns5-dev-tools
+    #     # - qtconnectivity5-dev
+    #     filesets:
+    #         exclusion:
+    #         - "-usr/lib/*/cmake/*"
+    #         - "-usr/lib/*/qt5/bin/moc"
+    #         - "-usr/lib/*/qt5/bin/qmake"
+    #         - "-usr/lib/*/qt5/bin/rcc"
+    #         - "-usr/lib/*/qt5/bin/*cpp*"
+    #         - "-usr/lib/qt5/bin/assistant"
+    #         - "-usr/lib/qt5/bin/designer"
+    #         - "-usr/lib/qt5/bin/lconvert"
+    #         - "-usr/lib/qt5/bin/linguist"
+    #         - "-usr/lib/qt5/bin/lupdate"
+    #         - "-usr/lib/qt5/bin/lrelease"
+    #         - "-usr/lib/qt5/bin/moc"
+    #         - "-usr/lib/qt5/bin/pixeltool"
+    #         - "-usr/lib/qt5/bin/qcollectiongenerator"
+    #         - "-usr/lib/qt5/bin/qdbuscpp2xml"
+    #         - "-usr/lib/qt5/bin/qdbusxml2cpp"
+    #         - "-usr/lib/qt5/bin/qdoc"
+    #         - "-usr/lib/qt5/bin/qhelpconverter"
+    #         - "-usr/lib/qt5/bin/qlalr"
+    #         - "-usr/lib/qt5/bin/qmake"
+    #         - "-usr/lib/qt5/bin/rcc"
+    #         - "-usr/lib/qt5/bin/syncqt.pl"
+    #         - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
+    #         - "-usr/include/*"
+    #         - "-usr/share/ECM/*"
+    #         - "-usr/share/xml/docbook/*"
+    #         - "-usr/share/doc/*"
+    #         - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
+    #         - "-usr/share/man/*"
+    #         - "-usr/share/icons/breeze/*.rcc"
+    #         - "-usr/share/icons/breeze-dark/*.rcc"
+    #         - "-usr/share/wallpapers/*"
+    #         - "-usr/share/fonts/*"
+    #         - "-usr/share/pkgconfig"
+    #         - "-usr/lib/*/pkgconfig"
+    #         - "-usr/share/QtCurve"
+    #         - "-usr/share/kde4"
+    #         - "-usr/share/bug"
+    #         - "-usr/share/debhelper"
+    #         - "-usr/share/lintian"
+    #         - "-usr/share/menu"
+    #         - "-usr/bin/*vlc"
+    #         - "-usr/bin/dh_*"
+    #         - "-usr/lib/*/*.a"
+    #         - "-usr/lib/*/*.pri"
+    #         - "-usr/share/kf5/kdoctools/*"
+    #         - "-usr/bin/make"
+    #     prime:
+    #     - "-*"
+    #     stage:
+    #     - "-usr/share/doc/*"
+    #     - "-usr/share/man/*"
+    #     - "-usr/share/icons/breeze/*.rcc"
+    #     - "-usr/share/wallpapers/*"
+    #     - "-usr/share/fonts/*"
+    #     - "-usr/share/emoticons"
+    #     - "-usr/share/icons/*"
+    #     - "-usr/share/locale/*/LC_*/*"
+    #     - "-usr/share/qt5/translations/*"
+    #     - "-usr/lib/*/dri/*"
+    #     - "-usr/share/qtchooser/qt5-*.conf"
+    #     - "-usr/lib/*/libexec/kf5/kconf_update"
+    #     - "-usr/lib/*/libQt5*"
+    #     # Maybe remove all plugins and qml and allow to come from qt5 part
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/bearer"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-emu-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/generic"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/iconengines/libqsvgicon.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/imageformats"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforminputcontexts"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platforms"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/platformthemes"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins/xcbglintegrations"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/Qt/labs/settings/libqmlsettingsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/Models.2/libmodelsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQml/libqmlplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick.2/libqtquick2plugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Layouts/libqquicklayoutsplugin.so"
+    #     - "-usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qml/QtQuick/Window.2/libwindowplugin.so"
     qtbase:
         plugin: nil
         override-pull: |
@@ -1180,44 +915,23 @@ parts:
         - patches    
     qtxmlpatterns:
         plugin: nil
+        source: git://code.qt.io/qt/qtxmlpatterns.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtbase,qtxmlpatterns
-            git submodule update qtbase qtxmlpatterns
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtxmlpatterns/install/*
-            rm -rf /root/parts/qtxmlpatterns/build/*
-            rm -rf /root/parts/qtxmlpatterns/src/*
+            # rm -rf /root/parts/qtxmlpatterns/install/*
+            # rm -rf /root/parts/qtxmlpatterns/build/*
+            # rm -rf /root/parts/qtxmlpatterns/src/*
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1283,38 +997,17 @@ parts:
         - qtbase   
     qtx11extras:
         plugin: nil
+        source: git://code.qt.io/qt/qtx11extras.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtx11extras
-            git submodule update qtx11extras
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1386,38 +1079,17 @@ parts:
         - qtbase       
     qtgamepad:
         plugin: nil
+        source: git://code.qt.io/qt/qtgamepad.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtgamepad
-            git submodule update qtgamepad
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1489,38 +1161,17 @@ parts:
         - qtbase
     qtimageformats:
         plugin: nil
+        source: git://code.qt.io/qt/qtimageformats.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtimageformats,qtbase
-            git submodule update qtimageformats qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1592,38 +1243,17 @@ parts:
         - qtbase
     qtnetworkauth:
         plugin: nil
+        source: git://code.qt.io/qt/qtnetworkauth.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtnetworkauth,qtbase
-            git submodule update qtnetworkauth qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1695,38 +1325,17 @@ parts:
         - qtbase
     qtserialport:
         plugin: nil
+        source: git://code.qt.io/qt/qtserialport.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtserialport,qtbase
-            git submodule update qtserialport qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1798,38 +1407,17 @@ parts:
         - qtbase
     qtremoteobjects:
         plugin: nil
+        source: git://code.qt.io/qt/qtremoteobjects.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtremoteobjects,qtbase
-            git submodule update qtremoteobjects qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -1901,38 +1489,17 @@ parts:
         - qtbase
     qtsvg:
         plugin: nil
+        source: git://code.qt.io/qt/qtsvg.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtsvg,qtbase
-            git submodule update qtsvg qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2004,38 +1571,17 @@ parts:
         - qtbase
     qtscript:
         plugin: nil
+        source: git://code.qt.io/qt/qtscript.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtscript,qtbase
-            git submodule update qtscript qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2107,38 +1653,17 @@ parts:
         - qtbase
     qtdeclarative:
         plugin: nil
+        source: git://code.qt.io/qt/qtdeclarative.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtdeclarative,qtbase
-            git submodule update qtdeclarative qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2210,38 +1735,17 @@ parts:
         - qtxmlpatterns
     qtwayland:
         plugin: nil
+        source: git://code.qt.io/qt/qtwayland.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtwayland,qtbase
-            git submodule update qtwayland qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2313,38 +1817,17 @@ parts:
         - qtdeclarative
     qttools:
         plugin: nil
+        source: git://code.qt.io/qt/qttools.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qttools,qtbase
-            git submodule update qttools qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2416,38 +1899,17 @@ parts:
         - qtdeclarative
     qtconnectivity:
         plugin: nil
+        source: git://code.qt.io/qt/qtconnectivity.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtconnectivity,qtbase
-            git submodule update qtconnectivity qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2519,38 +1981,17 @@ parts:
         - qtdeclarative
     qtcharts:
         plugin: nil
+        source: git://code.qt.io/qt/qtcharts.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtcharts,qtbase
-            git submodule update qtcharts qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2620,46 +2061,25 @@ parts:
         - -./usr/lib/qt5
         after:
         - qtdeclarative
-    qtdocs:
+    qtdoc:
         plugin: nil
+        source: git://code.qt.io/qt/qtdoc.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtdocs,qtbase
-            git submodule update qtdocs qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
-            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
+            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT docs
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtdocs/install/*
-            rm -rf /root/parts/qtdocs/build/*
-            rm -rf /root/parts/qtdocs/src/*     
+            rm -rf /root/parts/qtdoc/install/*
+            rm -rf /root/parts/qtdoc/build/*
+            rm -rf /root/parts/qtdoc/src/*     
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2725,38 +2145,17 @@ parts:
         - qtdeclarative
     qtlottie:
         plugin: nil
+        source: git://code.qt.io/qt/qtlottie.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtlottie,qtbase
-            git submodule update qtlottie qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2828,38 +2227,17 @@ parts:
         - qtdeclarative
     qtgraphicaleffects:
         plugin: nil
+        source: git://code.qt.io/qt/qtgraphicaleffects.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtgraphicaleffects,qtbase
-            git submodule update qtgraphicaleffects qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -2931,44 +2309,23 @@ parts:
         - qtdeclarative
     qtmultimedia:
         plugin: nil
+        source: git://code.qt.io/qt/qtmultimedia.git
+        source-tag: v5.15.2 
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtmultimedia,qtbase
-            git submodule update qtmultimedia qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtmultimedia/install/*
-            rm -rf /root/parts/qtmultimedia/build/*
-            rm -rf /root/parts/qtmultimedia/src/*     
+            # rm -rf /root/parts/qtmultimedia/install/*
+            # rm -rf /root/parts/qtmultimedia/build/*
+            # rm -rf /root/parts/qtmultimedia/src/*     
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3034,38 +2391,17 @@ parts:
         - qtdeclarative
     qtquick3d:
         plugin: nil
+        source: git://code.qt.io/qt/qtquick3d.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtquick3d,qtbase
-            git submodule update qtquick3d qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3137,38 +2473,17 @@ parts:
         - qtdeclarative
     qtquickcontrols:
         plugin: nil
+        source: git://code.qt.io/qt/qtquickcontrols.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtquickcontrols,qtbase
-            git submodule update qtquickcontrols qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3240,38 +2555,17 @@ parts:
         - qtdeclarative
     qtscxml:
         plugin: nil
+        source: git://code.qt.io/qt/qtscxml.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtscxml,qtbase
-            git submodule update qtscxml qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3343,38 +2637,17 @@ parts:
         - qtdeclarative
     qtquicktimeline:
         plugin: nil
+        source: git://code.qt.io/qt/qtquicktimeline.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtquicktimeline,qtbase
-            git submodule update qtquicktimeline qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3446,38 +2719,17 @@ parts:
         - qtdeclarative
     qtsensors:
         plugin: nil
+        source: git://code.qt.io/qt/qtsensors.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtsensors,qtbase
-            git submodule update qtsensors qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3549,38 +2801,17 @@ parts:
         - qtdeclarative
     qtwebchannel:
         plugin: nil
+        source: git://code.qt.io/qt/qtwebchannel.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtwebchannel
-            git submodule update qtwebchannel
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3652,38 +2883,17 @@ parts:
         - qtdeclarative
     qtwebsockets:
         plugin: nil
+        source: git://code.qt.io/qt/qtwebsockets.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtwebsockets,qtbase
-            git submodule update qtwebsockets qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3755,35 +2965,13 @@ parts:
         - qtdeclarative
     qt3d:
         plugin: nil
+        source: git://code.qt.io/qt/qt3d.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qt3d,qtbase
-            git submodule update qt3d qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
 
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
             make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
@@ -3859,38 +3047,17 @@ parts:
         - qtimageformats
     qtquickcontrols2:
         plugin: nil
+        source: git://code.qt.io/qt/qtquickcontrols2.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtquickcontrols2,qtbase
-            git submodule update qtquickcontrols2 qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -3963,38 +3130,17 @@ parts:
         - qtquickcontrols
     qtlocation:
         plugin: nil
+        source: git://code.qt.io/qt/qtlocation.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtlocation,qtbase
-            git submodule update qtlocation qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4067,38 +3213,17 @@ parts:
         - qtserialport
     qtdatavis3d:
         plugin: nil
+        source: git://code.qt.io/qt/qtdatavis3d.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtdatavis3d,qtbase
-            git submodule update qtdatavis3d qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4170,38 +3295,17 @@ parts:
         - qtmultimedia
     qtspeech:
         plugin: nil
+        source: git://code.qt.io/qt/qtspeech.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtspeech,qtbase
-            git submodule update qtspeech qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4273,38 +3377,17 @@ parts:
         - qtmultimedia
     qtserialbus:
         plugin: nil
+        source: git://code.qt.io/qt/qtserialbus.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtserialbus,qtbase
-            git submodule update qtserialbus qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4376,38 +3459,17 @@ parts:
         - qtserialport
     qttranslations:
         plugin: nil
+        source: git://code.qt.io/qt/qttranslations.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qttranslations,qtbase
-            git submodule update qttranslations qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4479,38 +3541,17 @@ parts:
         - qttools
     qtwebglplugin:
         plugin: nil
+        source: git://code.qt.io/qt/qtwebglplugin.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtwebglplugin,qtbase
-            git submodule update qtwebglplugin qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4582,38 +3623,17 @@ parts:
         - qtwebsockets
     qtwebengine:
         plugin: nil
+        source: git://code.qt.io/qt/qtwebengine.git
+        source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        override-pull: |
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
-            perl init-repository --module-subset=qtwebengine,qtbase
-            git submodule update qtwebengine,qtbase
         override-build: |
-            ./configure \
-                -prefix /usr \
-                -bindir /usr/lib/qt5/bin \
-                -libdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET \
-                -docdir /usr/share/qt5/doc \
-                -headerdir /usr/include/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -datadir /usr/share/qt5 \
-                -archdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -plugindir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins \
-                -importdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/imports \
-                -translationdir /usr/share/qt5/translations \
-                -hostdatadir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5 \
-                -sysconfdir /etc/xdg \
-                -examplesdir /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/examples \
-                -release \
-                -opensource \
-                -confirm-license \
-                -nomake examples \
-                -nomake tests \
-                -I $SNAPCRAFT_STAGE/usr/include \
-                -L $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
@@ -4692,98 +3712,98 @@ parts:
         source-type: local
         prime:
         - -*
-    plasma-integration:
-        after:
-        - kf5-dev
-        - qtwayland
-        plugin: cmake
-        build-attributes:
-        - enable-patchelf
-        build-environment:
-        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        - CMAKE_PREFIX_PATH: $CMAKE_PREFIX_PATH:$SNAPCRAFT_STAGE
-        - CMAKE_INCLUDE_PATH: $CMAKE_INCLUDE_PATH:$SNAPCRAFT_STAGE/include:$SNAPCRAFT_STAGE/usr/include
-        - CMAKE_LIBRARY_PATH: $CMAKE_LIBRARY_PATH:$SNAPCRAFT_STAGE/lib:$SNAPCRAFT_STAGE/usr/lib:$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
-        build-packages:
-        - extra-cmake-modules
-        - kio-dev
-        - kwayland-dev
-        - libkf5config-dev
-        - libkf5configwidgets-dev
-        - libkf5i18n-dev
-        - libkf5iconthemes-dev
-        - libkf5notifications-dev
-        - libkf5widgetsaddons-dev
-        - libqt5x11extras5-dev
-        - libxcursor-dev
-        - qtbase5-dev
-        - qtbase5-private-dev
-        - breeze-dev
-        stage-packages: []
-        filesets:
-            exclusion:
-            - "-usr/lib/*/cmake/*"
-            - "-usr/lib/*/qt5/bin/moc"
-            - "-usr/lib/*/qt5/bin/qmake"
-            - "-usr/lib/*/qt5/bin/rcc"
-            - "-usr/lib/*/qt5/bin/*cpp*"
-            - "-usr/lib/qt5/bin/assistant"
-            - "-usr/lib/qt5/bin/designer"
-            - "-usr/lib/qt5/bin/lconvert"
-            - "-usr/lib/qt5/bin/linguist"
-            - "-usr/lib/qt5/bin/lupdate"
-            - "-usr/lib/qt5/bin/lrelease"
-            - "-usr/lib/qt5/bin/moc"
-            - "-usr/lib/qt5/bin/pixeltool"
-            - "-usr/lib/qt5/bin/qcollectiongenerator"
-            - "-usr/lib/qt5/bin/qdbuscpp2xml"
-            - "-usr/lib/qt5/bin/qdbusxml2cpp"
-            - "-usr/lib/qt5/bin/qdoc"
-            - "-usr/lib/qt5/bin/qhelpconverter"
-            - "-usr/lib/qt5/bin/qlalr"
-            - "-usr/lib/qt5/bin/qmake"
-            - "-usr/lib/qt5/bin/rcc"
-            - "-usr/lib/qt5/bin/syncqt.pl"
-            - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
-            - "-usr/include/*"
-            - "-usr/share/ECM/*"
-            - "-usr/share/xml/docbook/*"
-            - "-usr/share/doc/*"
-            - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
-            - "-usr/share/man/*"
-            - "-usr/share/icons/breeze/*.rcc"
-            - "-usr/share/icons/breeze-dark/*.rcc"
-            - "-usr/share/wallpapers/*"
-            - "-usr/share/fonts/*"
-            - "-usr/share/pkgconfig"
-            - "-usr/lib/*/pkgconfig"
-            - "-usr/share/QtCurve"
-            - "-usr/share/kde4"
-            - "-usr/share/bug"
-            - "-usr/share/debhelper"
-            - "-usr/share/lintian"
-            - "-usr/share/menu"
-            - "-usr/bin/*vlc"
-            - "-usr/bin/dh_*"
-            - "-usr/lib/*/*.a"
-            - "-usr/lib/*/*.pri"
-            - "-usr/share/kf5/kdoctools/*"
-            - "-usr/bin/make"
-        prime:
-        - "$exclusion"
-        stage:
-        - "-usr/share/doc/*"
-        - "-usr/share/man/*"
-        - "-usr/share/icons/breeze/*.rcc"
-        - "-usr/share/wallpapers/*"
-        - "-usr/share/fonts/*"
-        cmake-parameters:
-        - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
-        - "-DCMAKE_INSTALL_PREFIX=/usr"
-        - "-DCMAKE_BUILD_TYPE=Release"
-        - "-DENABLE_TESTING=OFF"
-        - "-DBUILD_TESTING=OFF"
-        - "-DKDE_SKIP_TEST_SETTINGS=ON"
-        source: https://invent.kde.org/plasma/plasma-integration.git
-        source-branch: Plasma/5.20
+    # plasma-integration:
+    #     after:
+    #     - kf5-dev
+    #     - qtwayland
+    #     plugin: cmake
+    #     build-attributes:
+    #     - enable-patchelf
+    #     build-environment:
+    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+    #     - CMAKE_PREFIX_PATH: $CMAKE_PREFIX_PATH:$SNAPCRAFT_STAGE
+    #     - CMAKE_INCLUDE_PATH: $CMAKE_INCLUDE_PATH:$SNAPCRAFT_STAGE/include:$SNAPCRAFT_STAGE/usr/include
+    #     - CMAKE_LIBRARY_PATH: $CMAKE_LIBRARY_PATH:$SNAPCRAFT_STAGE/lib:$SNAPCRAFT_STAGE/usr/lib:$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
+    #     build-packages:
+    #     - extra-cmake-modules
+    #     - kio-dev
+    #     - kwayland-dev
+    #     - libkf5config-dev
+    #     - libkf5configwidgets-dev
+    #     - libkf5i18n-dev
+    #     - libkf5iconthemes-dev
+    #     - libkf5notifications-dev
+    #     - libkf5widgetsaddons-dev
+    #     - libqt5x11extras5-dev
+    #     - libxcursor-dev
+    #     - qtbase5-dev
+    #     - qtbase5-private-dev
+    #     - breeze-dev
+    #     stage-packages: []
+    #     filesets:
+    #         exclusion:
+    #         - "-usr/lib/*/cmake/*"
+    #         - "-usr/lib/*/qt5/bin/moc"
+    #         - "-usr/lib/*/qt5/bin/qmake"
+    #         - "-usr/lib/*/qt5/bin/rcc"
+    #         - "-usr/lib/*/qt5/bin/*cpp*"
+    #         - "-usr/lib/qt5/bin/assistant"
+    #         - "-usr/lib/qt5/bin/designer"
+    #         - "-usr/lib/qt5/bin/lconvert"
+    #         - "-usr/lib/qt5/bin/linguist"
+    #         - "-usr/lib/qt5/bin/lupdate"
+    #         - "-usr/lib/qt5/bin/lrelease"
+    #         - "-usr/lib/qt5/bin/moc"
+    #         - "-usr/lib/qt5/bin/pixeltool"
+    #         - "-usr/lib/qt5/bin/qcollectiongenerator"
+    #         - "-usr/lib/qt5/bin/qdbuscpp2xml"
+    #         - "-usr/lib/qt5/bin/qdbusxml2cpp"
+    #         - "-usr/lib/qt5/bin/qdoc"
+    #         - "-usr/lib/qt5/bin/qhelpconverter"
+    #         - "-usr/lib/qt5/bin/qlalr"
+    #         - "-usr/lib/qt5/bin/qmake"
+    #         - "-usr/lib/qt5/bin/rcc"
+    #         - "-usr/lib/qt5/bin/syncqt.pl"
+    #         - "-usr/lib/vlc/plugins/gui/libqt4_plugin.so"
+    #         - "-usr/include/*"
+    #         - "-usr/share/ECM/*"
+    #         - "-usr/share/xml/docbook/*"
+    #         - "-usr/share/doc/*"
+    #         - "-usr/share/locale/*/LC_MESSAGES/vlc.mo"
+    #         - "-usr/share/man/*"
+    #         - "-usr/share/icons/breeze/*.rcc"
+    #         - "-usr/share/icons/breeze-dark/*.rcc"
+    #         - "-usr/share/wallpapers/*"
+    #         - "-usr/share/fonts/*"
+    #         - "-usr/share/pkgconfig"
+    #         - "-usr/lib/*/pkgconfig"
+    #         - "-usr/share/QtCurve"
+    #         - "-usr/share/kde4"
+    #         - "-usr/share/bug"
+    #         - "-usr/share/debhelper"
+    #         - "-usr/share/lintian"
+    #         - "-usr/share/menu"
+    #         - "-usr/bin/*vlc"
+    #         - "-usr/bin/dh_*"
+    #         - "-usr/lib/*/*.a"
+    #         - "-usr/lib/*/*.pri"
+    #         - "-usr/share/kf5/kdoctools/*"
+    #         - "-usr/bin/make"
+    #     prime:
+    #     - "$exclusion"
+    #     stage:
+    #     - "-usr/share/doc/*"
+    #     - "-usr/share/man/*"
+    #     - "-usr/share/icons/breeze/*.rcc"
+    #     - "-usr/share/wallpapers/*"
+    #     - "-usr/share/fonts/*"
+    #     cmake-parameters:
+    #     - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
+    #     - "-DCMAKE_INSTALL_PREFIX=/usr"
+    #     - "-DCMAKE_BUILD_TYPE=Release"
+    #     - "-DENABLE_TESTING=OFF"
+    #     - "-DBUILD_TESTING=OFF"
+    #     - "-DKDE_SKIP_TEST_SETTINGS=ON"
+    #     source: https://invent.kde.org/plasma/plasma-integration.git
+    #     source-branch: Plasma/5.20
