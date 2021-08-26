@@ -711,10 +711,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            pwd
-            rm -rf /root/parts/qtbase/install/*
             rm -rf /root/parts/qtbase/build/*
             rm -rf /root/parts/qtbase/src/*
+            rm -rf /root/parts/qtbase/build/.git
+            rm -rf /root/parts/qtbase/src/.git
         build-packages:
         - build-essential
         - autotools-dev
@@ -901,6 +901,23 @@ parts:
         - libsnappy1v5
         - libvpx6
         - libxss1
+        - libasn1-8-heimdal
+        - libgssapi3-heimdal
+        - libhcrypto4-heimdal
+        - libheimbase1-heimdal
+        - libheimntlm0-heimdal
+        - libhx509-5-heimdal
+        - libkrb5-26-heimdal
+        - libldap-2.4-2
+        - libltdl7
+        - libmtdev1
+        - libmysqlclient21
+        - libodbc1
+        - libpq5
+        - libroken18-heimdal
+        - libsasl2-2
+        - libsybdb5
+        - libwind0-heimdal
         prime:
         - -./usr/include
         - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake
@@ -929,9 +946,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            # rm -rf /root/parts/qtxmlpatterns/install/*
-            # rm -rf /root/parts/qtxmlpatterns/build/*
-            # rm -rf /root/parts/qtxmlpatterns/src/*
+            rm -rf /root/parts/qtxmlpatterns/build/*
+            rm -rf /root/parts/qtxmlpatterns/src/*
+            rm -rf /root/parts/qtxmlpatterns/build/.git
+            rm -rf /root/parts/qtxmlpatterns/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1011,9 +1029,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtx11extras/install/*
             rm -rf /root/parts/qtx11extras/build/*
             rm -rf /root/parts/qtx11extras/src/*
+            rm -rf /root/parts/qtx11extras/build/.git
+            rm -rf /root/parts/qtx11extras/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1093,9 +1112,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtgamepad/install/*
             rm -rf /root/parts/qtgamepad/build/*
             rm -rf /root/parts/qtgamepad/src/*
+            rm -rf /root/parts/qtgamepad/build/.git
+            rm -rf /root/parts/qtgamepad/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1175,9 +1195,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtimageformats/install/*
             rm -rf /root/parts/qtimageformats/build/*
-            rm -rf /root/parts/qtimageformats/src/*    
+            rm -rf /root/parts/qtimageformats/src/*
+            rm -rf /root/parts/qtimageformats/build/.git
+            rm -rf /root/parts/qtimageformats/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1257,9 +1278,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtnetworkauth/install/*
             rm -rf /root/parts/qtnetworkauth/build/*
-            rm -rf /root/parts/qtnetworkauth/src/*     
+            rm -rf /root/parts/qtnetworkauth/src/*
+            rm -rf /root/parts/qtnetworkauth/build/.git
+            rm -rf /root/parts/qtnetworkauth/src/.git 
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1339,7 +1361,6 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtserialport/install/*
             rm -rf /root/parts/qtserialport/build/*
             rm -rf /root/parts/qtserialport/src/*   
         build-packages:
@@ -1421,9 +1442,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtremoteobjects/install/*
             rm -rf /root/parts/qtremoteobjects/build/*
-            rm -rf /root/parts/qtremoteobjects/src/*    
+            rm -rf /root/parts/qtremoteobjects/src/*
+            rm -rf /root/parts/qtremoteobjects/build/.git
+            rm -rf /root/parts/qtremoteobjects/src/.git  
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1503,9 +1525,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtsvg/install/*
             rm -rf /root/parts/qtsvg/build/*
             rm -rf /root/parts/qtsvg/src/*
+            rm -rf /root/parts/qtsvg/build/.git
+            rm -rf /root/parts/qtsvg/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1585,9 +1608,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtscript/install/*
             rm -rf /root/parts/qtscript/build/*
-            rm -rf /root/parts/qtscript/src/*    
+            rm -rf /root/parts/qtscript/src/*
+            rm -rf /root/parts/qtscript/build/.git
+            rm -rf /root/parts/qtscript/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1667,9 +1691,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtdeclarative/install/*
             rm -rf /root/parts/qtdeclarative/build/*
-            rm -rf /root/parts/qtdeclarative/src/*  
+            rm -rf /root/parts/qtdeclarative/src/*
+            rm -rf /root/parts/qtdeclarative/build/.git
+            rm -rf /root/parts/qtdeclarative/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1749,9 +1774,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtwayland/install/*
             rm -rf /root/parts/qtwayland/build/*
-            rm -rf /root/parts/qtwayland/src/*     
+            rm -rf /root/parts/qtwayland/src/*
+            rm -rf /root/parts/qtwayland/build/.git
+            rm -rf /root/parts/qtwayland/src/.git 
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1831,9 +1857,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qttools/install/*
             rm -rf /root/parts/qttools/build/*
-            rm -rf /root/parts/qttools/src/*     
+            rm -rf /root/parts/qttools/src/*
+            rm -rf /root/parts/qttools/build/.git
+            rm -rf /root/parts/qttools/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1913,9 +1940,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtconnectivity/install/*
             rm -rf /root/parts/qtconnectivity/build/*
-            rm -rf /root/parts/qtconnectivity/src/*     
+            rm -rf /root/parts/qtconnectivity/src/*
+            rm -rf /root/parts/qtconnectivity/build/.git
+            rm -rf /root/parts/qtconnectivity/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -1995,9 +2023,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtcharts/install/*
             rm -rf /root/parts/qtcharts/build/*
-            rm -rf /root/parts/qtcharts/src/*     
+            rm -rf /root/parts/qtcharts/src/*
+            rm -rf /root/parts/qtcharts/build/.git
+            rm -rf /root/parts/qtcharts/src/.git   
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2068,18 +2097,22 @@ parts:
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        - QT_INSTALL_DOCS: $SNAPCRAFT_PART_INSTALL/usr/share/qt5/doc
         override-build: |
-            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
+            # $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -query
+            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT docs
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
-            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
-            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
+            # make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            # cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            # rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtdoc/install/*
             rm -rf /root/parts/qtdoc/build/*
-            rm -rf /root/parts/qtdoc/src/*     
+            rm -rf /root/parts/qtdoc/src/*
+            rm -rf /root/parts/qtdoc/build/.git
+            rm -rf /root/parts/qtdoc/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2159,9 +2192,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtlottie/install/*
             rm -rf /root/parts/qtlottie/build/*
-            rm -rf /root/parts/qtlottie/src/*     
+            rm -rf /root/parts/qtlottie/src/*
+            rm -rf /root/parts/qtlottie/build/.git
+            rm -rf /root/parts/qtlottie/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2241,9 +2275,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtgraphicaleffects/install/*
             rm -rf /root/parts/qtgraphicaleffects/build/*
-            rm -rf /root/parts/qtgraphicaleffects/src/*     
+            rm -rf /root/parts/qtgraphicaleffects/src/*
+            rm -rf /root/parts/qtgraphicaleffects/build/.git
+            rm -rf /root/parts/qtgraphicaleffects/src/.git    
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2323,9 +2358,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            # rm -rf /root/parts/qtmultimedia/install/*
-            # rm -rf /root/parts/qtmultimedia/build/*
-            # rm -rf /root/parts/qtmultimedia/src/*     
+            rm -rf /root/parts/qtmultimedia/build/*
+            rm -rf /root/parts/qtmultimedia/src/*
+            rm -rf /root/parts/qtmultimedia/build/.git
+            rm -rf /root/parts/qtmultimedia/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2405,9 +2441,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtquick3d/install/*
             rm -rf /root/parts/qtquick3d/build/*
-            rm -rf /root/parts/qtquick3d/src/*     
+            rm -rf /root/parts/qtquick3d/src/*
+            rm -rf /root/parts/qtquick3d/build/.git
+            rm -rf /root/parts/qtquick3d/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2487,9 +2524,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtquickcontrols/install/*
             rm -rf /root/parts/qtquickcontrols/build/*
-            rm -rf /root/parts/qtquickcontrols/src/*     
+            rm -rf /root/parts/qtquickcontrols/src/*
+            rm -rf /root/parts/qtquickkcontols/build/.git
+            rm -rf /root/parts/qtquickkcontols/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2569,9 +2607,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtscxml/install/*
             rm -rf /root/parts/qtscxml/build/*
-            rm -rf /root/parts/qtscxml/src/*     
+            rm -rf /root/parts/qtscxml/src/*
+            rm -rf /root/parts/qtscxml/build/.git
+            rm -rf /root/parts/qtscxml/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2651,9 +2690,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtquicktimeline/install/*
             rm -rf /root/parts/qtquicktimeline/build/*
-            rm -rf /root/parts/qtquicktimeline/src/*     
+            rm -rf /root/parts/qtquicktimeline/src/*
+            rm -rf /root/parts/qtquicktimeline/build/.git
+            rm -rf /root/parts/qtquicktimeline/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2733,9 +2773,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtsensors/install/*
             rm -rf /root/parts/qtsensors/build/*
-            rm -rf /root/parts/qtsensors/src/*     
+            rm -rf /root/parts/qtsensors/src/*
+            rm -rf /root/parts/qtsensors/build/.git
+            rm -rf /root/parts/qtsensors/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2815,9 +2856,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtwebchannel/install/*
             rm -rf /root/parts/qtwebchannel/build/*
-            rm -rf /root/parts/qtwebchannel/src/*     
+            rm -rf /root/parts/qtwebchannel/src/*
+            rm -rf /root/parts/qtwebchannel/build/.git
+            rm -rf /root/parts/qtwebchannel/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2897,9 +2939,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtwebsockets/install/*
             rm -rf /root/parts/qtwebsockets/build/*
-            rm -rf /root/parts/qtwebsockets/src/*     
+            rm -rf /root/parts/qtwebsockets/src/*
+            rm -rf /root/parts/qtwebsockets/build/.git
+            rm -rf /root/parts/qtwebsockets/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -2972,15 +3015,17 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-build: |
             $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
-
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL" install
+            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qt3d/install/*
             rm -rf /root/parts/qt3d/build/*
-            rm -rf /root/parts/qt3d/src/*     
+            rm -rf /root/parts/qt3d/src/*
+            rm -rf /root/parts/qt3d/build/.git
+            rm -rf /root/parts/qt3d/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3061,9 +3106,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtquickcontrols2/install/*
-            rm -rf /root/parts/qt/build/*
-            rm -rf /root/parts/qt/src/*     
+            rm -rf /root/parts/qtquickconrols2/build/*
+            rm -rf /root/parts/qtquickconrols2/src/*
+            rm -rf /root/parts/qtquickconrols2/build/.git
+            rm -rf /root/parts/qtquickconrols2/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3144,9 +3190,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtlocation/install/*
             rm -rf /root/parts/qtlocation/build/*
-            rm -rf /root/parts/qtlocation/src/*     
+            rm -rf /root/parts/qtlocation/src/*
+            rm -rf /root/parts/qtlocation/build/.git
+            rm -rf /root/parts/qtlocation/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3227,9 +3274,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtdatavis3d/install/*
             rm -rf /root/parts/qtdatavis3d/build/*
-            rm -rf /root/parts/qtdatavis3d/src/*     
+            rm -rf /root/parts/qtdatavis3d/src/*
+            rm -rf /root/parts/qtdatavis3d/build/.git
+            rm -rf /root/parts/qtdatavis3d/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3309,9 +3357,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtspeech/install/*
             rm -rf /root/parts/qtspeech/build/*
-            rm -rf /root/parts/qtspeech/src/*     
+            rm -rf /root/parts/qtspeech/src/*
+            rm -rf /root/parts/qtspeech/build/.git
+            rm -rf /root/parts/qtspeech/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3391,9 +3440,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtserialbus/install/*
             rm -rf /root/parts/qtserialbus/build/*
-            rm -rf /root/parts/qtserialbus/src/*     
+            rm -rf /root/parts/qtserialbus/src/*
+            rm -rf /root/parts/qtserialbus/build/.git
+            rm -rf /root/parts/qtserialbus/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3473,9 +3523,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qttranslations/install/*
             rm -rf /root/parts/qttranslations/build/*
-            rm -rf /root/parts/qttranslations/src/*     
+            rm -rf /root/parts/qttranslations/src/*
+            rm -rf /root/parts/qttranslations/build/.git
+            rm -rf /root/parts/qttranslations/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3555,9 +3606,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtwebglplugin/install/*
             rm -rf /root/parts/qtwebglplugin/build/*
-            rm -rf /root/parts/qtwebglplugin/src/*     
+            rm -rf /root/parts/qtwebglplugin/src/*
+            rm -rf /root/parts/qtwebglplugin/build/.git
+            rm -rf /root/parts/qtwebglplugin/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3637,9 +3689,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtwebengine/install/*
             rm -rf /root/parts/qtwebengine/build/*
-            rm -rf /root/parts/qtwebengine/src/*     
+            rm -rf /root/parts/qtwebengine/src/*
+            rm -rf /root/parts/qtwebengine/build/.git
+            rm -rf /root/parts/qtwebengine/src/.git
         build-packages:
         - flex
         - libxcb-render0-dev
@@ -3712,7 +3765,118 @@ parts:
         source-type: local
         prime:
         - -*
-    # plasma-integration:
+    kdesrc-buildrc:
+        plugin: nil
+        override-build: |
+            cat << EOF > "$HOME/.kdesrc-buildrc"
+            # This file controls options to apply when configuring/building modules, and
+            # controls which modules are built in the first place.
+            # List of all options: https://docs.kde.org/trunk5/en/kdesrc-build/kdesrc-build/conf-options-table.html
+
+            global
+                tag v5.84.0
+                # Paths
+
+                kdedir /root/parts/kf5/install/usr # Where to install KF5-based software
+            #   qtdir  ~/kde/qt5 # Where to install Qt5 if kdesrc-build supplies it
+
+                source-dir /root/parts/kf5/src   # Where sources are downloaded
+                build-dir  /root/parts/kf5/build # Where the source build is run
+
+                directory-layout flat # Use flattened structure
+
+                # Will pull in KDE-based dependencies only, to save you the trouble of
+                # listing them all below
+                include-dependencies true
+
+                cmake-options -DCMAKE_BUILD_TYPE=Release
+                
+
+                # kdesrc-build sets 2 options which is used in options like make-options or set-env
+                # to help manage the number of compile jobs that happen during a build:
+                #
+                # 1. num-cores, which is just the number of detected CPU cores, and can be passed
+                #    to tools like make (needed for parallel build) or ninja (completely optional).
+                #
+                # 2. num-cores-low-mem, which is set to largest value that appears safe for
+                #    particularly heavyweight modules based on total memory, intended for
+                #    modules like qtwebengine
+                num-cores $SNAPCRAFT_PARALLEL_BUILD_COUNT
+
+                num-cores-low-mem $SNAPCRAFT_PARALLEL_BUILD_COUNT
+
+            end global
+
+            module-set frameworks-set
+                repository kde-projects
+                use-modules frameworks
+                # cmake-options -DBUILD_TESTING=TRUE
+                # ignore-modules kguiaddons
+
+                tag v5.84.0
+            end module-set
+
+
+            # With base options set, the remainder of the file is used to define modules to build, in the
+            # desired order, and set any module-specific options.
+            #
+            # Modules may be grouped into sets, and this is the normal practice.
+            #
+            # You can include other files inline using the "include" command. We do this here
+            # to include files which are updated with kdesrc-build.
+
+            # Common options that should be set for some KDE modules no matter how
+            # kdesrc-build finds them. Do not comment these out unless you know
+            # what you are doing.
+            include /root/parts/kf5/src/kf5-common-options-build-include
+
+            # Qt and some Qt-using middleware libraries. Uncomment if your distribution's Qt
+            # tools are too old but be warned that Qt take a long time to build!
+            #include /root/parts/kf5/src/qt5-build-include
+            #include /root/parts/kf5/src/custom-qt5-libs-build-include
+
+            # KF5 and Plasma :)
+            include /root/parts/kf5/src/kf5-qt5-build-include
+
+            # To change options for modules that have already been defined, use an
+            # 'options' block. See kf5-common-options-build-include for an example
+            EOF
+        # stage:
+        # - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqwayland*
+        # - -usr/lib/x86_64-linux-gnu/qt5/plugins/wayland*
+        # - -usr/lib/x86_64-linux-gnu/qt5/qml/QtWayland
+        # - -usr/share/doc
+        prime:
+        - -./*
+    kf5:
+        plugin: cmake
+        source: https://invent.kde.org/sdk/kdesrc-build.git
+        # build-attributes:
+        # - enable-patchelf
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            snapcraftctl pull
+            # ./kdesrc-build --initial-setup
+            source ~/.bashrc
+        override-build: |
+            $SNAPCRAFT_PART_SRC/kdesrc-build frameworks
+        build-packages:
+        - dialog
+        # polkit
+        - libpolkit-gobject-1-dev
+        - libpolkit-agent-1-dev
+        # kdoctool
+        - docbook-xml
+        - docbook-xsl
+        # kwindow-system
+        - libxcb-res0
+        after:
+        - qtx11extras
+        - kdesrc-buildrc
+
+        # plasma-integration:
     #     after:
     #     - kf5-dev
     #     - qtwayland
