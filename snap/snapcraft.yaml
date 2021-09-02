@@ -19,15 +19,11 @@ slots:
         interface: content
         read:
         - "."
-package-repositories:
--   type: apt
-    components:
-    - main
-    suites:
-    - focal
-    key-id: 444DABCF3667D0283F894EDDE6D4736255751E5D
-    url: http://origin.archive.neon.kde.org/user
-    key-server: keyserver.ubuntu.com
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+  - build-on: ppc64el
 parts:
     patches:
         plugin: dump
@@ -4943,7 +4939,8 @@ parts:
         - -DBUILD_TESTING=OFF
         - -DKDE_SKIP_TEST_SETTINGS=ON
         source: https://invent.kde.org/plasma/plasma-integration.git
-        source-branch: Plasma/5.20
+        source-tag: v5.22.5
+        # source-branch: Plasma/5.20
         plugin: cmake
         # build-attributes:
         # - enable-patchelf
