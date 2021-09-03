@@ -3082,8 +3082,13 @@ parts:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-build: |
+            # Setting number of build jobs to a safe number to prevent running out of memory during QtWebengine build
+            memtotal=$(cat /proc/meminfo | awk '{print $2}' | head -n1)
+            roundedmem=$(python3 -c "print(round($memtotal/1024000.0))")
+            maxcoresformem=$(python3 -c "print(max(1, int($roundedmem / 2))-1)")
+            numcoreslow=$(python3 -c "print(min($maxcoresformem, $SNAPCRAFT_PARALLEL_BUILD_COUNT))")
             $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
-            make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
+            make -j$numcoreslow NINJAJOBS=-j$numcoreslow
             make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
             cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
             rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
@@ -3095,6 +3100,7 @@ parts:
             rm -rf /root/parts/qtwebengine/build/.git
             rm -rf /root/parts/qtwebengine/src/.git
         build-packages:
+        - python3
         - flex
         - libxcb-render0-dev
         - libxcb-image0-dev
