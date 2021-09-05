@@ -23,7 +23,7 @@ architectures:
   - build-on: amd64
   - build-on: arm64
   - build-on: armhf
-  - build-on: ppc64el
+#   - build-on: ppc64el
 parts:
     patches:
         plugin: dump
@@ -63,8 +63,8 @@ parts:
             git submodule update qtbase
 
             cd qtbase
-            git apply $SNAPCRAFT_STAGE/qtbase-ordonly4.patch
-            # cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
+            git apply $SNAPCRAFT_STAGE/qtbase_5_15_2/01-fix-qtopenurl-openfile-portal.patch
+            cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
         override-build: |
             ./configure \
                 -prefix /usr \
@@ -3085,7 +3085,7 @@ parts:
             # Setting number of build jobs to a safe number to prevent running out of memory during QtWebengine build
             memtotal=$(cat /proc/meminfo | awk '{print $2}' | head -n1)
             roundedmem=$(python3 -c "print(round($memtotal/1024000.0))")
-            maxcoresformem=$(python3 -c "print(max(1, int($roundedmem / 2))-1)")
+            maxcoresformem=$(python3 -c "print(max(1, int(($roundedmem / 2)-1)))")
             numcoreslow=$(python3 -c "print(min($maxcoresformem, $SNAPCRAFT_PARALLEL_BUILD_COUNT))")
             $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$numcoreslow NINJAJOBS=-j$numcoreslow
@@ -4589,6 +4589,8 @@ parts:
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        build-packages:
+        - python3-setuptools
         after:
         - kactivities-stats
     kcalendarcore:
