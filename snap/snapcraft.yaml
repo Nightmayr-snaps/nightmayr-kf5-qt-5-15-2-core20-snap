@@ -312,7 +312,7 @@ parts:
         - -./usr/lib/qt5
         after:
         - patches
-        - kf5-parts-src
+        - sources
     qtxmlpatterns:
         plugin: nil
         source: git://code.qt.io/qt/qtxmlpatterns.git
@@ -398,8 +398,8 @@ parts:
         - qtbase   
     qtx11extras:
         plugin: nil
-        source: git://code.qt.io/qt/qtx11extras.git
-        source-tag: v5.15.2
+        source: /root/parts/sources/src/qtx11extras
+        source-type: local
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2326,8 +2326,8 @@ parts:
         - qtdeclarative
     qtwebsockets:
         plugin: nil
-        source: git://code.qt.io/qt/qtwebsockets.git
-        source-tag: v5.15.2
+        source: /root/parts/sources/src/qtwebsockets
+        source-type: local
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2994,8 +2994,8 @@ parts:
         - qttools
     qtwebglplugin:
         plugin: nil
-        source: git://code.qt.io/qt/qtwebglplugin.git
-        source-tag: v5.15.2
+        source: /root/parts/sources/src/qtwebglplugin
+        source-type: local
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -3077,8 +3077,8 @@ parts:
         - qtwebsockets
     qtwebengine:
         plugin: nil
-        source: git://code.qt.io/qt/qtwebengine.git
-        source-tag: v5.15.2
+        source: /root/parts/sources/src/qtwebengine
+        source-type: local
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -3100,6 +3100,10 @@ parts:
             rm -rf /root/parts/qtwebengine/src/*
             rm -rf /root/parts/qtwebengine/build/.git
             rm -rf /root/parts/qtwebengine/src/.git
+            rm -rf /root/parts/sources/build/qtwebengine/*
+            rm -rf /root/parts/sources/src/qtwebengine/*
+            rm -rf /root/parts/sources/build/qtwebengine/.git
+            rm -rf /root/parts/sources/src/qtwebengine/.git
         build-packages:
         - python3
         - flex
@@ -3264,7 +3268,7 @@ parts:
     #     - qtwebengine
 
     extra-cmake-modules:
-        source: ../parts/kf5-parts-src/src/extra-cmake-modules
+        source: /root/parts/sources/src/extra-cmake-modules
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3315,7 +3319,7 @@ parts:
         - qtwebglplugin
         - qtwebengine
     kcoreaddons:
-        source: ../parts/kf5-parts-src/src/kcoreaddons
+        source: /root/parts/sources/src/kcoreaddons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3332,7 +3336,7 @@ parts:
         after:
         - extra-cmake-modules
     ki18n:
-        source: ../parts/kf5-parts-src/src/ki18n
+        source: /root/parts/sources/src/ki18n
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3349,7 +3353,7 @@ parts:
         after:
         - kcoreaddons
     karchive:
-        source: ../parts/kf5-parts-src/src/karchive
+        source: /root/parts/sources/src/karchive
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3366,7 +3370,7 @@ parts:
         after:
         - ki18n
     kconfig:
-        source: ../parts/kf5-parts-src/src/kconfig
+        source: /root/parts/sources/src/kconfig
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3383,7 +3387,7 @@ parts:
         after:
         - karchive
     kdoctools:
-        source: ../parts/kf5-parts-src/src/kdoctools
+        source: /root/parts/sources/src/kdoctools
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3403,7 +3407,7 @@ parts:
         after:
         - kconfig
     kwidgetsaddons:
-        source: ../parts/kf5-parts-src/src/kwidgetsaddons
+        source: /root/parts/sources/src/kwidgetsaddons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3420,7 +3424,7 @@ parts:
         after:
         - kdoctools
     kcodecs:
-        source: ../parts/kf5-parts-src/src/kcodecs
+        source: /root/parts/sources/src/kcodecs
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3437,7 +3441,7 @@ parts:
         after:
         - kwidgetsaddons
     kwindowsystem:
-        source: ../parts/kf5-parts-src/src/kwindowsystem
+        source: /root/parts/sources/src/kwindowsystem
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3458,7 +3462,7 @@ parts:
         after:
         - kcodecs
     polkit-qt-1:
-        source: ../parts/kf5-parts-src/src/polkit-qt-1
+        source: /root/parts/sources/src/polkit-qt-1
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3481,7 +3485,7 @@ parts:
         after:
         - kwindowsystem
     kauth:
-        source: ../parts/kf5-parts-src/src/kauth
+        source: /root/parts/sources/src/kauth
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3498,7 +3502,7 @@ parts:
         after:
         - polkit-qt-1
     kcrash:
-        source: ../parts/kf5-parts-src/src/kcrash
+        source: /root/parts/sources/src/kcrash
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3515,7 +3519,7 @@ parts:
         after:
         - kauth
     kdbusaddons:
-        source: ../parts/kf5-parts-src/src/kdbusaddons
+        source: /root/parts/sources/src/kdbusaddons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3532,7 +3536,7 @@ parts:
         after:
         - kcrash
     kguiaddons:
-        source: ../parts/kf5-parts-src/src/kguiaddons
+        source: /root/parts/sources/src/kguiaddons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3549,7 +3553,7 @@ parts:
         after:
         - kdbusaddons
     kconfigwidgets:
-        source: ../parts/kf5-parts-src/src/kconfigwidgets
+        source: /root/parts/sources/src/kconfigwidgets
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3566,7 +3570,7 @@ parts:
         after:
         - kguiaddons
     kitemviews:
-        source: ../parts/kf5-parts-src/src/kitemviews
+        source: /root/parts/sources/src/kitemviews
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3583,7 +3587,7 @@ parts:
         after:
         - kconfigwidgets
     kiconthemes:
-        source: ../parts/kf5-parts-src/src/kiconthemes
+        source: /root/parts/sources/src/kiconthemes
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3600,7 +3604,7 @@ parts:
         after:
         - kitemviews
     kcompletion:
-        source: ../parts/kf5-parts-src/src/kcompletion
+        source: /root/parts/sources/src/kcompletion
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3617,7 +3621,7 @@ parts:
         after:
         - kiconthemes
     kservice:
-        source: ../parts/kf5-parts-src/src/kservice
+        source: /root/parts/sources/src/kservice
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3634,7 +3638,7 @@ parts:
         after:
         - kcompletion
     sonnet:
-        source: ../parts/kf5-parts-src/src/sonnet
+        source: /root/parts/sources/src/sonnet
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3653,7 +3657,7 @@ parts:
         after:
         - kservice
     attica:
-        source: ../parts/kf5-parts-src/src/attica
+        source: /root/parts/sources/src/attica
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3670,7 +3674,7 @@ parts:
         after:
         - sonnet
     phonon:
-        source: ../parts/kf5-parts-src/src/phonon
+        source: /root/parts/sources/src/phonon
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3689,7 +3693,7 @@ parts:
         after:
         - attica
     breeze-icons:
-        source: ../parts/kf5-parts-src/src/breeze-icons
+        source: /root/parts/sources/src/breeze-icons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3706,7 +3710,7 @@ parts:
         after:
         - phonon
     kglobalaccel:
-        source: ../parts/kf5-parts-src/src/kglobalaccel
+        source: /root/parts/sources/src/kglobalaccel
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3723,7 +3727,7 @@ parts:
         after:
         - breeze-icons
     ktextwidgets:
-        source: ../parts/kf5-parts-src/src/ktextwidgets
+        source: /root/parts/sources/src/ktextwidgets
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3740,7 +3744,7 @@ parts:
         after:
         - kglobalaccel
     knotifications:
-        source: ../parts/kf5-parts-src/src/knotifications
+        source: /root/parts/sources/src/knotifications
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3759,7 +3763,7 @@ parts:
         after:
         - ktextwidgets
     kxmlgui:
-        source: ../parts/kf5-parts-src/src/kxmlgui
+        source: /root/parts/sources/src/kxmlgui
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3776,7 +3780,7 @@ parts:
         after:
         - knotifications
     kbookmarks:
-        source: ../parts/kf5-parts-src/src/kbookmarks
+        source: /root/parts/sources/src/kbookmarks
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3793,7 +3797,7 @@ parts:
         after:
         - kxmlgui
     kjobwidgets:
-        source: ../parts/kf5-parts-src/src/kjobwidgets
+        source: /root/parts/sources/src/kjobwidgets
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3810,7 +3814,7 @@ parts:
         after:
         - kbookmarks
     kwallet:
-        source: ../parts/kf5-parts-src/src/kwallet
+        source: /root/parts/sources/src/kwallet
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3827,7 +3831,7 @@ parts:
         after:
         - kjobwidgets
     solid:
-        source: ../parts/kf5-parts-src/src/solid
+        source: /root/parts/sources/src/solid
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3844,7 +3848,7 @@ parts:
         after:
         - kwallet
     kio:
-        source: ../parts/kf5-parts-src/src/kio
+        source: /root/parts/sources/src/kio
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3861,7 +3865,7 @@ parts:
         after:
         - solid
     kparts:
-        source: ../parts/kf5-parts-src/src/kparts
+        source: /root/parts/sources/src/kparts
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3880,7 +3884,7 @@ parts:
         after:
         - kio
     taglib:
-        source: ../parts/kf5-parts-src/src/taglib
+        source: /root/parts/sources/src/taglib
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3894,7 +3898,7 @@ parts:
         after:
         - kparts
     kirigami:
-        source: ../parts/kf5-parts-src/src/kirigami
+        source: /root/parts/sources/src/kirigami
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3911,7 +3915,7 @@ parts:
         after:
         - taglib
     kpackage:
-        source: ../parts/kf5-parts-src/src/kpackage
+        source: /root/parts/sources/src/kpackage
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3928,7 +3932,7 @@ parts:
         after:
         - kirigami
     kinit:
-        source: ../parts/kf5-parts-src/src/kinit
+        source: /root/parts/sources/src/kinit
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3945,7 +3949,7 @@ parts:
         after:
         - kpackage
     kactivities:
-        source: ../parts/kf5-parts-src/src/kactivities
+        source: /root/parts/sources/src/kactivities
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3964,7 +3968,7 @@ parts:
         after:
         - kinit
     plasma-wayland-protocols:
-        source: ../parts/kf5-parts-src/src/plasma-wayland-protocols
+        source: /root/parts/sources/src/plasma-wayland-protocols
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3981,7 +3985,7 @@ parts:
         after:
         - kactivities
     kdeclarative:
-        source: ../parts/kf5-parts-src/src/kdeclarative
+        source: /root/parts/sources/src/kdeclarative
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -3998,7 +4002,7 @@ parts:
         after:
         - plasma-wayland-protocols
     kidletime:
-        source: ../parts/kf5-parts-src/src/kidletime
+        source: /root/parts/sources/src/kidletime
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4015,7 +4019,7 @@ parts:
         after:
         - kdeclarative
     kunitconversion:
-        source: ../parts/kf5-parts-src/src/kunitconversion
+        source: /root/parts/sources/src/kunitconversion
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4032,7 +4036,7 @@ parts:
         after:
         - kidletime
     oxygen-icons5:
-        source: ../parts/kf5-parts-src/src/oxygen-icons5
+        source: /root/parts/sources/src/oxygen-icons5
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4049,7 +4053,7 @@ parts:
         after:
         - kunitconversion
     syntax-highlighting:
-        source: ../parts/kf5-parts-src/src/syntax-highlighting
+        source: /root/parts/sources/src/syntax-highlighting
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4066,7 +4070,7 @@ parts:
         after:
         - oxygen-icons5
     kdnssd:
-        source: ../parts/kf5-parts-src/src/kdnssd
+        source: /root/parts/sources/src/kdnssd
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4079,7 +4083,7 @@ parts:
         after:
         - syntax-highlighting
     kitemmodels:
-        source: ../parts/kf5-parts-src/src/kitemmodels
+        source: /root/parts/sources/src/kitemmodels
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4096,7 +4100,7 @@ parts:
         after:
         - kdnssd
     kross:
-        source: ../parts/kf5-parts-src/src/kross
+        source: /root/parts/sources/src/kross
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4113,7 +4117,7 @@ parts:
         after:
         - kitemmodels
     kjs:
-        source: ../parts/kf5-parts-src/src/kjs
+        source: /root/parts/sources/src/kjs
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4130,7 +4134,7 @@ parts:
         after:
         - kross
     ktexteditor:
-        source: ../parts/kf5-parts-src/src/ktexteditor
+        source: /root/parts/sources/src/ktexteditor
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4152,7 +4156,7 @@ parts:
         after:
         - kjs
     kwayland:
-        source: ../parts/kf5-parts-src/src/kwayland
+        source: /root/parts/sources/src/kwayland
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4169,7 +4173,7 @@ parts:
         after:
         - ktexteditor
     syndication:
-        source: ../parts/kf5-parts-src/src/syndication
+        source: /root/parts/sources/src/syndication
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4182,7 +4186,7 @@ parts:
         after:
         - kwayland
     threadweaver:
-        source: ../parts/kf5-parts-src/src/threadweaver
+        source: /root/parts/sources/src/threadweaver
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4199,7 +4203,7 @@ parts:
         after:
         - syndication
     kded:
-        source: ../parts/kf5-parts-src/src/kded
+        source: /root/parts/sources/src/kded
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4218,7 +4222,7 @@ parts:
         after:
         - threadweaver
     kdesignerplugin:
-        source: ../parts/kf5-parts-src/src/kdesignerplugin
+        source: /root/parts/sources/src/kdesignerplugin
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4235,7 +4239,7 @@ parts:
         after:
         - kded
     kemoticons:
-        source: ../parts/kf5-parts-src/src/kemoticons
+        source: /root/parts/sources/src/kemoticons
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4252,7 +4256,7 @@ parts:
         after:
         - kdesignerplugin
     kfilemetadata:
-        source: ../parts/kf5-parts-src/src/kfilemetadata
+        source: /root/parts/sources/src/kfilemetadata
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4306,7 +4310,7 @@ parts:
         after:
         - kemoticons
     knewstuff:
-        source: ../parts/kf5-parts-src/src/knewstuff
+        source: /root/parts/sources/src/knewstuff
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4323,7 +4327,7 @@ parts:
         after:
         - kfilemetadata
     kpty:
-        source: ../parts/kf5-parts-src/src/kpty
+        source: /root/parts/sources/src/kpty
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4336,7 +4340,7 @@ parts:
         after:
         - knewstuff
     plasma-framework:
-        source: ../parts/kf5-parts-src/src/plasma-framework
+        source: /root/parts/sources/src/plasma-framework
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4351,7 +4355,7 @@ parts:
         after:
         - kpty
     baloo:
-        source: ../parts/kf5-parts-src/src/baloo
+        source: /root/parts/sources/src/baloo
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4368,7 +4372,7 @@ parts:
         after:
         - plasma-framework
     bluez-qt:
-        source: ../parts/kf5-parts-src/src/bluez-qt
+        source: /root/parts/sources/src/bluez-qt
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4381,7 +4385,7 @@ parts:
         after:
         - baloo
     frameworkintegration:
-        source: ../parts/kf5-parts-src/src/frameworkintegration
+        source: /root/parts/sources/src/frameworkintegration
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4394,7 +4398,7 @@ parts:
         after:
         - bluez-qt
     kactivities-stats:
-        source: ../parts/kf5-parts-src/src/kactivities-stats
+        source: /root/parts/sources/src/kactivities-stats
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4407,7 +4411,7 @@ parts:
         after:
         - frameworkintegration
     kapidox:
-        source: ../parts/kf5-parts-src/src/kapidox
+        source: /root/parts/sources/src/kapidox
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4422,7 +4426,7 @@ parts:
         after:
         - kactivities-stats
     kcalendarcore:
-        source: ../parts/kf5-parts-src/src/kcalendarcore
+        source: /root/parts/sources/src/kcalendarcore
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4439,7 +4443,7 @@ parts:
         after:
         - kapidox
     kcmutils:
-        source: ../parts/kf5-parts-src/src/kcmutils
+        source: /root/parts/sources/src/kcmutils
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4452,7 +4456,7 @@ parts:
         after:
         - kcalendarcore
     kcontacts:
-        source: ../parts/kf5-parts-src/src/kcontacts
+        source: /root/parts/sources/src/kcontacts
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4465,7 +4469,7 @@ parts:
         after:
         - kcmutils
     kdav:
-        source: ../parts/kf5-parts-src/src/kdav
+        source: /root/parts/sources/src/kdav
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4478,7 +4482,7 @@ parts:
         after:
         - kcontacts
     kdelibs4support:
-        source: ../parts/kf5-parts-src/src/kdelibs4support
+        source: /root/parts/sources/src/kdelibs4support
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4491,7 +4495,7 @@ parts:
         after:
         - kdav
     kdesu:
-        source: ../parts/kf5-parts-src/src/kdesu
+        source: /root/parts/sources/src/kdesu
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4517,7 +4521,7 @@ parts:
     #     after:
     #     - kdesu
     kholidays:
-        source: ../parts/kf5-parts-src/src/kholidays
+        source: /root/parts/sources/src/kholidays
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4531,7 +4535,7 @@ parts:
         # - kdewebkit
         - kdesu
     khtml:
-        source: ../parts/kf5-parts-src/src/khtml
+        source: /root/parts/sources/src/khtml
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4548,7 +4552,7 @@ parts:
         after:
         - kholidays
     kimageformats:
-        source: ../parts/kf5-parts-src/src/kimageformats
+        source: /root/parts/sources/src/kimageformats
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4561,7 +4565,7 @@ parts:
         after:
         - khtml
     kjsembed:
-        source: ../parts/kf5-parts-src/src/kjsembed
+        source: /root/parts/sources/src/kjsembed
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4574,7 +4578,7 @@ parts:
         after:
         - kimageformats
     kmediaplayer:
-        source: ../parts/kf5-parts-src/src/kmediaplayer
+        source: /root/parts/sources/src/kmediaplayer
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4587,7 +4591,7 @@ parts:
         after:
         - kjsembed
     knotifyconfig:
-        source: ../parts/kf5-parts-src/src/knotifyconfig
+        source: /root/parts/sources/src/knotifyconfig
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4600,7 +4604,7 @@ parts:
         after:
         - kmediaplayer
     kpeople:
-        source: ../parts/kf5-parts-src/src/kpeople
+        source: /root/parts/sources/src/kpeople
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4613,7 +4617,7 @@ parts:
         after:
         - knotifyconfig
     kplotting:
-        source: ../parts/kf5-parts-src/src/kplotting
+        source: /root/parts/sources/src/kplotting
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4626,7 +4630,7 @@ parts:
         after:
         - kpeople
     kquickcharts:
-        source: ../parts/kf5-parts-src/src/kquickcharts
+        source: /root/parts/sources/src/kquickcharts
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4639,7 +4643,7 @@ parts:
         after:
         - kplotting
     krunner:
-        source: ../parts/kf5-parts-src/src/krunner
+        source: /root/parts/sources/src/krunner
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4652,7 +4656,7 @@ parts:
         after:
         - kquickcharts
     kxmlrpcclient:
-        source: ../parts/kf5-parts-src/src/kxmlrpcclient
+        source: /root/parts/sources/src/kxmlrpcclient
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4665,7 +4669,7 @@ parts:
         after:
         - krunner
     modemmanager-qt:
-        source: ../parts/kf5-parts-src/src/modemmanager-qt
+        source: /root/parts/sources/src/modemmanager-qt
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4680,7 +4684,7 @@ parts:
         after:
         - kxmlrpcclient
     networkmanager-qt:
-        source: ../parts/kf5-parts-src/src/networkmanager-qt
+        source: /root/parts/sources/src/networkmanager-qt
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4695,7 +4699,7 @@ parts:
         after:
         - modemmanager-qt
     prison:
-        source: ../parts/kf5-parts-src/src/prison
+        source: /root/parts/sources/src/prison
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4714,7 +4718,7 @@ parts:
         after:
         - networkmanager-qt
     purpose:
-        source: ../parts/kf5-parts-src/src/purpose
+        source: /root/parts/sources/src/purpose
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4727,7 +4731,7 @@ parts:
         after:
         - prison
     qqc2-desktop-style:
-        source: ../parts/kf5-parts-src/src/qqc2-desktop-style
+        source: /root/parts/sources/src/qqc2-desktop-style
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4740,7 +4744,7 @@ parts:
         after:
         - purpose
     kdecoration:
-        source: ../parts/kf5-parts-src/src/kdecoration
+        source: /root/parts/sources/src/kdecoration
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4753,7 +4757,7 @@ parts:
         after:
         - qqc2-desktop-style
     breeze:
-        source: ../parts/kf5-parts-src/src/breeze
+        source: /root/parts/sources/src/breeze
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4774,7 +4778,7 @@ parts:
         - -DENABLE_TESTING=OFF
         - -DBUILD_TESTING=OFF
         - -DKDE_SKIP_TEST_SETTINGS=ON
-        source: ../parts/kf5-parts-src/src/plasma-integration
+        source: /root/parts/sources/src/plasma-integration
         source-type: local
         # source-branch: Plasma/5.20
         plugin: cmake
@@ -4848,7 +4852,7 @@ parts:
         - breeze
 
     libkdegames:
-        source: ../parts/kf5-parts-src/src/libkdegames
+        source: /root/parts/sources/src/libkdegames
         source-type: local
         plugin: cmake
         cmake-generator: Ninja
@@ -4866,9 +4870,15 @@ parts:
         - plasma-integration
 
     # Launchpad builders timeout internet access so fetching sources in advance
-    kf5-parts-src:
+    sources:
         plugin: nil
         override-pull: |
+            # Qt Sources
+            git clone --recurse-submodules -b v5.15.2 git://code.qt.io/qt/qtwebengine.git
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebsockets.git
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebglplugin.git
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtx11extras.git
+            # KDE/KF5 Sources
             git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/extra-cmake-modules.git
             git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcoreaddons.git
             git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/ki18n.git
@@ -4982,4 +4992,48 @@ parts:
         - libqrencode-dev
         - libdmtx-dev
         - libsndfile1-dev
-        stage-packages: []
+        stage-packages:
+        - libxcb-res0
+        - libpolkit-agent-1-0
+        - libpolkit-gobject-1-0
+        - libhunspell-1.7-0
+        - libpulse-mainloop-glib0
+        - libaom0
+        - libavcodec58
+        - libavformat58
+        - libavutil56
+        - libbluray2
+        - libchromaprint1
+        - libcodec2-0.9
+        - libgme0
+        - libgomp1
+        - libgsm1
+        - libmp3lame0
+        - libmpg123-0
+        - libnuma1
+        - libopenjp2-7
+        - libopenmpt0
+        - libshine3
+        - libsoxr0
+        - libspeex1
+        - libssh-gcrypt-4
+        - libswresample3
+        - libtheora0
+        - libtwolame0
+        - libva-drm2
+        - libva-x11-2
+        - libva2
+        - libvdpau1
+        - libvorbisfile3
+        - libwavpack1
+        - libx264-155
+        - libx265-179
+        - libxvidcore4
+        - libzvbi0
+        - ocl-icd-libopencl1
+        - libopengl0
+        - libical3
+        - libgif7
+        - libdmtx0b
+        - libqrencode4
+        - libsndfile1
