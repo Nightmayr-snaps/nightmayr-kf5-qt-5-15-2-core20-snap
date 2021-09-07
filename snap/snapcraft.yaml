@@ -319,8 +319,10 @@ parts:
         - sources
     qtxmlpatterns:
         plugin: nil
-        source: git://code.qt.io/qt/qtxmlpatterns.git
-        source-tag: v5.15.2
+        # source: git://code.qt.io/qt/qtxmlpatterns.git
+        source: /root/parts/sources/src/qtxmlpatterns
+        source-type: local
+        # source-tag: v5.15.2
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
