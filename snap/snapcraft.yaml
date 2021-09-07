@@ -64,7 +64,11 @@ parts:
 
             cd qtbase
             git apply $SNAPCRAFT_STAGE/qtbase_5_15_2/01-fix-qtopenurl-openfile-portal.patch
-            cat src/platformsupport/services/genericunix/qgenericunixservices.cpp
+            # Check launchpad environment
+            echo $HOME
+            ls ~
+            ls $HOME
+            env
         override-build: |
             ./configure \
                 -prefix /usr \
@@ -4874,6 +4878,7 @@ parts:
         plugin: nil
         override-pull: |
             # Qt Sources
+            git clone --recurse-submodules -b v5.15.2 git://code.qt.io/qt/qtxmlpaterns.git
             git clone --recurse-submodules -b v5.15.2 git://code.qt.io/qt/qtwebengine.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebsockets.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebglplugin.git
