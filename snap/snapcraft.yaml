@@ -311,7 +311,8 @@ parts:
         - -./usr/lib/$SNAPCRAFT_ARCH_TRIPLET/*.prl
         - -./usr/lib/qt5
         after:
-        - patches    
+        - patches
+        - kf5-parts-src
     qtxmlpatterns:
         plugin: nil
         source: git://code.qt.io/qt/qtxmlpatterns.git
@@ -3262,183 +3263,9 @@ parts:
     #     after:
     #     - qtwebengine
 
-    # kdesrc-buildrc:
-    #     plugin: nil
-    #     override-build: |
-    #         cat << EOF > "$HOME/.kdesrc-buildrc"
-    #         # This file controls options to apply when configuring/building modules, and
-    #         # controls which modules are built in the first place.
-    #         # List of all options: https://docs.kde.org/trunk5/en/kdesrc-build/kdesrc-build/conf-options-table.html
-
-    #         global
-    #             # Paths
-
-    #             kdedir /root/parts/kf5/install/usr # Where to install KF5-based software
-    #         #   qtdir  ~/kde/qt5 # Where to install Qt5 if kdesrc-build supplies it
-
-    #             source-dir /root/parts/kf5/src   # Where sources are downloaded
-    #             build-dir  /root/parts/kf5/build # Where the source build is run
-
-    #             directory-layout flat # Use flattened structure
-
-    #             # Will pull in KDE-based dependencies only, to save you the trouble of
-    #             # listing them all below
-    #             include-dependencies true
-
-    #             cmake-options -DCMAKE_BUILD_TYPE=Release
-    #             branch-group stable-kf5-qt5
-
-    #             # kdesrc-build sets 2 options which is used in options like make-options or set-env
-    #             # to help manage the number of compile jobs that happen during a build:
-    #             #
-    #             # 1. num-cores, which is just the number of detected CPU cores, and can be passed
-    #             #    to tools like make (needed for parallel build) or ninja (completely optional).
-    #             #
-    #             # 2. num-cores-low-mem, which is set to largest value that appears safe for
-    #             #    particularly heavyweight modules based on total memory, intended for
-    #             #    modules like qtwebengine
-    #             num-cores $SNAPCRAFT_PARALLEL_BUILD_COUNT
-
-    #             num-cores-low-mem $SNAPCRAFT_PARALLEL_BUILD_COUNT
-
-    #         end global
-     
-
-    #         module-set frameworks-set
-    #             repository kde-projects
-    #             use-modules extra-cmake-modules kcoreaddons
-    #             tag v5.85.0
-    #             ignore-modules kdewebkit
-    #         end module-set
-
-    #         # module-set frameworks-set
-    #         #     repository kde-git
-    #         #     use-modules frameworks
-    #         #     # cmake-options -DBUILD_TESTING=TRUE
-    #         #     # ignore-modules kguiaddons
-
-    #         #     tag v5.85.0
-    #         # end module-set
-            
-    #         module extra-cmake-modules
-    #             repository kde-projects:module1.git
-    #         end module
-
-
-    #         # With base options set, the remainder of the file is used to define modules to build, in the
-    #         # desired order, and set any module-specific options.
-    #         #
-    #         # Modules may be grouped into sets, and this is the normal practice.
-    #         #
-    #         # You can include other files inline using the "include" command. We do this here
-    #         # to include files which are updated with kdesrc-build.
-
-    #         # Common options that should be set for some KDE modules no matter how
-    #         # kdesrc-build finds them. Do not comment these out unless you know
-    #         # what you are doing.
-    #         include /root/parts/kf5/src/kf5-common-options-build-include
-
-    #         # Qt and some Qt-using middleware libraries. Uncomment if your distribution's Qt
-    #         # tools are too old but be warned that Qt take a long time to build!
-    #         #include /root/parts/kf5/src/qt5-build-include
-    #         #include /root/parts/kf5/src/custom-qt5-libs-build-include
-
-    #         # KF5 and Plasma :)
-    #         include /root/parts/kf5/src/kf5-qt5-build-include
-
-    #         # To change options for modules that have already been defined, use an
-    #         # 'options' block. See kf5-common-options-build-include for an example
-    #         EOF
-    #     prime:
-    #     - -./*
-    # kf5:
-    #     plugin: cmake
-    #     source: https://invent.kde.org/sdk/kdesrc-build.git
-    #     # build-attributes:
-    #     # - enable-patchelf
-    #     build-environment:
-    #     - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-    #     - PATH: $SNAPCRAFT_STAGE/usr/bin:$SNAPCRAFT_STAGE/usr/lib/qt5/bin/:$PATH
-    #     override-pull: |
-    #         snapcraftctl pull
-    #         source ~/.bashrc
-    #     override-build: |
-    #         $SNAPCRAFT_PART_SRC/kdesrc-build frameworks-set
-    #     build-packages:
-    #     - libyaml-pp-perl
-    #     # - libyaml-syck-perl
-    #     # - libyaml-perl
-    #     - dialog
-    #     # polkit
-    #     - libpolkit-gobject-1-dev
-    #     - libpolkit-agent-1-dev
-    #     # kdoctool
-    #     - docbook-xml
-    #     - docbook-xsl
-    #     # kwindow-system
-    #     - libxcb-res0-dev
-    #     # kactivities
-    #     - libboost-dev
-    #     # kfilemetatdata
-    #     - xattr
-    #     - libattr1-dev
-    #     # kcalendarcore
-    #     - libical-dev
-    #     # khtml
-    #     - giflib-tools
-    #     - libgif-dev
-    #     # modemmanager-qt
-    #     - modemmanager-dev
-    #     # baloo
-    #     - liblmdb-dev
-    #     # networkmanager-qt
-    #     - libnm-dev 
-    #     # prison
-    #     - libqrencode-dev
-    #     - libdmtx-dev
-    #     after:
-    #     - qtbase
-    #     - qtxmlpatterns
-    #     - qtx11extras
-    #     - qtgamepad
-    #     - qtimageformats
-    #     - qtnetworkauth
-    #     - qtserialport
-    #     - qtremoteobjects
-    #     - qtsvg
-    #     - qtscript
-    #     - qtdeclarative
-    #     - qtwayland
-    #     - qttools
-    #     - qtconnectivity
-    #     - qtcharts
-    #     - qtdoc
-    #     - qtlottie
-    #     - qtgraphicaleffects
-    #     - qtmultimedia
-    #     - qtquick3d
-    #     - qtquickcontrols
-    #     - qtscxml
-    #     - qtquicktimeline
-    #     - qtsensors
-    #     - qtwebchannel
-    #     - qtwebsockets
-    #     - qt3d
-    #     - qtquickcontrols2
-    #     - qtlocation
-    #     - qtdatavis3d
-    #     - qtspeech
-    #     - qtserialbus
-    #     - qttranslations
-    #     - qtwebglplugin
-    #     - qtwebengine
-    #     - kdesrc-buildrc
-    #     # - qtwebkit
-
     extra-cmake-modules:
-        # source: https://invent.kde.org/frameworks/extra-cmake-modules.git
-        source: https://github.com/KDE/extra-cmake-modules.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/extra-cmake-modules
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3488,8 +3315,8 @@ parts:
         - qtwebglplugin
         - qtwebengine
     kcoreaddons:
-        source: https://invent.kde.org/frameworks/kcoreaddons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcoreaddons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3505,8 +3332,8 @@ parts:
         after:
         - extra-cmake-modules
     ki18n:
-        source: https://invent.kde.org/frameworks/ki18n.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/ki18n
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3522,8 +3349,8 @@ parts:
         after:
         - kcoreaddons
     karchive:
-        source: https://invent.kde.org/frameworks/karchive.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/karchive
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3539,8 +3366,8 @@ parts:
         after:
         - ki18n
     kconfig:
-        source: https://invent.kde.org/frameworks/kconfig.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kconfig
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3556,8 +3383,8 @@ parts:
         after:
         - karchive
     kdoctools:
-        source: https://invent.kde.org/frameworks/kdoctools.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdoctools
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3576,8 +3403,8 @@ parts:
         after:
         - kconfig
     kwidgetsaddons:
-        source: https://invent.kde.org/frameworks/kwidgetsaddons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kwidgetsaddons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3593,8 +3420,8 @@ parts:
         after:
         - kdoctools
     kcodecs:
-        source: https://invent.kde.org/frameworks/kcodecs.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcodecs
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3610,8 +3437,8 @@ parts:
         after:
         - kwidgetsaddons
     kwindowsystem:
-        source: https://invent.kde.org/frameworks/kwindowsystem.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kwindowsystem
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3631,8 +3458,8 @@ parts:
         after:
         - kcodecs
     polkit-qt-1:
-        source: https://invent.kde.org/libraries/polkit-qt-1.git
-        source-tag: v0.114.0
+        source: ../parts/kf5-parts-src/src/polkit-qt-1
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3654,8 +3481,8 @@ parts:
         after:
         - kwindowsystem
     kauth:
-        source: https://invent.kde.org/frameworks/kauth.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kauth
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3671,8 +3498,8 @@ parts:
         after:
         - polkit-qt-1
     kcrash:
-        source: https://invent.kde.org/frameworks/kcrash.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcrash
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3688,8 +3515,8 @@ parts:
         after:
         - kauth
     kdbusaddons:
-        source: https://invent.kde.org/frameworks/kdbusaddons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdbusaddons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3705,8 +3532,8 @@ parts:
         after:
         - kcrash
     kguiaddons:
-        source: https://invent.kde.org/frameworks/kguiaddons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kguiaddons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3722,8 +3549,8 @@ parts:
         after:
         - kdbusaddons
     kconfigwidgets:
-        source: https://invent.kde.org/frameworks/kconfigwidgets.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kconfigwidgets
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3739,8 +3566,8 @@ parts:
         after:
         - kguiaddons
     kitemviews:
-        source: https://invent.kde.org/frameworks/kitemviews.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kitemviews
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3756,8 +3583,8 @@ parts:
         after:
         - kconfigwidgets
     kiconthemes:
-        source: https://invent.kde.org/frameworks/kiconthemes.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kiconthemes
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3773,8 +3600,8 @@ parts:
         after:
         - kitemviews
     kcompletion:
-        source: https://invent.kde.org/frameworks/kcompletion.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcompletion
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3790,8 +3617,8 @@ parts:
         after:
         - kiconthemes
     kservice:
-        source: https://invent.kde.org/frameworks/kservice.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kservice
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3807,8 +3634,8 @@ parts:
         after:
         - kcompletion
     sonnet:
-        source: https://invent.kde.org/frameworks/sonnet.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/sonnet
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3826,8 +3653,8 @@ parts:
         after:
         - kservice
     attica:
-        source: https://invent.kde.org/frameworks/attica.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/attica
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3843,8 +3670,8 @@ parts:
         after:
         - sonnet
     phonon:
-        source: https://invent.kde.org/libraries/phonon.git
-        source-tag: v4.11.1
+        source: ../parts/kf5-parts-src/src/phonon
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3862,8 +3689,8 @@ parts:
         after:
         - attica
     breeze-icons:
-        source: https://invent.kde.org/frameworks/breeze-icons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/breeze-icons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3879,8 +3706,8 @@ parts:
         after:
         - phonon
     kglobalaccel:
-        source: https://invent.kde.org/frameworks/kglobalaccel.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kglobalaccel
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3896,8 +3723,8 @@ parts:
         after:
         - breeze-icons
     ktextwidgets:
-        source: https://invent.kde.org/frameworks/ktextwidgets.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/ktextwidgets
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3913,8 +3740,8 @@ parts:
         after:
         - kglobalaccel
     knotifications:
-        source: https://invent.kde.org/frameworks/knotifications.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/knotifications
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3932,8 +3759,8 @@ parts:
         after:
         - ktextwidgets
     kxmlgui:
-        source: https://invent.kde.org/frameworks/kxmlgui.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kxmlgui
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3949,8 +3776,8 @@ parts:
         after:
         - knotifications
     kbookmarks:
-        source: https://invent.kde.org/frameworks/kbookmarks.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kbookmarks
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3966,8 +3793,8 @@ parts:
         after:
         - kxmlgui
     kjobwidgets:
-        source: https://invent.kde.org/frameworks/kjobwidgets.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kjobwidgets
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -3983,8 +3810,8 @@ parts:
         after:
         - kbookmarks
     kwallet:
-        source: https://invent.kde.org/frameworks/kwallet.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kwallet
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4000,8 +3827,8 @@ parts:
         after:
         - kjobwidgets
     solid:
-        source: https://invent.kde.org/frameworks/solid.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/solid
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4017,8 +3844,8 @@ parts:
         after:
         - kwallet
     kio:
-        source: https://invent.kde.org/frameworks/kio.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kio
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4034,8 +3861,8 @@ parts:
         after:
         - solid
     kparts:
-        source: https://invent.kde.org/frameworks/kparts.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kparts
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4053,8 +3880,8 @@ parts:
         after:
         - kio
     taglib:
-        source: https://github.com/taglib/taglib.git
-        source-tag: v1.12
+        source: ../parts/kf5-parts-src/src/taglib
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4067,8 +3894,8 @@ parts:
         after:
         - kparts
     kirigami:
-        source: https://invent.kde.org/frameworks/kirigami.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kirigami
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4084,8 +3911,8 @@ parts:
         after:
         - taglib
     kpackage:
-        source: https://invent.kde.org/frameworks/kpackage.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kpackage
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4101,8 +3928,8 @@ parts:
         after:
         - kirigami
     kinit:
-        source: https://invent.kde.org/frameworks/kinit.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kinit
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4118,8 +3945,8 @@ parts:
         after:
         - kpackage
     kactivities:
-        source: https://invent.kde.org/frameworks/kactivities.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kactivities
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4137,8 +3964,8 @@ parts:
         after:
         - kinit
     plasma-wayland-protocols:
-        source: https://invent.kde.org/libraries/plasma-wayland-protocols.git
-        source-tag: v1.3.0
+        source: ../parts/kf5-parts-src/src/plasma-wayland-protocols
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4154,8 +3981,8 @@ parts:
         after:
         - kactivities
     kdeclarative:
-        source: https://invent.kde.org/frameworks/kdeclarative.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdeclarative
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4171,8 +3998,8 @@ parts:
         after:
         - plasma-wayland-protocols
     kidletime:
-        source: https://invent.kde.org/frameworks/kidletime.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kidletime
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4188,8 +4015,8 @@ parts:
         after:
         - kdeclarative
     kunitconversion:
-        source: https://invent.kde.org/frameworks/kunitconversion.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kunitconversion
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4205,8 +4032,8 @@ parts:
         after:
         - kidletime
     oxygen-icons5:
-        source: https://invent.kde.org/frameworks/oxygen-icons5.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/oxygen-icons5
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4222,8 +4049,8 @@ parts:
         after:
         - kunitconversion
     syntax-highlighting:
-        source: https://invent.kde.org/frameworks/syntax-highlighting.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/syntax-highlighting
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4239,8 +4066,8 @@ parts:
         after:
         - oxygen-icons5
     kdnssd:
-        source: https://invent.kde.org/frameworks/kdnssd.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdnssd
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4252,8 +4079,8 @@ parts:
         after:
         - syntax-highlighting
     kitemmodels:
-        source: https://invent.kde.org/frameworks/kitemmodels.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kitemmodels
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4269,8 +4096,8 @@ parts:
         after:
         - kdnssd
     kross:
-        source: https://invent.kde.org/frameworks/kross.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kross
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4286,8 +4113,8 @@ parts:
         after:
         - kitemmodels
     kjs:
-        source: https://invent.kde.org/frameworks/kjs.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kjs
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4303,8 +4130,8 @@ parts:
         after:
         - kross
     ktexteditor:
-        source: https://invent.kde.org/frameworks/ktexteditor.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/ktexteditor
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4325,8 +4152,8 @@ parts:
         after:
         - kjs
     kwayland:
-        source: https://invent.kde.org/frameworks/kwayland.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kwayland
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4342,8 +4169,8 @@ parts:
         after:
         - ktexteditor
     syndication:
-        source: https://invent.kde.org/frameworks/syndication.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/syndication
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4355,8 +4182,8 @@ parts:
         after:
         - kwayland
     threadweaver:
-        source: https://invent.kde.org/frameworks/threadweaver.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/threadweaver
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4372,8 +4199,8 @@ parts:
         after:
         - syndication
     kded:
-        source: https://invent.kde.org/frameworks/kded.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kded
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4391,8 +4218,8 @@ parts:
         after:
         - threadweaver
     kdesignerplugin:
-        source: https://invent.kde.org/frameworks/kdesignerplugin.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdesignerplugin
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4408,8 +4235,8 @@ parts:
         after:
         - kded
     kemoticons:
-        source: https://invent.kde.org/frameworks/kemoticons.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kemoticons
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4425,8 +4252,8 @@ parts:
         after:
         - kdesignerplugin
     kfilemetadata:
-        source: https://invent.kde.org/frameworks/kfilemetadata.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kfilemetadata
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4479,8 +4306,8 @@ parts:
         after:
         - kemoticons
     knewstuff:
-        source: https://invent.kde.org/frameworks/knewstuff.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/knewstuff
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4496,8 +4323,8 @@ parts:
         after:
         - kfilemetadata
     kpty:
-        source: https://invent.kde.org/frameworks/kpty.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kpty
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4509,8 +4336,8 @@ parts:
         after:
         - knewstuff
     plasma-framework:
-        source: https://invent.kde.org/frameworks/plasma-framework.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/plasma-framework
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4524,8 +4351,8 @@ parts:
         after:
         - kpty
     baloo:
-        source: https://invent.kde.org/frameworks/baloo.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/baloo
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4541,8 +4368,8 @@ parts:
         after:
         - plasma-framework
     bluez-qt:
-        source: https://invent.kde.org/frameworks/bluez-qt.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/bluez-qt
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4554,8 +4381,8 @@ parts:
         after:
         - baloo
     frameworkintegration:
-        source: https://invent.kde.org/frameworks/frameworkintegration.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/frameworkintegration
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4567,8 +4394,8 @@ parts:
         after:
         - bluez-qt
     kactivities-stats:
-        source: https://invent.kde.org/frameworks/kactivities-stats.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kactivities-stats
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4580,8 +4407,8 @@ parts:
         after:
         - frameworkintegration
     kapidox:
-        source: https://invent.kde.org/frameworks/kapidox.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kapidox
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4595,8 +4422,8 @@ parts:
         after:
         - kactivities-stats
     kcalendarcore:
-        source: https://invent.kde.org/frameworks/kcalendarcore.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcalendarcore
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4612,8 +4439,8 @@ parts:
         after:
         - kapidox
     kcmutils:
-        source: https://invent.kde.org/frameworks/kcmutils.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcmutils
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4625,8 +4452,8 @@ parts:
         after:
         - kcalendarcore
     kcontacts:
-        source: https://invent.kde.org/frameworks/kcontacts.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kcontacts
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4638,8 +4465,8 @@ parts:
         after:
         - kcmutils
     kdav:
-        source: https://invent.kde.org/frameworks/kdav.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdav
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4651,8 +4478,8 @@ parts:
         after:
         - kcontacts
     kdelibs4support:
-        source: https://invent.kde.org/frameworks/kdelibs4support.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdelibs4support
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4664,8 +4491,8 @@ parts:
         after:
         - kdav
     kdesu:
-        source: https://invent.kde.org/frameworks/kdesu.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kdesu
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4690,8 +4517,8 @@ parts:
     #     after:
     #     - kdesu
     kholidays:
-        source: https://invent.kde.org/frameworks/kholidays.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kholidays
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4704,8 +4531,8 @@ parts:
         # - kdewebkit
         - kdesu
     khtml:
-        source: https://invent.kde.org/frameworks/khtml.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/khtml
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4721,8 +4548,8 @@ parts:
         after:
         - kholidays
     kimageformats:
-        source: https://invent.kde.org/frameworks/kimageformats.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kimageformats
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4734,8 +4561,8 @@ parts:
         after:
         - khtml
     kjsembed:
-        source: https://invent.kde.org/frameworks/kjsembed.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kjsembed
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4747,8 +4574,8 @@ parts:
         after:
         - kimageformats
     kmediaplayer:
-        source: https://invent.kde.org/frameworks/kmediaplayer.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kmediaplayer
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4760,8 +4587,8 @@ parts:
         after:
         - kjsembed
     knotifyconfig:
-        source: https://invent.kde.org/frameworks/knotifyconfig.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/knotifyconfig
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4773,8 +4600,8 @@ parts:
         after:
         - kmediaplayer
     kpeople:
-        source: https://invent.kde.org/frameworks/kpeople.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kpeople
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4786,8 +4613,8 @@ parts:
         after:
         - knotifyconfig
     kplotting:
-        source: https://invent.kde.org/frameworks/kplotting.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kplotting
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4799,8 +4626,8 @@ parts:
         after:
         - kpeople
     kquickcharts:
-        source: https://invent.kde.org/frameworks/kquickcharts.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kquickcharts
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4812,8 +4639,8 @@ parts:
         after:
         - kplotting
     krunner:
-        source: https://invent.kde.org/frameworks/krunner.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/krunner
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4825,8 +4652,8 @@ parts:
         after:
         - kquickcharts
     kxmlrpcclient:
-        source: https://invent.kde.org/frameworks/kxmlrpcclient.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/kxmlrpcclient
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4838,8 +4665,8 @@ parts:
         after:
         - krunner
     modemmanager-qt:
-        source: https://invent.kde.org/frameworks/modemmanager-qt.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/modemmanager-qt
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4853,8 +4680,8 @@ parts:
         after:
         - kxmlrpcclient
     networkmanager-qt:
-        source: https://invent.kde.org/frameworks/networkmanager-qt.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/networkmanager-qt
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4868,8 +4695,8 @@ parts:
         after:
         - modemmanager-qt
     prison:
-        source: https://invent.kde.org/frameworks/prison.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/prison
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4887,8 +4714,8 @@ parts:
         after:
         - networkmanager-qt
     purpose:
-        source: https://invent.kde.org/frameworks/purpose.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/purpose
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4900,8 +4727,8 @@ parts:
         after:
         - prison
     qqc2-desktop-style:
-        source: https://invent.kde.org/frameworks/qqc2-desktop-style.git
-        source-tag: v5.85.0
+        source: ../parts/kf5-parts-src/src/qqc2-desktop-style
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4913,8 +4740,8 @@ parts:
         after:
         - purpose
     kdecoration:
-        source: https://invent.kde.org/plasma/kdecoration.git
-        source-tag: v5.22.5
+        source: ../parts/kf5-parts-src/src/kdecoration
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4926,8 +4753,8 @@ parts:
         after:
         - qqc2-desktop-style
     breeze:
-        source: https://invent.kde.org/plasma/breeze.git
-        source-tag: v5.22.5
+        source: ../parts/kf5-parts-src/src/breeze
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -4947,8 +4774,8 @@ parts:
         - -DENABLE_TESTING=OFF
         - -DBUILD_TESTING=OFF
         - -DKDE_SKIP_TEST_SETTINGS=ON
-        source: https://invent.kde.org/plasma/plasma-integration.git
-        source-tag: v5.22.5
+        source: ../parts/kf5-parts-src/src/plasma-integration
+        source-type: local
         # source-branch: Plasma/5.20
         plugin: cmake
         # build-attributes:
@@ -5021,8 +4848,8 @@ parts:
         - breeze
 
     libkdegames:
-        source: https://invent.kde.org/games/libkdegames.git
-        source-tag: v21.08.1
+        source: ../parts/kf5-parts-src/src/libkdegames
+        source-type: local
         plugin: cmake
         cmake-generator: Ninja
         cmake-parameters: 
@@ -5037,3 +4864,122 @@ parts:
           - libsndfile1
         after:
         - plasma-integration
+
+    # Launchpad builders timeout internet access so fetching sources in advance
+    kf5-parts-src:
+        plugin: nil
+        override-pull: |
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/extra-cmake-modules.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcoreaddons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/ki18n.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/karchive.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kconfig.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdoctools.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kwidgetsaddons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcodecs.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kwindowsystem.git
+            git clone -b v0.114.0 --depth=1 https://invent.kde.org/libraries/polkit-qt-1.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kauth.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcrash.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdbusaddons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kguiaddons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kconfigwidgets.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kitemviews.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kiconthemes.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcompletion.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kservice.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/sonnet.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/attica.git
+            git clone -b v4.11.1 --depth=1 https://invent.kde.org/libraries/phonon.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/breeze-icons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kglobalaccel.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/ktextwidgets.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/knotifications.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kxmlgui.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kbookmarks.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kjobwidgets.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kwallet.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/solid.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kio.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kparts.git
+            git clone -b v1.12 --depth=1 https://github.com/taglib/taglib.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kirigami.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kpackage.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kinit.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kactivities.git
+            git clone -b v1.3.0 --depth=1 https://invent.kde.org/libraries/plasma-wayland-protocols.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdeclarative.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kidletime.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kunitconversion.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/oxygen-icons5.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/syntax-highlighting.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdnssd.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kitemmodels.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kross.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kjs.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/ktexteditor.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kwayland.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/syndication.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/threadweaver.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kded.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdesignerplugin.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kemoticons.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kfilemetadata.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/knewstuff.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kpty.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/plasma-framework.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/baloo.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/bluez-qt.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/frameworkintegration.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kactivities-stats.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kapidox.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcalendarcore.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcmutils.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kcontacts.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdav.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdelibs4support.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdesu.git
+            # git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kdewebkit.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kholidays.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/khtml.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kimageformats.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kjsembed.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kmediaplayer.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/knotifyconfig.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kpeople.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kplotting.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kquickcharts.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/krunner.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/kxmlrpcclient.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/modemmanager-qt.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/networkmanager-qt.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/prison.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/purpose.git
+            git clone -b v$SNAPCRAFT_PROJECT_VERSION --depth=1 https://invent.kde.org/frameworks/qqc2-desktop-style.git
+            git clone -b v5.22.5 --depth=1 https://invent.kde.org/plasma/kdecoration.git
+            git clone -b v5.22.5 --depth=1 https://invent.kde.org/plasma/breeze.git
+            git clone -b v5.22.5 --depth=1 https://invent.kde.org/plasma/plasma-integration.git
+            git clone -b v21.08.1 --depth=1 https://invent.kde.org/games/libkdegames.git
+        # override-stage: |
+        #     rm -rf $SNAPCRAFT_PART_BUILD
+        #     rm -rf $SNAPCRAFT_PART_BUILD/.git
+        build-packages:
+        - docbook-xml
+        - docbook-xsl
+        - libxcb-res0-dev
+        - libboost-dev
+        - xattr
+        - libattr1-dev
+        - libgif-dev
+        - libhunspell-1.7-0
+        - libpolkit-gobject-1-dev
+        - libpolkit-agent-1-dev
+        - modemmanager-dev
+        - libnm-dev
+        - liblmdb-dev
+        - python3-setuptools
+        - libical-dev
+        - libqrencode-dev
+        - libdmtx-dev
+        - libsndfile1-dev
+        stage-packages: []
