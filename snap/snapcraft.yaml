@@ -92,10 +92,10 @@ parts:
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
-            rm -rf /root/parts/qtbase/build/*
-            rm -rf /root/parts/qtbase/src/*
-            rm -rf /root/parts/qtbase/build/.git
-            rm -rf /root/parts/qtbase/src/.git
+            rm -rf $SNAPCRAFT_STAGE/../parts/qtbase/build/*
+            rm -rf $SNAPCRAFT_STAGE/../parts/qtbase/src/*
+            rm -rf $SNAPCRAFT_STAGE/../parts/qtbase/build/.git
+            rm -rf $SNAPCRAFT_STAGE/../parts/qtbase/src/.git
         build-packages:
         - build-essential
         - autotools-dev
@@ -401,11 +401,11 @@ parts:
         - qtbase   
     qtx11extras:
         plugin: nil
-        source: /root/parts/sources/src/qtx11extras
-        source-type: local
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            cp -a $SNAPCRAFT_PART_SRC/../../sources/src/qtwebglplugin/. $SNAPCRAFT_PART_SRC
         override-build: |
             $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
@@ -4783,8 +4783,6 @@ parts:
         - -DENABLE_TESTING=OFF
         - -DBUILD_TESTING=OFF
         - -DKDE_SKIP_TEST_SETTINGS=ON
-        source: /root/parts/sources/src/plasma-integration
-        source-type: local
         # source-branch: Plasma/5.20
         plugin: cmake
         # build-attributes:
