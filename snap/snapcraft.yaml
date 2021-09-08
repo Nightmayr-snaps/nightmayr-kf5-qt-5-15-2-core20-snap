@@ -58,12 +58,13 @@ parts:
     qtbase:
         plugin: nil
         override-pull: |
+            QT=5_15_2
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt5.git .
             perl init-repository --module-subset=qtbase
             git submodule update qtbase
 
             cd qtbase
-            git apply $SNAPCRAFT_STAGE/qtbase_5_15_2/01-fix-qtopenurl-openfile-portal.patch
+            find $SNAPCRAFT_STAGE/qtbase_${QT} -type f -print0 | sort -z | xargs -r0 git apply
         override-build: |
             ./configure \
                 -prefix /usr \
@@ -405,7 +406,7 @@ parts:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
-            cp -a $SNAPCRAFT_PART_SRC/../../sources/src/qtwebglplugin/. $SNAPCRAFT_PART_SRC
+            cp -a $SNAPCRAFT_PART_SRC/../../sources/src/qtx11extras/. $SNAPCRAFT_PART_SRC
         override-build: |
             $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
             make -j$SNAPCRAFT_PARALLEL_BUILD_COUNT
