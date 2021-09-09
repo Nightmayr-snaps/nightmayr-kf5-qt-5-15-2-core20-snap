@@ -3143,6 +3143,7 @@ parts:
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebchannel.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtwebsockets.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qt3d.git
+            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtquickcontrols.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtquickcontrols2.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtlocation.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtdatavis3d.git
