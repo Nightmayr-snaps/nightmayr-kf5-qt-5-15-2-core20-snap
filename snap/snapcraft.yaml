@@ -3410,9 +3410,9 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        build-packages:
-        - docbook-xml
-        - docbook-xsl
+        # build-packages:
+        # - docbook-xml
+        # - docbook-xsl
         after:
         - kconfig
     kwidgetsaddons:
@@ -3464,10 +3464,10 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        build-packages:
-        - libxcb-res0-dev
-        stage-packages:
-        - libxcb-res0
+        # build-packages:
+        # - libxcb-res0-dev
+        # stage-packages:
+        # - libxcb-res0
         after:
         - kcodecs
     polkit-qt-1:
@@ -3485,12 +3485,12 @@ parts:
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        build-packages:
-        - libpolkit-gobject-1-dev
-        - libpolkit-agent-1-dev
-        stage-packages:
-        - libpolkit-agent-1-0
-        - libpolkit-gobject-1-0
+        # build-packages:
+        # - libpolkit-gobject-1-dev
+        # - libpolkit-agent-1-dev
+        # stage-packages:
+        # - libpolkit-agent-1-0
+        # - libpolkit-gobject-1-0
         after:
         - kwindowsystem
     kauth:
@@ -3697,8 +3697,8 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        stage-packages:
-        - libpulse-mainloop-glib0
+        # stage-packages:
+        # - libpulse-mainloop-glib0
         after:
         - attica
     breeze-icons:
@@ -3767,8 +3767,8 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        stage-packages:
-        - libxtst6
+        # stage-packages:
+        # - libxtst6
         after:
         - ktextwidgets
     kxmlgui:
@@ -4279,43 +4279,43 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        build-packages:
-        - xattr
-        - libattr1-dev
-        stage-packages:
-        - libaom0
-        - libavcodec58
-        - libavformat58
-        - libavutil56
-        - libbluray2
-        - libchromaprint1
-        - libcodec2-0.9
-        - libgme0
-        - libgomp1
-        - libgsm1
-        - libmp3lame0
-        - libmpg123-0
-        - libnuma1
-        - libopenjp2-7
-        - libopenmpt0
-        - libshine3
-        - libsoxr0
-        - libspeex1
-        - libssh-gcrypt-4
-        - libswresample3
-        - libtheora0
-        - libtwolame0
-        - libva-drm2
-        - libva-x11-2
-        - libva2
-        - libvdpau1
-        - libvorbisfile3
-        - libwavpack1
-        - libx264-155
-        - libx265-179
-        - libxvidcore4
-        - libzvbi0
-        - ocl-icd-libopencl1
+        # build-packages:
+        # - xattr
+        # - libattr1-dev
+        # stage-packages:
+        # - libaom0
+        # - libavcodec58
+        # - libavformat58
+        # - libavutil56
+        # - libbluray2
+        # - libchromaprint1
+        # - libcodec2-0.9
+        # - libgme0
+        # - libgomp1
+        # - libgsm1
+        # - libmp3lame0
+        # - libmpg123-0
+        # - libnuma1
+        # - libopenjp2-7
+        # - libopenmpt0
+        # - libshine3
+        # - libsoxr0
+        # - libspeex1
+        # - libssh-gcrypt-4
+        # - libswresample3
+        # - libtheora0
+        # - libtwolame0
+        # - libva-drm2
+        # - libva-x11-2
+        # - libva2
+        # - libvdpau1
+        # - libvorbisfile3
+        # - libwavpack1
+        # - libx264-155
+        # - libx265-179
+        # - libxvidcore4
+        # - libzvbi0
+        # - ocl-icd-libopencl1
         after:
         - kemoticons
     knewstuff:
@@ -4359,8 +4359,8 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/plasma-framework/. $SNAPCRAFT_PART_SRC
-        stage-packages:
-        - libopengl0
+        # stage-packages:
+        # - libopengl0
         after:
         - kpty
     baloo:
@@ -4374,10 +4374,10 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/baloo/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - liblmdb-dev
-        stage-packages:
-        - liblmdb0
+        # build-packages:
+        # - liblmdb-dev
+        # stage-packages:
+        # - liblmdb0
         after:
         - plasma-framework
     bluez-qt:
@@ -4430,8 +4430,8 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kapidox/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - python3-setuptools
+        # build-packages:
+        # - python3-setuptools
         after:
         - kactivities-stats
     kcalendarcore:
@@ -4445,10 +4445,10 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kcalendarcore/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - libical-dev
-        stage-packages:
-        - libical3
+        # build-packages:
+        # - libical-dev
+        # stage-packages:
+        # - libical3
         after:
         - kapidox
     kcmutils:
@@ -4556,10 +4556,10 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/khtml/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - libgif-dev
-        stage-packages:
-        - libgif7
+        # build-packages:
+        # - libgif-dev
+        # stage-packages:
+        # - libgif7
         after:
         - kholidays
     kimageformats:
@@ -4690,8 +4690,8 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/modemmanager-qt/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - modemmanager-dev
+        # build-packages:
+        # - modemmanager-dev
         after:
         - kxmlrpcclient
     networkmanager-qt:
@@ -4705,8 +4705,8 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/networkmanager-qt/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - libnm-dev 
+        # build-packages:
+        # - libnm-dev 
         after:
         - modemmanager-qt
     prison:
@@ -4720,12 +4720,12 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/prison/. $SNAPCRAFT_PART_SRC
-        build-packages:
-        - libqrencode-dev
-        - libdmtx-dev
-        stage-packages:
-        - libdmtx0b
-        - libqrencode4
+        # build-packages:
+        # - libqrencode-dev
+        # - libdmtx-dev
+        # stage-packages:
+        # - libdmtx0b
+        # - libqrencode4
         after:
         - networkmanager-qt
     purpose:
@@ -4873,10 +4873,10 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/libkdegames/. $SNAPCRAFT_PART_SRC
-        build-packages:
-          - libsndfile1-dev
-        stage-packages:
-          - libsndfile1
+        # build-packages:
+        #   - libsndfile1-dev
+        # stage-packages:
+        #   - libsndfile1
         after:
         - plasma-integration
 
