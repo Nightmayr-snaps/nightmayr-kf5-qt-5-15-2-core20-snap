@@ -23,7 +23,7 @@ architectures:
   - build-on: amd64
   - build-on: arm64
   - build-on: armhf
-#   - build-on: ppc64el
+  - build-on: ppc64el
 parts:
     patches:
         plugin: dump
@@ -3087,16 +3087,21 @@ parts:
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/qtwebengine/. $SNAPCRAFT_PART_SRC
         override-build: |
-            # Setting number of build jobs to a safe number to prevent running out of memory during QtWebengine build
-            memtotal=$(cat /proc/meminfo | awk '{print $2}' | head -n1)
-            roundedmem=$(python3 -c "print(round($memtotal/1024000.0))")
-            maxcoresformem=$(python3 -c "print(max(1, int(($roundedmem / 2)-1)))")
-            numcoreslow=$(python3 -c "print(min($maxcoresformem, $SNAPCRAFT_PARALLEL_BUILD_COUNT))")
-            $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
-            make -j$numcoreslow NINJAJOBS=-j$numcoreslow
-            make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
-            cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
-            rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
+            if [ $SNAPCRAFT_TARGET_ARCH != "ppc64el" ]; then
+                # Setting number of build jobs to a safe number to prevent running out of memory during QtWebengine build
+                memtotal=$(cat /proc/meminfo | awk '{print $2}' | head -n1)
+                roundedmem=$(python3 -c "print(round($memtotal/1024000.0))")
+                maxcoresformem=$(python3 -c "print(max(1, int(($roundedmem / 2)-1)))")
+                numcoreslow=$(python3 -c "print(min($maxcoresformem, $SNAPCRAFT_PARALLEL_BUILD_COUNT))")
+                $SNAPCRAFT_STAGE/usr/lib/qt5/bin/qmake -qtconf "$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/qt.conf"
+                make -j$numcoreslow NINJAJOBS=-j$numcoreslow
+                make INSTALL_ROOT="$SNAPCRAFT_PART_INSTALL/tmp" install
+                cp -a "$SNAPCRAFT_PART_INSTALL/tmp$SNAPCRAFT_STAGE/." "$SNAPCRAFT_PART_INSTALL"
+                rm -r "$SNAPCRAFT_PART_INSTALL/tmp"
+            else
+                echo "QtWebengine can not be built for ppc64el, skipping"
+                exit 0
+            fi
         override-stage: |
             snapcraftctl stage
             # Cleanup space on build VM to prevent running out of disk space for later parts
