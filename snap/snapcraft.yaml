@@ -3136,7 +3136,7 @@ parts:
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtlottie.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtgraphicaleffects.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtmultimedia.git
-            git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtquick3d.git
+            git clone --recurse-submodules -b v5.15.2 --depth=1 git://code.qt.io/qt/qtquick3d.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtscxml.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtquicktimeline.git
             git clone -b v5.15.2 --depth=1 git://code.qt.io/qt/qtsensors.git
