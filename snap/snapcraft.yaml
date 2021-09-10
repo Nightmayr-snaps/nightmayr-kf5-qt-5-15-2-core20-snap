@@ -2702,6 +2702,10 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kdelibs4support/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            snapcraftctl build
+            # Correct file permission on fileshareset, to 755 and remove sticky bit: -rwsr-xr-x
+            chmod 00755 $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/kf5/fileshareset
         after:
         - kdav
     kdesu:
@@ -2715,6 +2719,12 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kdesu/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            snapcraftctl build
+            # Correct file permission on kdesud, to 755 and remove sticky bit: -rwxr-sr-x
+            # also correct ownership to root:root instead of root:nogroup
+            chmod 00755 $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/kf5/kdesud
+            chown root:root $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/kf5/kdesud
         after:
         - kdelibs4support
     # kdewebkit:
