@@ -335,6 +335,7 @@ parts:
         after:
         - patches
         - sources
+        - mesa
     qtxmlpatterns:
         plugin: nil
         build-environment:
@@ -1673,9 +1674,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        # build-packages:
-        # - docbook-xml
-        # - docbook-xsl
         after:
         - kconfig
     kwidgetsaddons:
@@ -1727,10 +1725,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        # build-packages:
-        # - libxcb-res0-dev
-        # stage-packages:
-        # - libxcb-res0
         after:
         - kcodecs
     polkit-qt-1:
@@ -1748,12 +1742,6 @@ parts:
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        # build-packages:
-        # - libpolkit-gobject-1-dev
-        # - libpolkit-agent-1-dev
-        # stage-packages:
-        # - libpolkit-agent-1-0
-        # - libpolkit-gobject-1-0
         after:
         - kwindowsystem
     kauth:
@@ -1924,8 +1912,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        stage-packages:
-        - libhunspell-1.7-0
         after:
         - kservice
     attica:
@@ -1960,8 +1946,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        # stage-packages:
-        # - libpulse-mainloop-glib0
         after:
         - attica
     breeze-icons:
@@ -2030,8 +2014,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        # stage-packages:
-        # - libxtst6
         after:
         - ktextwidgets
     kxmlgui:
@@ -2235,8 +2217,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        build-packages:
-        - libboost-dev
         after:
         - kinit
     plasma-wayland-protocols:
@@ -2542,43 +2522,6 @@ parts:
             cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
-        # build-packages:
-        # - xattr
-        # - libattr1-dev
-        # stage-packages:
-        # - libaom0
-        # - libavcodec58
-        # - libavformat58
-        # - libavutil56
-        # - libbluray2
-        # - libchromaprint1
-        # - libcodec2-0.9
-        # - libgme0
-        # - libgomp1
-        # - libgsm1
-        # - libmp3lame0
-        # - libmpg123-0
-        # - libnuma1
-        # - libopenjp2-7
-        # - libopenmpt0
-        # - libshine3
-        # - libsoxr0
-        # - libspeex1
-        # - libssh-gcrypt-4
-        # - libswresample3
-        # - libtheora0
-        # - libtwolame0
-        # - libva-drm2
-        # - libva-x11-2
-        # - libva2
-        # - libvdpau1
-        # - libvorbisfile3
-        # - libwavpack1
-        # - libx264-155
-        # - libx265-179
-        # - libxvidcore4
-        # - libzvbi0
-        # - ocl-icd-libopencl1
         after:
         - kemoticons
     knewstuff:
@@ -3026,7 +2969,6 @@ parts:
         - -DENABLE_TESTING=OFF
         - -DBUILD_TESTING=OFF
         - -DKDE_SKIP_TEST_SETTINGS=ON
-        # source-branch: Plasma/5.20
         plugin: cmake
         # build-attributes:
         # - enable-patchelf
@@ -3038,7 +2980,6 @@ parts:
         - CMAKE_LIBRARY_PATH: $CMAKE_LIBRARY_PATH:$SNAPCRAFT_STAGE/lib:$SNAPCRAFT_STAGE/usr/lib:$SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/plasma-integration/. $SNAPCRAFT_PART_SRC
-        stage-packages: []
         filesets:
             exclusion:
             - "-usr/lib/*/cmake/*"
