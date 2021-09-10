@@ -2635,6 +2635,13 @@ parts:
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/baloo/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            snapcraftctl build
+            # Correct baloo_file and baloo_file_extractor symlinks to be relative paths rather than absolute
+            rm -rf $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file
+            rm -rf $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file_extractor
+            ln -s ../lib/x86_64-linux-gnu/libexec/baloo_file $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file
+            ln -s ../lib/x86_64-linux-gnu/libexec/baloo_file_extractor $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file_extractor
         after:
         - plasma-framework
     bluez-qt:
