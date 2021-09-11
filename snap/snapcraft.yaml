@@ -9,8 +9,8 @@ description: |
 confinement: strict
 grade: stable
 slots:
-    nightmayr-qt-5-15-2-core20-slot:
-        content: nightmayr-qt-5-15-2-core20-all
+    nightmayr-kf5-qt-5-15-2-core20-slot:
+        content: nightmayr-kf5-qt-5-15-2-core20-all
         interface: content
         read:
         - "."
