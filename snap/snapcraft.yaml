@@ -9,16 +9,10 @@ description: |
 confinement: strict
 grade: stable
 slots:
-    nightmayr-kf5-qt-5-15-2-core20-slot:
-        content: nightmayr-kf5-qt-5-15-2-core20-all
-        interface: content
-        read:
-        - "."
-    nightmayr-kf-5-85-qt-5-15-core20:
-        content: nightmayr-kf-5-85-qt-5-15-core20
-        interface: content
-        read:
-        - "."
+    nightmayr-kf5-qt-5-15-2-core20:
+      interface: content
+      read:
+        - /
 architectures:
   - build-on: amd64
   - build-on: arm64
