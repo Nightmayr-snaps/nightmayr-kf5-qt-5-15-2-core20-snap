@@ -18,6 +18,7 @@ architectures:
   - build-on: arm64
   - build-on: armhf
   - build-on: ppc64el
+compression: lzo
 parts:
     patches:
         plugin: dump
@@ -3065,6 +3066,40 @@ parts:
         after:
         - plasma-integration
 
+    caches:
+        after:
+        - libkdegames
+        plugin: nil
+        build-packages:
+        - gtk-update-icon-cache
+        - libglib2.0-bin
+        - shared-mime-info
+        override-build: |
+            set -eux
+            snapcraftctl build
+            glib-compile-schemas $SNAPCRAFT_STAGE/usr/share/glib-2.0/schemas
+            update-mime-database $SNAPCRAFT_STAGE/usr/share/mime
+            for dir in $SNAPCRAFT_STAGE/usr/share/icons/*; do
+                if [ -f "$dir/index.theme" ]; then
+                gtk-update-icon-cache --force "$dir"
+                fi
+            done
+
+    cleanup:
+        after:
+        - caches
+        plugin: nil
+        build-snaps:
+        - gtk-common-themes
+        override-prime: |
+            set -eux
+            cd /snap/gtk-common-themes/current
+            find . -type f,l -exec rm -f $SNAPCRAFT_PRIME/usr/{} \;
+            cd $SNAPCRAFT_PRIME
+            rm -rf usr/share/doc
+            rm -rf usr/share/man
+            find . -type d -empty -delete
+
     # Launchpad builders timeout internet access so fetching sources in advance
     sources:
         plugin: nil
@@ -3228,6 +3263,10 @@ parts:
         - libdmtx-dev
         # libkdegames
         - libsndfile1-dev
+        ## caches
+        - gtk-update-icon-cache
+        - libglib2.0-bin
+        - shared-mime-info
         stage-packages:
         # kwindowsystem
         - libxcb-res0
@@ -3287,3 +3326,5 @@ parts:
         - libqrencode4
         # libkdegames
         - libsndfile1
+        ## non part specific
+        - locales-all
