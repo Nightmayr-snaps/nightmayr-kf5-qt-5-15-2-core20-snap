@@ -98,7 +98,6 @@ parts:
         - binutils-gold
         - bison
         - cdbs
-        - cmake
         - flex
         - flite1-dev
         - freetds-dev
@@ -3055,7 +3054,7 @@ parts:
     libkdegames:
         plugin: cmake
         cmake-generator: Ninja
-        cmake-parameters: 
+        cmake-parameters:
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
         build-environment:
@@ -3066,9 +3065,50 @@ parts:
         after:
         - plasma-integration
 
-    caches:
+    adwaita-qt:
+        plugin: cmake
+        cmake-generator: Ninja
+        cmake-parameters:
+        - -DCMAKE_BUILD_TYPE=Release
+        - -DCMAKE_INSTALL_PREFIX=/usr
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            cp -a $SNAPCRAFT_PART_SRC/../../sources/src/adwaita-qt/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            snapcraftctl build
+            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
+            rm -rf $SNAPCRAFT_PART_INSTALL/root
+            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/ /
+        stage:
+        - -usr/share/doc
         after:
         - libkdegames
+
+    qgnomeplatform:
+        plugin: cmake
+        cmake-generator: Ninja
+        cmake-parameters:
+        - -DCMAKE_BUILD_TYPE=Release
+        - -DCMAKE_INSTALL_PREFIX=/usr
+        build-environment:
+        - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+        - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
+        override-pull: |
+            cp -a $SNAPCRAFT_PART_SRC/../../sources/src/QGnomePlatform/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            snapcraftctl build
+            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
+            rm -rf $SNAPCRAFT_PART_INSTALL/root
+        stage:
+        - -usr/share/doc
+        after:
+        - adwaita-qt
+
+    caches:
+        after:
+        - qgnomeplatform
         plugin: nil
         build-packages:
         - gtk-update-icon-cache
@@ -3232,6 +3272,11 @@ parts:
             git clone -b v5.22.5 --depth=1 https://invent.kde.org/plasma/breeze.git
             git clone -b v5.22.5 --depth=1 https://invent.kde.org/plasma/plasma-integration.git
             git clone -b v21.08.1 --depth=1 https://invent.kde.org/games/libkdegames.git
+            # QGnomeplatform theming
+            git clone -b 1.4.1 --depth=1 https://github.com/FedoraQt/adwaita-qt.git
+            git clone -b 0.8.2 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
+        build-snaps:
+        - cmake
         build-packages:
         # kdoctools
         - docbook-xml
@@ -3263,6 +3308,9 @@ parts:
         - libdmtx-dev
         # libkdegames
         - libsndfile1-dev
+        #qgnomeplatform
+        - libgtk-3-dev
+        - gsettings-desktop-schemas-dev
         ## caches
         - gtk-update-icon-cache
         - libglib2.0-bin
@@ -3326,5 +3374,6 @@ parts:
         - libqrencode4
         # libkdegames
         - libsndfile1
+        # qgnomeplatform
         ## non part specific
         - locales-all
