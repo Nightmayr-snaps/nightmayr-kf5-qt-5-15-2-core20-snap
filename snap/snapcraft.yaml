@@ -3080,9 +3080,14 @@ parts:
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/adwaita-qt/. $SNAPCRAFT_PART_SRC
         override-build: |
             snapcraftctl build
-            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
-            rm -rf $SNAPCRAFT_PART_INSTALL/root
-            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/ /
+            sed -i -E \
+                "s|set\(_IMPORT_PREFIX \"(.*)\"\)|set\(_IMPORT_PREFIX \"/root/stage\1\"\)|" \
+                $SNAPCRAFT_PART_INSTALL/usr/lib/cmake/AdwaitaQt/AdwaitaQtTargets.cmake
+        # override-build: |
+        #     snapcraftctl build
+        #     rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
+        #     rm -rf $SNAPCRAFT_PART_INSTALL/root
+        #     rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/ /
         stage:
         - -usr/share/doc
         after:
@@ -3310,10 +3315,12 @@ parts:
         - libdmtx-dev
         # libkdegames
         - libsndfile1-dev
-        #qgnomeplatform
+        # adwaita-qt
+        - rsync
+        # qgnomeplatform
         - libgtk-3-dev
         - gsettings-desktop-schemas-dev
-        ## caches
+        # caches
         - gtk-update-icon-cache
         - libglib2.0-bin
         - shared-mime-info
@@ -3376,6 +3383,5 @@ parts:
         - libqrencode4
         # libkdegames
         - libsndfile1
-        # qgnomeplatform
         ## non part specific
         - locales-all
