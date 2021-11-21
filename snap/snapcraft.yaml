@@ -3082,7 +3082,7 @@ parts:
             snapcraftctl build
             sed -i -E \
                 "s|set\(_IMPORT_PREFIX \"(.*)\"\)|set\(_IMPORT_PREFIX \"/root/stage\1\"\)|" \
-                $SNAPCRAFT_PART_INSTALL/usr/lib/cmake/AdwaitaQt/AdwaitaQtTargets.cmake
+                $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQtTargets.cmake
         # override-build: |
         #     snapcraftctl build
         #     rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
