@@ -3071,11 +3071,10 @@ parts:
         cmake-parameters:
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
-        build-packages:
-        - rsync
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/adwaita-qt/. $SNAPCRAFT_PART_SRC
         override-build: |
@@ -3083,11 +3082,6 @@ parts:
             sed -i -E \
                 "s|set\(_IMPORT_PREFIX \"(.*)\"\)|set\(_IMPORT_PREFIX \"/root/stage\1\"\)|" \
                 $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQtTargets.cmake
-        # override-build: |
-        #     snapcraftctl build
-        #     rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
-        #     rm -rf $SNAPCRAFT_PART_INSTALL/root
-        #     rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/ /
         stage:
         - -usr/share/doc
         after:
@@ -3099,15 +3093,12 @@ parts:
         cmake-parameters:
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/QGnomePlatform/. $SNAPCRAFT_PART_SRC
-        override-build: |
-            snapcraftctl build
-            rsync -a --ignore-existing $SNAPCRAFT_PART_INSTALL/root/stage/ $SNAPCRAFT_PART_INSTALL
-            rm -rf $SNAPCRAFT_PART_INSTALL/root
         stage:
         - -usr/share/doc
         after:
