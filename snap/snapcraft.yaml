@@ -3272,7 +3272,7 @@ parts:
             git clone -b v21.08.1 --depth=1 https://invent.kde.org/games/libkdegames.git
             # QGnomeplatform theming
             git clone -b 1.4.1 --depth=1 https://github.com/FedoraQt/adwaita-qt.git
-            git clone -b 0.8.2 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
+            git clone -b 0.8.3 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
         build-snaps:
         - cmake
         build-packages:
