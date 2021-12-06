@@ -3071,7 +3071,7 @@ parts:
         cmake-parameters:
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
-        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
+        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -3093,7 +3093,7 @@ parts:
         cmake-parameters:
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
-        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5
+        - -DQT_PLUGINS_DIR=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
