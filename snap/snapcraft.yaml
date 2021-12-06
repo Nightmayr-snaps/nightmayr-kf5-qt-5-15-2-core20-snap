@@ -3080,7 +3080,7 @@ parts:
         override-build: |
             snapcraftctl build
             sed -i -E \
-                "s|set\(_IMPORT_PREFIX \"(.*)\"\)|set\(_IMPORT_PREFIX \"/root/stage\1\"\)|" \
+                "s|set\(_IMPORT_PREFIX \"(.*)\"\)|set\(_IMPORT_PREFIX \"$SNAPCRAFT_STAGE\1\"\)|" \
                 $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQtTargets.cmake
         stage:
         - -usr/share/doc
