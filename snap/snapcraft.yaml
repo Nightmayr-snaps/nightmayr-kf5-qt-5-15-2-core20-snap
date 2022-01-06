@@ -281,7 +281,6 @@ parts:
             --enable-opengl \
             --enable-sdl2 \
             --enable-librsvg \
-            --enable-libmfx \
             --enable-libdc1394 \
             --enable-libdrm \
             --enable-libiec61883 \
