@@ -134,6 +134,9 @@ parts:
         - -DENABLE_DOCS=0
         - -DENABLE_EXAMPLES=0
         - -DENABLE_TESTS=0
+        - on armhf:
+            - -DAOM_TARGET_CPU=armv7
+            - -DAOM_NEON_INTRIN_FLAG=-mfpu=neon
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/aom/. $SNAPCRAFT_PART_SRC
         prime:
@@ -3286,6 +3289,9 @@ parts:
             git clone -b release-3.0.3 --depth=1 https://github.com/sekrit-twc/zimg.git
             git clone -b sdk/10.0 --depth=1 https://github.com/FFmpeg/nv-codec-headers.git
             git clone -b release/4.4 --depth=1 https://git.ffmpeg.org/ffmpeg.git
+            # QGnomeplatform theming
+            git clone -b 1.4.1 --depth=1 https://github.com/FedoraQt/adwaita-qt.git
+            git clone -b 0.8.3 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
         build-packages:
         - gcc-10
         - g++-10
