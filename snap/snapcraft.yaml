@@ -134,9 +134,6 @@ parts:
         - -DENABLE_DOCS=0
         - -DENABLE_EXAMPLES=0
         - -DENABLE_TESTS=0
-        - on armhf:
-            - -DAOM_TARGET_CPU=armv7
-            - -DAOM_NEON_INTRIN_FLAG=-mfpu=neon
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/aom/. $SNAPCRAFT_PART_SRC
         prime:
