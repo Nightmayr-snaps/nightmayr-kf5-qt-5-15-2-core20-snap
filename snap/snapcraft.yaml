@@ -142,7 +142,7 @@ parts:
                 EXTRA=""
             elif [ "${ARCHITECTURE}" = "ppc64el" ]; then
                 EXTRA=""
-            elif[ "${ARCHITECTURE}" = "arm64" ]; then
+            elif [ "${ARCHITECTURE}" = "arm64" ]; then
                 EXTRA=""
             elif [ "${ARCHITECTURE}" = "armhf" ]; then
                 EXTRA="-DAOM_TARGET_CPU=armv7 -DAOM_NEON_INTRIN_FLAG=-mfpu=neon"
