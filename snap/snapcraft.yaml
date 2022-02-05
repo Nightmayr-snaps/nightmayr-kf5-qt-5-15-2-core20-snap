@@ -3288,7 +3288,7 @@ parts:
             git clone -b release/4.4 --depth=1 https://git.ffmpeg.org/ffmpeg.git
             # QGnomeplatform theming
             git clone -b 1.4.1 --depth=1 https://github.com/FedoraQt/adwaita-qt.git
-            git clone -b 0.8.3 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
+            git clone -b 0.8.4 --depth=1 https://github.com/FedoraQt/QGnomePlatform.git
         build-snaps:
         - cmake
         build-packages:
