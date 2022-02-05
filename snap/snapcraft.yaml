@@ -136,6 +136,31 @@ parts:
         - -DENABLE_TESTS=0
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/aom/. $SNAPCRAFT_PART_SRC
+        override-build: |
+            ARCHITECTURE=$(dpkg --print-architecture)
+            if [ "${ARCHITECTURE}" = "amd64" ]; then
+                EXTRA=""
+            elif [ "${ARCHITECTURE}" = "ppc64el" ]; then
+                EXTRA=""
+            elif[ "${ARCHITECTURE}" = "arm64" ]; then
+                EXTRA=""
+            elif [ "${ARCHITECTURE}" = "armhf" ]; then
+                EXTRA="-DAOM_TARGET_CPU=armv7 -DAOM_NEON_INTRIN_FLAG=-mfpu=neon"
+            else
+                EXTRA=""
+            fi
+            cmake $SNAPCRAFT_PART_SRC -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr \
+            -DCMAKE_C_FLAGS_RELEASE=-s \
+            -DCMAKE_CXX_FLAGS_RELEASE=-s \
+            -DCONFIG_MULTITHREAD=1 \
+            -DBUILD_SHARED_LIBS=1 \
+            -DENABLE_DOCS=0 \
+            -DENABLE_EXAMPLES=0 \
+            -DENABLE_TESTS=0 ${EXTRA}
+            cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
+            cmake --build . --target install
         prime:
         - -usr/include
         - -usr/lib/$SNAPCRAFT_ARCH_TRIPLET/libaom.a
