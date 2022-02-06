@@ -3008,6 +3008,9 @@ parts:
         cmake-parameters:
         # - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DCMAKE_INSTALL_LIBDIR=lib/$SNAPCRAFT_ARCH_TRIPLET
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         - -DCMAKE_BUILD_TYPE=Release
         - -DENABLE_TESTING=OFF
         - -DBUILD_TESTING=OFF
