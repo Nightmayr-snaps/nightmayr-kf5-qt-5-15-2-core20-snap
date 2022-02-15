@@ -127,6 +127,7 @@ parts:
         cmake-parameters:
         - -DCMAKE_INSTALL_PREFIX=/usr
         - -DCMAKE_BUILD_TYPE=Release
+        - -DLIB_INSTALL_DIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET
         - -DCMAKE_C_FLAGS_RELEASE=-s
         - -DCMAKE_CXX_FLAGS_RELEASE=-s
         - -DCONFIG_MULTITHREAD=1
@@ -1708,13 +1709,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kwidgetsaddons/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1759,10 +1762,11 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DCMAKE_INSTALL_LIBDIR=lib/$SNAPCRAFT_ARCH_TRIPLET
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/polkit-qt-1/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DCMAKE_INSTALL_LIBDIR=lib/$SNAPCRAFT_ARCH_TRIPLET
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         build-environment:
@@ -1776,13 +1780,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kauth/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1844,13 +1850,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kconfigwidgets/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1861,13 +1869,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kitemviews/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1878,13 +1888,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kiconthemes/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1895,13 +1907,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kcompletion/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1929,13 +1943,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/sonnet/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1963,13 +1979,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/phonon/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -1997,13 +2015,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kglobalaccel/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -2014,13 +2034,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/ktextwidgets/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -2048,13 +2070,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kxmlgui/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -2133,6 +2157,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2150,13 +2176,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kparts/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
             # Copy kservicetypes5/kpart.desktop to /root/.local/share to be parseable by ktexteditor cmake build stage
@@ -2383,13 +2411,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kross/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -2522,13 +2552,15 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
         override-pull: |
             cp -a $SNAPCRAFT_PART_SRC/../../sources/src/kemoticons/. $SNAPCRAFT_PART_SRC
         override-build: |
-            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr
+            cmake $SNAPCRAFT_PART_SRC -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL/usr -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
             cmake --build . -- -j${SNAPCRAFT_PARALLEL_BUILD_COUNT}
             cmake --build . --target install
         after:
@@ -2586,6 +2618,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2599,6 +2633,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2609,8 +2645,8 @@ parts:
             # Correct baloo_file and baloo_file_extractor symlinks to be relative paths rather than absolute
             rm -rf $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file
             rm -rf $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file_extractor
-            ln -s ../lib/x86_64-linux-gnu/libexec/baloo_file $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file
-            ln -s ../lib/x86_64-linux-gnu/libexec/baloo_file_extractor $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file_extractor
+            ln -s ../lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/baloo_file $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file
+            ln -s ../lib/$SNAPCRAFT_ARCH_TRIPLET/libexec/baloo_file_extractor $SNAPCRAFT_PART_INSTALL/usr/bin/baloo_file_extractor
         after:
         - plasma-framework
     bluez-qt:
@@ -2632,6 +2668,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2723,6 +2761,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2801,6 +2841,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2866,6 +2908,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
@@ -2996,6 +3040,8 @@ parts:
         cmake-parameters: 
         - -DCMAKE_BUILD_TYPE=Release
         - -DCMAKE_INSTALL_PREFIX=/usr
+        - -DKDE_INSTALL_PLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
+        - -DKDE_INSTALL_QTPLUGINDIR:PATH=/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/qt5/plugins
         build-environment:
         - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
         - PATH: $SNAPCRAFT_STAGE/usr/bin:$PATH
